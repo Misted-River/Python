@@ -41,9 +41,10 @@ class game_object:
 
 while not exit:
     #canvas.blit(image, dest = position) # render image onto surface
+    canvas.blit(image, dest="position") # render image onto surface
     canvas.blit(player, player_pos) # render image onto surface
     canvas.blit(textSufaceObj, textRectObj)
-    pygame.display.update()
+    pygame.display.update() 
     print (mouse)
 
     for event in pygame.event.get():
