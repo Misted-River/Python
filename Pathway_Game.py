@@ -6,15 +6,11 @@ position = (0,0)
 clock = pygame.time.Clock()
 bottom_line_height = 10
 
-x = 1920
-y = 1080
-
 # set up objects
 player = pygame.image.load('comet_placeholder.png')# player image -> surface2
-
 fontObj = pygame.font.Font(None, 32)
-textSufaceObj = fontObj.render('Welcome', True, 'BLack', None) # antialiasing is true
 
+textSufaceObj = fontObj.render('Welcome', True, 'BLack', None) # antialiasing is true
 textRectObj = textSufaceObj.get_rect()
 player_pos = player.get_rect()
 
