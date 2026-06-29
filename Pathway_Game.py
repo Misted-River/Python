@@ -19,7 +19,7 @@ clock = pygame.time.Clock()
 canvas= pygame.display.set_mode((1920,1080),pygame.RESIZABLE) # canvas size -> creates screen -> background 
 image = pygame.image.load('Untitled2186_20240824160114.png').convert() # initialise image -> surface2
 
-player_pos.midbottom = (canvas.get_width() // 2, canvas.get_height() - bottom_line_height - 15)
+player_pos.midbottom = (canvas.get_width() // 2, canvas.get_height() - bottom_line_height - 20)
 
 image= pygame.transform.smoothscale(image,(1920,1080)) # sizing image
 
@@ -32,7 +32,7 @@ mouse = pygame.mouse.get_pos()
 
 objects = [] # gathering all players etc objects in game
 
-pygame.draw.line(canvas, 'Black', (0, canvas.get_height() - bottom_line_height), (canvas.get_width(), canvas.get_height() - bottom_line_height), 3)
+pygame.draw.line(canvas, 'Black', (0, canvas.get_height() - bottom_line_height), (canvas.get_width(), canvas.get_height() - bottom_line_height), 300)
 
 pygame.event.get()
 pygame.display.set_icon(image)
@@ -54,8 +54,8 @@ while not exit:
     canvas.blit(image, dest=position) # render image onto surface, background
     canvas.blit(player, player_pos) # render image onto surface
     canvas.blit(textSufaceObj, textRectObj)
-    pygame.display.update() 
-    print (mouse)
+    pygame.display.update()
+    print(mouse)
 
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
