@@ -40,7 +40,7 @@ image = pygame.transform.smoothscale(image,(1920,1080)) # sizing image
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
-refresh = False
+#refresh = False
 mouse = pygame.mouse.get_pos()
 
 objects = [] # gathering all players etc objects in game
