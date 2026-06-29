@@ -75,14 +75,17 @@ class game_object:
 
 player_obj = game_object(player,10,3)
 
-canvas.blit(image, dest=position) # render image onto surface, background
  
 while not exit:
+    canvas.blit(image, dest=position) # render image onto surface, background
     canvas.blit(player, player_pos) # render image onto surface
     canvas.blit(path, path_pos) # render image onto surface, path
     pygame.display.update()
 
     for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            exit = True
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w: # key = k_(the key) event
                 player_obj.move(up=True)
@@ -96,13 +99,13 @@ while not exit:
             elif event.key == pygame.K_d:
                 player_obj.move(right=True)
                 print("Move the character right")
-            
-            
-        if event.type == pygame.QUIT:
-            exit = True
+
         canvas.blit(player_obj.image, player_obj.pos)
         pygame.display.update()
         clock.tick(60)
+            
+            
+        
         
 
 pygame.quit()
