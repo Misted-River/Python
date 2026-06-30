@@ -5,7 +5,6 @@ pygame.init() # initialise pygame module
 position = (0,0)
 clock = pygame.time.Clock()
 
-bottom_line_height = 100 # move based on this height, which is centered
 
 # set up objects
 player = pygame.image.load('player_placeholder.jpg')# player image -> surface2
@@ -13,6 +12,15 @@ path = pygame.image.load('costume2.svg')# player image -> surface2
 
 #fontObj = pygame.font.Font(None, 32)
 image_size = (1000, 1000)
+
+bottom_line_height = 100 # move based on this height, which is centered
+
+pygame.draw.line(canvas, 'Black', (0, canvas.get_height() - bottom_line_height), (canvas.get_width(), canvas.get_height() - bottom_line_height), 3) # thickness = 3
+
+
+
+path_pos.midbottom = (canvas.get_width() // 2 + 150, canvas.get_height() - 450 - bottom_line_height - 15)
+player_pos.midbottom = (canvas.get_width() // 2, canvas.get_height() - bottom_line_height - 15)
 
 
 #textSufaceObj = fontObj.render('', True, 'BLack', None) # antialiasing is true
@@ -32,9 +40,6 @@ canvas = pygame.display.set_mode((1920,1080),pygame.RESIZABLE) # canvas size -> 
 image = pygame.image.load('Untitled2186_20240824160114.png').convert() # initialise image -> surface2
 
 
-path_pos.midbottom = (canvas.get_width() // 2 +150, canvas.get_height() -450 - bottom_line_height - 15)
-player_pos.midbottom = (canvas.get_width() // 2, canvas.get_height() - bottom_line_height - 15)
-
 image = pygame.transform.smoothscale(image,(1920,1080)) # sizing image
 
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
@@ -45,7 +50,6 @@ mouse = pygame.mouse.get_pos()
 
 objects = [] # gathering all players etc objects in game
 
-pygame.draw.line(canvas, 'Black', (0, canvas.get_height() - bottom_line_height), (canvas.get_width(), canvas.get_height() - bottom_line_height), 3)
 
 pygame.event.get()
 pygame.display.set_icon(image)
@@ -57,7 +61,7 @@ class game_object:
         self.speed = speed
         self.image = image
         self.pos = image.get_rect().move(0,height)
-    def move(self, up=False, down=False,left=False,right=False):
+""" def move(self, up=False, down=False,left=False,right=False):
         if right:
             self.pos.right += self.speed
         if left:
@@ -71,9 +75,10 @@ class game_object:
         if self.pos.right < player.get_width():
             self.pos.left = 0
         if self.pos.top < 0:
-            self.pos.top = canvas.get_height() -player.get_height()
+            self.pos.top = canvas.get_height() -player.get_height()"""
 
-player_obj = game_object(player,10,3)
+#player_obj = game_object(player,10,3)
+
 
  
 while not exit:
@@ -88,19 +93,23 @@ while not exit:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w: # key = k_(the key) event
-                player_obj.move(up=True)
-                print("Move the character up")
+                while event.key == pygame.K_w:
+                    bottom_line_height-=5
+                    print(bottom_line_height)  
+                    canvas.blit(player, player_pos.midbottom) # render image onto surface  
+                    pygame.display.update()
+                    clock.tick(60)                
+                    print("Move the character up")
+
             elif event.key == pygame.K_s:
-                player_obj.move(down=True)
+                
                 print("Move the character down")
             elif event.key == pygame.K_a:
-                player_obj.move(left=True)
                 print("Move the character left")
             elif event.key == pygame.K_d:
-                player_obj.move(right=True)
                 print("Move the character right")
 
-        canvas.blit(player_obj.image, player_obj.pos)
+        #canvas.blit(player_obj.image, player_obj.pos)
         pygame.display.update()
         clock.tick(60)
             
