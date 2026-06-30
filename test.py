@@ -78,6 +78,34 @@ while player_position > 1:
 
     print(screen)
 
+#fontObj = pygame.font.Font(None, 32)
 
 # co-ordinates start from 0,0 in top left so (10,0) would move x to the right from the left (X,Y), when blitting the top left corner of the sourse is used to position the image on the screen
 
+#textSufaceObj = fontObj.render('', True, 'BLack', None) # antialiasing is true
+#textRectObj = textSufaceObj.get_rect()
+
+#player_obj = game_object(player,10,3)
+
+# multiple images use python classes
+
+class game_object:
+    def __init__(self,image,height,speed): # initialise object -> player, position, speed
+        self.speed = speed
+        self.image = image
+        self.pos = image.get_rect().move(0,height)
+""" def move(self, up=False, down=False,left=False,right=False):
+        if right:
+            self.pos.right += self.speed
+        if left:
+            self.pos.right -= self.speed
+        if down:
+            self.pos.top += self.speed
+        if up:
+            self.pos.top -= self.speed
+        if self.pos.right > canvas.get_width():
+            self.pos.left = 0
+        if self.pos.right < player.get_width():
+            self.pos.left = 0
+        if self.pos.top < 0:
+            self.pos.top = canvas.get_height() -player.get_height()"""
