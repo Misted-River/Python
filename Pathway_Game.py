@@ -8,7 +8,7 @@ clock = pygame.time.Clock()
 
 # set up objects
 player = pygame.image.load('player_placeholder.jpg')# player image -> surface2
-path = pygame.image.load('costume2.svg')# player image -> surface2
+path = pygame.image.load('pathways_place.png')# player image -> surface2
 
 image_size = (1000, 1000)
 
@@ -22,7 +22,7 @@ path_pos = path.get_rect()
 width_path = path.get_rect().width
 height_path = path.get_rect().height
 
-path = pygame.transform.smoothscale(path,(width_path*3, height_path*3)) # 200,200 is default image size
+path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) # 200,200 is default image size
 
 
 #----------------------------------------------------------------------------------
@@ -53,11 +53,11 @@ pygame.display.set_icon(image)
 
 
 # player 
-x = 700 # positioon x
-y = 200 # position y
+x = 800 # positioon x
+y = 345 # position y
 
-x_path = 400
-y_path = 50
+x_path = -365
+y_path = 240
 
 
 width = player.get_width()
@@ -66,9 +66,10 @@ height = player.get_height()
 width_path = path.get_width()
 height_path = path.get_height()
 
-velo = 1 # up down direction
+velo = 5 # up down direction
+velo_path = 45 # up down direction
 
-velo_path = 10 # up down direction
+
 
 
 
@@ -78,41 +79,57 @@ canvas.blit(path, path_pos) # render image onto surface, path
 pygame.display.update()
 
 while not exit:
+    keys = pygame.key.get_pressed()
+
+    w = keys[pygame.K_w]
+    a = keys[pygame.K_a]
+    s = keys[pygame.K_s]
+    d = keys[pygame.K_d]
+    print("x:",x_path,"y:",y_path )
+
+
 
     for event in pygame.event.get():
-        
-        keys = pygame.key.get_pressed()
-
         if event.type == pygame.QUIT:
             exit = True
 
-        if keys[pygame.K_w] and y>0: # key = k_(the key) events 
-            y -= velo
-            y_path += velo_path
- 
-            print("Move the character up")
+    if w and y>0: # key = k_(the key) events 
+        y -= velo
+        if (not s) and ( y_path<310) :
+             y_path += velo_path
+        else:
+            velo = 0
 
-        if keys[pygame.K_s] and  y<1080-height:
-            y += velo
+    if s and  y<1080-height:
+        y += velo
+        if (not w) and y_path>-2525:
             y_path -= velo_path
-            print("Move the character down")
+        else:
+            velo = 0
 
-        if keys[pygame.K_a] and  x>0:
-            x -= velo 
+    if a and  x>0:
+        x -= velo
+        if (not d) and x_path<-200:
             x_path += velo_path
-            print("Move the character left")
+        else:
+            velo = 10
+            x -= velo*2
 
-        if keys[pygame.K_d] and x<1920-width:
-            x += velo
+
+    if d and x<1920-width:
+        x += velo
+    
+        if (not a) and ( x<1920-width and x_path>-680) :
             x_path -= velo_path
-            print("Move the character right")
+        else:
+            velo = 10
+            x += velo*2
+
+        
 
     canvas.blit(image, dest=position) # render image onto surface, background
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
-    clock.tick(100)
     canvas.blit(player, (x,y)) # render image onto surface, original position
-    
-
     pygame.display.update()
 
             

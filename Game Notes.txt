@@ -2,8 +2,7 @@ Art for Game:
 
 Scene1
 - Comet walk -> up,down, forward (left), backward (right) -> ( first frame different to reduce the visual effect of the delay? )
-- Pathway1 -> First part of the pathways in scene1 , have it be 3d like to allow comets free movement on this path, have borders to restrist the area of movement however, if close to edge of path.
+- Pathway1 -> First part of the pathways in scene1 , have it be 3d like to allow comets free movement on this path, have borders to restrist the area of movement however, if close to edge of path. -> restrict paths movement to avoid showing the edge of it on the screen.
 - Identifying the properties of the pathways -> specific parts on the path that Comet can walk on.
-- Background -> maybe use layers to create a 3d effect that imitates a game environments atomosphere and to add realism -> possibly parallax, move slower than the path comet is on as the planets are furtehr away.
 
 Scene2
