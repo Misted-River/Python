@@ -3,7 +3,7 @@ import pygame
 pygame.init() # initialise pygame module
 
 position = (0,0)
-
+clock = pygame.time.Clock()
 
 
 # set up objects
@@ -27,7 +27,7 @@ path = pygame.transform.smoothscale(path,(width_path*3, height_path*3)) # 200,20
 
 #----------------------------------------------------------------------------------
 canvas = pygame.display.set_mode((1920,1080),pygame.RESIZABLE) # canvas size -> creates screen -> background 
-image = pygame.image.load('Untitled2186_20240824160114.png').convert() # initialise image -> surface2
+image = pygame.image.load('1.png').convert() # initialise image -> surface2
 
 pygame.draw.line(canvas, 'Black', (0, canvas.get_height() - bottom_line_height), (canvas.get_width(), canvas.get_height() - bottom_line_height), 3) # thickness = 3
 
@@ -53,10 +53,10 @@ pygame.display.set_icon(image)
 
 
 # player 
-x = 200 # positioon x
+x = 700 # positioon x
 y = 200 # position y
 
-x_path = 50
+x_path = 400
 y_path = 50
 
 
@@ -66,9 +66,9 @@ height = player.get_height()
 width_path = path.get_width()
 height_path = path.get_height()
 
-velo = 5 # up down direction
+velo = 1 # up down direction
 
-velo_path = 15 # up down direction
+velo_path = 10 # up down direction
 
 
 
@@ -108,9 +108,10 @@ while not exit:
             print("Move the character right")
 
     canvas.blit(image, dest=position) # render image onto surface, background
-
-    canvas.blit(player, (x,y)) # render image onto surface, original position
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
+    clock.tick(100)
+    canvas.blit(player, (x,y)) # render image onto surface, original position
+    
 
     pygame.display.update()
 
