@@ -1,37 +1,34 @@
 import pygame
 
-pygame.init() # initialise pygame module
+pygame.init() 
 
+# constants
 position = (0,0)
-#clock = pygame.time.Clock()
-
+bottom_line_height = 100 # move based on this height, which is centered
 
 # set up objects
 player = pygame.image.load('player_placeholder.jpg')# player image -> surface2
-path = pygame.image.load('pathways_place.png')# player image -> surface2
-rocks = pygame.image.load('rocks.png')
+path = pygame.image.load('pathways_place.png')# patyhway moves -> surface2
+rocks = pygame.image.load('rocks.png') # rocks on pathways, move same as path
 
 
-bottom_line_height = 100 # move based on this height, which is centered
-
-
-
+# rectangles
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
 path_pos = path.get_rect()
-rocks_pos = path_pos
-
+rocks_pos = path_pos # rocks is same rect as path's recxtangle
 
 width_path = path_pos.width
 height_path = path_pos.height
 
+# resizing to fit
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 
 #----------------------------------------------------------------------------------
 canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
 
-image = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
-image = pygame.transform.smoothscale(image,(1920,1080)) # resizing image
+background = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
+background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
@@ -41,7 +38,7 @@ mouse = pygame.mouse.get_pos()
 
 
 pygame.event.get()
-pygame.display.set_icon(image)
+pygame.display.set_icon(background)
 
 
 # player 
@@ -55,19 +52,13 @@ y_path = 240
 width = player.get_width()
 height = player.get_height()
 
-#width_path = path.get_width()
-#height_path = path.get_height()
-
 velo = 5 # up down direction
 velo_path = 45 # up down direction
 
-
-
-canvas.blit(image, dest=position) # render image onto surface, background
+canvas.blit(background, dest=position) # render image onto surface, background
 canvas.blit(player, player_rect) # render image onto surface, original position
 canvas.blit(path, path_pos) # render image onto surface, path
-canvas.blit(rocks, path_pos) # render image onto surface, path
-
+canvas.blit(rocks, path_pos) # render image onto surface, rocks
 pygame.display.update()
 
 while not exit:
@@ -77,8 +68,6 @@ while not exit:
     a = keys[pygame.K_a]
     s = keys[pygame.K_s]
     d = keys[pygame.K_d]
-    #print("x:",x_path,"y:",y_path )
-
 
 
     for event in pygame.event.get():
@@ -89,7 +78,7 @@ while not exit:
         y -= velo
 
         if (not s) and (y_path<310) :
-             y_path += velo_path
+            y_path += velo_path
         else:
             velo = 0
 
@@ -118,15 +107,10 @@ while not exit:
             velo = 10
             x += velo*2
 
-        
-
-    canvas.blit(image, dest=position) # render image onto surface, background
+    canvas.blit(background, dest=position) # render image onto surface, background
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
+    canvas.blit(rocks, path_pos) # render image onto surface, rocks
     canvas.blit(player, (x,y)) # render image onto surface, original position
     pygame.display.update()
-
-            
-        
-        
 
 pygame.quit()
