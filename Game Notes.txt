@@ -5,4 +5,20 @@ Scene1
 - Pathway1 -> First part of the pathways in scene1 , have it be 3d like to allow comets free movement on this path, have borders to restrist the area of movement however, if close to edge of path. -> restrict paths movement to avoid showing the edge of it on the screen.
 - Identifying the properties of the pathways -> specific parts on the path that Comet can walk on.
 
+
+1. -> rocks -> somehting in the rocks? maybe some kind of clue? to make remark about the environment
+( placement rocks -> visible from top path but need to be clickable -> highlitghtabkle when on seconmd path, on thrirdit dissapears)
+-> same size rectangle to go over the path -> slots into the correct position
+
+2.
+3.
+
+
+background -> parallax -> shading dif layers planets, stars, back -> make this a functions that calls all of these-> can take out a few to avoid overload of game ->lightweight 
+
+
+
+
+
+
 Scene2
