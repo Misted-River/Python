@@ -60,7 +60,7 @@ while exit != True:
     print(mouse)
 
 pygame.quit()
-"""
+
 screen_originalvals = [0,0,1,1,1,0] # background
 
 screen = [0]*6 # new list of 6 zeros
@@ -94,7 +94,7 @@ class game_object:
         self.speed = speed
         self.image = image
         self.pos = image.get_rect().move(0,height)
-""" def move(self, up=False, down=False,left=False,right=False):
+ def move(self, up=False, down=False,left=False,right=False):
         if right:
             self.pos.right += self.speed
         if left:
@@ -109,3 +109,54 @@ class game_object:
             self.pos.left = 0
         if self.pos.top < 0:
             self.pos.top = canvas.get_height() -player.get_height()"""
+
+import sys
+import pygame
+from pygame.locals import *
+
+pygame.init()
+pygame.display.set_caption("mask test")
+
+screen = pygame.display.set_mode((500,500))
+
+clock = pygame.time.Clock()
+
+img = pygame.image.load('player_placeholder.jpg').convert_alpha()
+img.set_colorkey((0,0,0))
+img_2 = pygame.image.load('pathways_place.png').convert_alpha()
+img_2.set_colorkey((0,0,0))
+img_loc = (50,50)
+
+mask = pygame.mask.from_surface(img)
+mask_2 = pygame.mask.from_surface(img_2)
+
+show_masks = False
+
+while True:
+    screen.fill((255,0,0))
+
+    if not show_masks:
+        screen.blit(img,img_loc)
+        screen.blit(img_2,(0,0))
+    else:
+        screen.blit(mask.to_surface(unsetcolor=(0,0,0,0),setcolor=(255,255,255,255)),img_loc)
+        screen.blit(mask_2.to_surface(unsetcolor=(0,0,0,0),setcolor=(255,255,255,255)),(0,0))
+        outline = [(p[0] + img_loc[0],p[1] + img_loc[1]) for p in mask.outline(every=2)] # list of points for outline of mask shape
+        pygame.draw.lines(screen,(255,0,255),False,outline,3)
+
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == KEYDOWN:
+            if event.key == K_m:
+                show_masks = not show_masks
+
+
+            if event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+    pygame.display.update()
+
+#loc_player = (player.get_width(),player.get_height())
+#loc_path = (player.get_width(),player.get_height())

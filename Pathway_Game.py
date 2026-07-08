@@ -3,7 +3,7 @@ import pygame
 pygame.init() 
 
 canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
-
+background = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
 
 # constants
 position = (0,0)
@@ -14,40 +14,35 @@ player = pygame.image.load('player_placeholder.jpg').convert_alpha() # player im
 path = pygame.image.load('pathways_place.png').convert_alpha() # patyhway moves -> surface2
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 
-# masks
-pa_mask = pygame.mask.from_surface(path)
-path.set_colorkey((0,0,0))
-pl_mask = pygame.mask.from_surface(player)
-player.set_colorkey((0,0,0))
-
-loc_player = (player.get_width(),player.get_height())
-loc_path = (player.get_width(),player.get_height())
-
-
-
+objects = [player,path,rocks]
 
 # rectangles
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
-path_pos = path.get_rect()
-rocks_pos = path_pos # rocks is same rect as path's recxtangle
+path_rect = path.get_rect()
+rocks_rect = path_rect # rocks is same rect as path's recxtangle
 
-width_path = path_pos.width
-height_path = path_pos.height
+width_path = path_rect.width
+height_path = path_rect.height
 
 # resizing to fit
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
+background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
+
+# masks
+pa_mask = pygame.mask.from_surface(path)
+#path.set_colorkey((0,0,0))
+pl_mask = pygame.mask.from_surface(player)
+#player.set_colorkey((0,0,0))
+
 
 #----------------------------------------------------------------------------------
 
-background = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
-background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
-mouse = pygame.mouse.get_pos()
-#objects = [] # gathering all players etc objects in game
+mouse_pos = pygame.mouse.get_pos()
 
 pygame.event.get()
 pygame.display.set_icon(background)
@@ -62,19 +57,19 @@ y_path = 240
 width = player.get_width()
 height = player.get_height()
 
+# variables for movement speed
+
 velo = 2 # up down direction
 velo_path = 20 # up down direction
+#----------------------------------------------------------------------------------
 
 canvas.blit(background, dest=position) # render image onto surface, background
 canvas.blit(player, player_rect) # render image onto surface, original position
-canvas.blit(path, path_pos) # render image onto surface, path
-canvas.blit(rocks, path_pos) # render image onto surface, rocks
-#canvas.blit(pa_mask,path_pos)
+canvas.blit(path, path_rect) # render image onto surface, path
+canvas.blit(rocks, path_rect) # render image onto surface, rocks
 pygame.display.update()
 
 while not exit:
-    pygame.display.update()
-
     keys = pygame.key.get_pressed()
 
     w = keys[pygame.K_w]
@@ -82,14 +77,12 @@ while not exit:
     s = keys[pygame.K_s]
     d = keys[pygame.K_d]
 
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit = True
 
     if w and y>0: # key = k_(the key) events 
         y -= velo*2
-
         if w and y>0 and (not s) and (y_path<310) and w and y>0:
             y_path += velo_path
                 
@@ -98,7 +91,6 @@ while not exit:
 
     if s and  y<1080-height:
         y += velo*2
-        
         if s and  y<1080-height and (not w) and y_path>-2525:
             y_path -= velo_path
                 
@@ -114,7 +106,6 @@ while not exit:
 
     if d and x<1920-width:
         x += velo*2
-        
         if (not a) and ( x<1920-width and x_path>-680) :
             x_path -= velo_path
         else:
@@ -125,6 +116,8 @@ while not exit:
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
     canvas.blit(player, (x,y)) # render image onto surface, original position
     
+    outline = [(p[0] + path_rect[0],p[1] + path_rect[1]) for p in pa_mask.outline(every=121)] # list of points for outline of mask shape
+    pygame.draw.lines(canvas,(255,0,255),False,outline,3)
     pygame.display.update()
 
 pygame.quit()
