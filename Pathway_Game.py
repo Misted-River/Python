@@ -50,6 +50,16 @@ y_path = 240
 width = player.get_width()
 height = player.get_height()
 
+class Object:
+    def _init(self):
+        self.img = self.img
+        self.x,self.y = self.START_POS
+        
+    def collide(self,mask,x=0,y=0):
+        pl_mask = pygame.mask.from_surface(self)
+        offset= (self.x-x),int(player.y - y)
+        poi = mask.overlap(pl_mask,offset)
+        return poi
 
 # variables for movement speed
 
@@ -71,6 +81,11 @@ while not exit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit = True
+
+    if player.collide(pathborder_mask) != None:
+        print('collide')
+    else:
+        print('no')
             
     if w and y>0: # key = k_(the key) events 
         y -= velo*2
