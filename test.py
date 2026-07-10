@@ -160,3 +160,22 @@ while True:
 
 #loc_player = (player.get_width(),player.get_height())
 #loc_path = (player.get_width(),player.get_height())
+
+
+"""
+def collide(self, mask, x= 0,y=0):
+    pl_mask = pygame.mask.from_surface(self)
+    offset= (self.x-x),int(player.y - y)
+    poi = mask.overlap(pl_mask,offset)
+    return poi
+
+
+ if collide(player,pathborder_mask,0,0) != None:
+        print('collide')
+    else:
+        print('no')
+
+#canvas.blit(pa_mask.to_surface(unsetcolor=(0,0,0,0),setcolor=(255,255,255,255)),(x_path,y_path))
+
+    #pygame.draw.lines(canvas,(255,0,255),False,outline,3)
+"""

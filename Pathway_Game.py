@@ -1,6 +1,6 @@
 import pygame
 
-pygame.init() 
+pygame.init()
 
 canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
 background = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
@@ -13,8 +13,6 @@ bottom_line_height = 100 # move based on this height, which is centered
 player = pygame.image.load('player_placeholder.jpg').convert_alpha() # player image -> surface2
 path = pygame.image.load('pathways_place.png').convert_alpha() # patyhway moves -> surface2
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
-
-objects = [player,path,rocks]
 
 # rectangles
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
@@ -30,15 +28,10 @@ rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 
 # masks
-pa_mask = pygame.mask.from_surface(path)
+pathborder_mask = pygame.mask.from_surface(path)
 #path.set_colorkey((0,0,0))
-pl_mask = pygame.mask.from_surface(player)
 #player.set_colorkey((0,0,0))
-
-
 #----------------------------------------------------------------------------------
-
-
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
@@ -48,7 +41,7 @@ pygame.event.get()
 pygame.display.set_icon(background)
 
 # player 
-x = 800 # positioon x
+x = 800 # position x
 y = 345 # position y
 
 x_path = -365
@@ -57,21 +50,19 @@ y_path = 240
 width = player.get_width()
 height = player.get_height()
 
+
 # variables for movement speed
 
-velo = 2 # up down direction
-velo_path = 20 # up down direction
+velo = 3 # up down direction
+velo_path = 34 # up down direction
 #----------------------------------------------------------------------------------
-
 canvas.blit(background, dest=position) # render image onto surface, background
 canvas.blit(player, player_rect) # render image onto surface, original position
 canvas.blit(path, path_rect) # render image onto surface, path
 canvas.blit(rocks, path_rect) # render image onto surface, rocks
-pygame.display.update()
 
 while not exit:
     keys = pygame.key.get_pressed()
-
     w = keys[pygame.K_w]
     a = keys[pygame.K_a]
     s = keys[pygame.K_s]
@@ -80,12 +71,11 @@ while not exit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit = True
-
+            
     if w and y>0: # key = k_(the key) events 
         y -= velo*2
         if w and y>0 and (not s) and (y_path<310) and w and y>0:
             y_path += velo_path
-                
         else:
             velo
 
@@ -106,7 +96,7 @@ while not exit:
 
     if d and x<1920-width:
         x += velo*2
-        if (not a) and ( x<1920-width and x_path>-680) :
+        if (not a) and ( x<1920-width and x_path>-680):
             x_path -= velo_path
         else:
             velo
@@ -115,9 +105,6 @@ while not exit:
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
     canvas.blit(player, (x,y)) # render image onto surface, original position
-    
-    outline = [(p[0] + path_rect[0],p[1] + path_rect[1]) for p in pa_mask.outline(every=121)] # list of points for outline of mask shape
-    pygame.draw.lines(canvas,(255,0,255),False,outline,3)
     pygame.display.update()
 
 pygame.quit()
