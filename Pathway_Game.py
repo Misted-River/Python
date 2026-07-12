@@ -18,7 +18,7 @@ position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
 
 # set up objects
-path = pygame.image.load('pathways_place.png').convert_alpha() # patyhway moves -> surface2
+path = pygame.image.load('unnamed.png').convert_alpha() # patyhway moves -> surface2
 player = pygame.image.load('player_placeholder.jpg').convert_alpha() # player image -> surface2
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 path_rect = path.get_rect()
@@ -34,8 +34,8 @@ background = pygame.transform.smoothscale(background,(1920,1080)) # resizing ima
 path_mask = pygame.mask.from_surface(path)
 path_rect = path.get_rect()
 
-pa_x = w/2 - path_rect.center[0]
-pa_y = h/2 - path_rect.center[1]
+#pa_x = w/2 - path_rect.center[0]
+#pa_y = h/2 - path_rect.center[1]
 
 player_mask = pygame.mask.from_surface(player)
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
@@ -51,6 +51,7 @@ height_path = path_rect.height
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
+# mouse
 mouse_pos = pygame.mouse.get_pos()
 
 pygame.event.get()
@@ -87,9 +88,10 @@ while not exit:
     result = path_mask.overlap(player_mask,(offset))
 
     if result:
-        print("yes",result)
+        pass
     else:
-        print("no",offset)
+        velo = 3 # up down direction
+        velo_path = 34 # up down direction
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -99,40 +101,57 @@ while not exit:
         y -= velo*2
         if w and y>0 and (not s) and (y_path<310) and w and y>0:
             y_path += velo_path
-            pa_y += velo_path
+
+        if result and not s:
+            print("w collide not s")
+            y_path -= velo_path
+            y += velo*2
+
+        if result and s:
+            print("w collide s")
+            y_path -= velo_path
+            y += velo*2
         else:
-            velo
+            pass
 
     if s and  y<1080-height:
         y += velo*2
         if s and  y<1080-height and (not w) and y_path>-2525:
             y_path -= velo_path
-            pa_y =- velo_path
-                
+            print("s not collide")
+
+        #if result and not w:
+            #print("s collide not w")
+            #y_path += velo_path
+            #y -= velo*2
+
+        if result and w:
+            print("s collide w")
+            y_path += velo_path
+            y -= velo*2
+
         else:
-            velo
+            pass
 
     if a and  x>0:
         x -= velo*2
         if (not d) and x_path<-200:
             x_path += velo_path
-            pa_x += velo_path
         else:
-            velo
+            pass
 
     if d and x<1920-width:
         x += velo*2
         if (not a) and ( x<1920-width and x_path>-680):
             x_path -= velo_path
-            pa_x -= velo_path
         else:
-            velo
+            pass
 
     canvas.blit(background, dest=position) # render image onto surface, background
-    
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
     canvas.blit(player, (x,y)) # render image onto surface, original position
     pygame.display.update()
 
 pygame.quit()
+
