@@ -103,12 +103,11 @@ while not exit:
             exit = True
 
     if result:
-            if hist[0] == "w":
-                y += velo*4
             if hist[0] == "s":
                 y -= velo*4
             if hist[0] == "a":
                 x += velo*4
+                
             if hist[0] == "d":
                 x -= velo*4
 
@@ -120,6 +119,10 @@ while not exit:
             y_path += velo_path
             hist.clear()
             hist.append("w")
+    if result and hist[0] == "w":
+        y += velo*4
+
+        
 
     if s and  y<1080-height:
         y += velo*2
@@ -131,6 +134,8 @@ while not exit:
 
             hist.clear()
             hist.append("s")
+    if result and hist[0] == "s":
+        y -= velo*4
 
   
 
@@ -144,8 +149,8 @@ while not exit:
 
             hist.clear()
             hist.append("a")
-        else:
-            pass
+    if result and hist[0] == "a":
+        x += velo*4
 
     if d and x<1920-width:
         x += velo*2
@@ -156,8 +161,8 @@ while not exit:
             x_path -= velo_path
             hist.clear()
             hist.append("d")
-        else:
-            pass
+    if result and hist[0] == "d":
+        x += velo*4
 
     canvas.blit(background, dest=position) # render image onto surface, background
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
