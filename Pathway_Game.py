@@ -4,9 +4,6 @@ from pygame.locals import *
 w = 1920
 h = 1080
 
-hw, hh = w/2, h/2
-area = w*h
-
 
 pygame.init()
 
@@ -34,9 +31,6 @@ background = pygame.transform.smoothscale(background,(1920,1080)) # resizing ima
 path_mask = pygame.mask.from_surface(path)
 path_rect = path.get_rect()
 
-#pa_x = w/2 - path_rect.center[0]
-#pa_y = h/2 - path_rect.center[1]
-
 player_mask = pygame.mask.from_surface(player)
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
 
@@ -52,7 +46,7 @@ pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
 # mouse
-mouse_pos = pygame.mouse.get_pos()
+#mouse_pos = pygame.mouse.get_pos()
 
 pygame.event.get()
 pygame.display.set_icon(background)
@@ -67,17 +61,15 @@ y_path = 240
 width = player.get_width()
 height = player.get_height()
 
-# variables for movement speed
 
-velo = 3 # up down direction
-velo_path = 34 # up down direction
+
 #----------------------------------------------------------------------------------
 canvas.blit(background, dest=position) # render image onto surface, background
 canvas.blit(player, player_rect) # render image onto surface, original position
 canvas.blit(path, path_rect) # render image onto surface, path
 canvas.blit(rocks, path_rect) # render image onto surface, rocks
 
-hist = []
+hist = [] # history of last key pressed
 
 while not exit:
     keys = pygame.key.get_pressed()
@@ -91,9 +83,10 @@ while not exit:
     offset = (x - x_path), (y - y_path)
     result = path_mask.overlap(player_mask,(offset))
 
+    # variables for movement speed
     if result:
-        velo = 1 # up down direction
-        velo_path = 0 # up down direction
+        velo = 2 # up down direction
+        velo_path = 20 # up down direction
     else:
         velo = 3 # up down direction
         velo_path = 34 # up down direction
@@ -102,14 +95,6 @@ while not exit:
         if event.type == pygame.QUIT:
             exit = True
 
-    if result:
-            if hist[0] == "s":
-                y -= velo*4
-            if hist[0] == "a":
-                x += velo*4
-                
-            if hist[0] == "d":
-                x -= velo*4
 
     if w and y>0: # key = k_(the key) events 
         y -= velo*2
@@ -119,10 +104,24 @@ while not exit:
             y_path += velo_path
             hist.clear()
             hist.append("w")
-    if result and hist[0] == "w":
+    
+    if result and hist[0] == "w" and s:
         y += velo*4
-
-        
+        y_path -= velo_path
+        hist[0] == "none"
+    if result and hist[0] == "s" and w:
+        y -= velo*4
+        y_path += velo_path
+        hist[0] == "none"
+    if result and hist[0] == "a" and d:
+        x += velo*4
+        x_path += velo_path
+        hist[0] == "none"
+    if result and hist[0] == "d" and a:
+        x += velo*4
+        x_path -= velo_path
+        hist[0] == "none"
+    
 
     if s and  y<1080-height:
         y += velo*2
@@ -134,10 +133,6 @@ while not exit:
 
             hist.clear()
             hist.append("s")
-    if result and hist[0] == "s":
-        y -= velo*4
-
-  
 
     if a and  x>0:
         x -= velo*2
@@ -149,8 +144,7 @@ while not exit:
 
             hist.clear()
             hist.append("a")
-    if result and hist[0] == "a":
-        x += velo*4
+
 
     if d and x<1920-width:
         x += velo*2
@@ -161,8 +155,7 @@ while not exit:
             x_path -= velo_path
             hist.clear()
             hist.append("d")
-    if result and hist[0] == "d":
-        x += velo*4
+
 
     canvas.blit(background, dest=position) # render image onto surface, background
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
