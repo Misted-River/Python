@@ -63,13 +63,19 @@ height = player.get_height()
 
 
 
+
+
 #----------------------------------------------------------------------------------
 canvas.blit(background, dest=position) # render image onto surface, background
 canvas.blit(player, player_rect) # render image onto surface, original position
 canvas.blit(path, path_rect) # render image onto surface, path
 canvas.blit(rocks, path_rect) # render image onto surface, rocks
 
-hist = [] # history of last key pressed
+hist = ["none"] # history of last key pressed
+
+def historyadd(lista,key):
+    lista.clear()
+    lista.append(key)
 
 while not exit:
     keys = pygame.key.get_pressed()
@@ -85,8 +91,8 @@ while not exit:
 
     # variables for movement speed
     if result:
-        velo = 2 # up down direction
-        velo_path = 20 # up down direction
+        velo = -3 # up down direction
+        velo_path = -34 # up down direction
     else:
         velo = 3 # up down direction
         velo_path = 34 # up down direction
@@ -95,68 +101,67 @@ while not exit:
         if event.type == pygame.QUIT:
             exit = True
 
-
     if w and y>0: # key = k_(the key) events 
         y -= velo*2
-        hist.clear()
-        hist.append("w")
+        historyadd(hist,"w")
+                    
         if w and y>0 and (not s) and (y_path<310) and w and y>0:
             y_path += velo_path
-            hist.clear()
-            hist.append("w")
-    
-    if result and hist[0] == "w" and s:
-        y += velo*4
-        y_path -= velo_path
-        hist[0] == "none"
-    if result and hist[0] == "s" and w:
-        y -= velo*4
-        y_path += velo_path
-        hist[0] == "none"
-    if result and hist[0] == "a" and d:
-        x += velo*4
-        x_path += velo_path
-        hist[0] == "none"
-    if result and hist[0] == "d" and a:
-        x += velo*4
-        x_path -= velo_path
-        hist[0] == "none"
-    
+            historyadd(hist,"w")
 
+        if result and hist[0] == "s" and w:
+            y -= velo
+            y_path += velo_path
+            hist[0] ="w"
+
+    
     if s and  y<1080-height:
         y += velo*2
-        hist.clear()
-        hist.append("s")
+        historyadd(hist,"s")
 
         if s and  y<1080-height and (not w) and y_path>-2525:
             y_path -= velo_path
+            historyadd(hist,"s")
 
-            hist.clear()
-            hist.append("s")
+        if result and hist[0] == "w" and s:
+            y += velo
+            y_path -= velo_path
+            hist[0] ="s"
+
+            
 
     if a and  x>0:
         x -= velo*2
-        hist.clear()
-        hist.append("a")
+        historyadd(hist,"a")
 
         if (not d) and x_path<-200:
             x_path += velo_path
+            historyadd(hist,"a")
 
-            hist.clear()
-            hist.append("a")
-
-
+        if result and hist[0] == "d":
+            x += velo
+            x_path -= velo_path
+            hist[0] ="a"
+            
+            
+        
     if d and x<1920-width:
         x += velo*2
-        hist.clear()
-        hist.append("d")
+        historyadd(hist,"d")
 
         if (not a) and ( x<1920-width and x_path>-680):
             x_path -= velo_path
-            hist.clear()
-            hist.append("d")
+            historyadd(hist,"d")
 
+        if result and hist[0] == "a" and d:
+            x += velo
+            x_path += velo_path
+            hist[0] ="a"
+     
 
+    
+
+    print(hist[0])
     canvas.blit(background, dest=position) # render image onto surface, background
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
