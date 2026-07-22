@@ -1,13 +1,13 @@
 import pygame
 from pygame.locals import *
 
-w = 1920
-h = 1080
+w = 1000
+h = 1000
 
 
 pygame.init()
 
-canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
+canvas = pygame.display.set_mode((1000,1000)) # canvas size -> creates screen -> background 
 background = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
 
 # constants
@@ -26,7 +26,7 @@ height_path = path_rect.height
 # resizing to fit
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
-background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
+background = pygame.transform.smoothscale(background,(1000,1000)) # resizing image
 
 path_mask = pygame.mask.from_surface(path)
 path_rect = path.get_rect()
@@ -60,10 +60,6 @@ y_path = 240
 
 width = player.get_width()
 height = player.get_height()
-
-
-
-
 
 #----------------------------------------------------------------------------------
 canvas.blit(background, dest=position) # render image onto surface, background
@@ -103,27 +99,41 @@ while not exit:
 
     if w and y>0: # key = k_(the key) events 
         y -= velo*2
-        historyadd(hist,"w")
                     
         if w and y>0 and (not s) and (y_path<310) and w and y>0:
             y_path += velo_path
+            
+        if hist[0] == "s":
+            historyadd(hist,"s")
+        elif hist[0] == "w":
             historyadd(hist,"w")
 
-        if result and hist[0] == "s" and w:
+        if result and hist[0] == "w":
             y -= velo
             y_path += velo_path
             hist[0] ="w"
+        if result and hist[0] == "s":
+            y += velo
+            y_path -= velo_path
+            hist[0] ="s"
 
-    
+
     if s and  y<1080-height:
         y += velo*2
-        historyadd(hist,"s")
 
         if s and  y<1080-height and (not w) and y_path>-2525:
             y_path -= velo_path
+
+        if hist[0] == "w":
+            historyadd(hist,"w")
+        elif hist[0] == "s":
             historyadd(hist,"s")
 
-        if result and hist[0] == "w" and s:
+        if result and hist[0] == "s":
+            y -= velo
+            y_path += velo_path
+            hist[0] ="s"
+        if result and hist[0] == "w":
             y += velo
             y_path -= velo_path
             hist[0] ="s"
@@ -132,11 +142,11 @@ while not exit:
 
     if a and  x>0:
         x -= velo*2
-        historyadd(hist,"a")
+        historyadd(hist,"d")
 
         if (not d) and x_path<-200:
             x_path += velo_path
-            historyadd(hist,"a")
+            historyadd(hist,"d")
 
         if result and hist[0] == "d":
             x += velo
@@ -147,16 +157,16 @@ while not exit:
         
     if d and x<1920-width:
         x += velo*2
-        historyadd(hist,"d")
+        historyadd(hist,"a")
 
         if (not a) and ( x<1920-width and x_path>-680):
             x_path -= velo_path
-            historyadd(hist,"d")
+            historyadd(hist,"a")
 
         if result and hist[0] == "a" and d:
             x += velo
             x_path += velo_path
-            hist[0] ="a"
+            hist[0] ="d"
      
 
     
