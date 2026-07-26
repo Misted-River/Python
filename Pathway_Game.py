@@ -1,12 +1,12 @@
 import pygame
 from pygame.locals import *
 
-w = 1000
-h = 1000
+w = 1920
+h = 1080
 
 pygame.init()
 
-canvas = pygame.display.set_mode((1000,1000)) # canvas size -> creates screen -> background 
+canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
 background = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
 # constants
 position = (0,0)
@@ -24,7 +24,7 @@ height_path = path_rect.height
 # resizing to fit
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
-background = pygame.transform.smoothscale(background,(1000,1000)) # resizing image
+background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 
 player.set_colorkey((255,255,255))
 
@@ -104,6 +104,7 @@ while not exit:
         if not poi:
             y -= velo
             y_path += velo_path
+
             historyadd(hist,"w")
 
         if poi and hist[0] == "w":
@@ -113,31 +114,24 @@ while not exit:
         if poi and hist[0] == "s":
             y += velo
             hist[0] = "w"
-            print(hist[0])
+
+            print("w",hist[0])
     
     if  s and  y<1080-height:
         if not poi:
             y += velo
-            historyadd(hist,"s")
-
-        if not s and  y<1080-height and (not w) and y_path>-2525:
             y_path -= velo_path
-
-        if hist[0] == "w":
-            historyadd(hist,"w")
-        elif hist[0] == "s":
             historyadd(hist,"s")
-
+        
         if poi and hist[0] == "s":
-            #y -= velo
-            y_path += velo_path
-
-            hist[0] ="s"
+            y += velo
+            hist[0] ="s" 
         if poi and hist[0] == "w":
-            #y += velo
-            y_path -= velo_path
-            historyadd(hist,"s")
-            hist[0] ="s"
+            y -= velo
+            hist[0] ="w" 
+
+            print("s",hist[0])
+
 
     if a and  x>0:
         x -= velo*2
