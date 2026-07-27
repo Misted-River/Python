@@ -1,0 +1,5 @@
+Pixel perfect collision accomplished! 
+
+For this I had to utilise image masks to ensure that only when the actual pixels of the player and the path border are touching, a reaction is triggered. When player is controlled by w,a,s,d keys the path border doesn't allow the player to move off the path and acts as an obstacle which is exactly what I was hoping to achieve :D
+
+Now I need to refine this collision effect to include all combinations of w,a,s,d keys as right now, the collision effect is limited to either w or s and either a or d keys being pressed.

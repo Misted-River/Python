@@ -178,4 +178,10 @@ def collide(self, mask, x= 0,y=0):
 #canvas.blit(pa_mask.to_surface(unsetcolor=(0,0,0,0),setcolor=(255,255,255,255)),(x_path,y_path))
 
     #pygame.draw.lines(canvas,(255,0,255),False,outline,3)
+
+
+
+      #poi_list = []
+        #poi_list.append(poi)
+        #print(poi_list)
 """

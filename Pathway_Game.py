@@ -74,20 +74,15 @@ def historyadd(lista,key):
 
 while not exit:
     keys = pygame.key.get_pressed()
+
     w = keys[pygame.K_w]
     a = keys[pygame.K_a]
     s = keys[pygame.K_s]
     d = keys[pygame.K_d]
 
-
     offset = (x - x_path), (y - y_path)
     poi = path_mask.overlap(player_mask,(offset)) 
-
-    poi_list = []
-    poi_list.append(poi)
-    print(poi_list)
     
-
     # variables for movement speed
     if poi: 
         velo = -3
@@ -122,7 +117,6 @@ while not exit:
             y -= velo
             hist[0] ="w" 
 
-
     if a and  x>0:
         if not poi:
             x -= velo*2
@@ -134,7 +128,6 @@ while not exit:
             x += velo
             hist[0] ="d"
             
-        
     if d and x<1920-width:
         if not poi:
             x += velo*2
@@ -145,7 +138,6 @@ while not exit:
         if poi and hist[0] == "a":
             x -= velo
             hist[0] ="a"
-
     
     print(hist[0])
     canvas.blit(background, dest=position) # render image onto surface, background
@@ -155,6 +147,3 @@ while not exit:
     pygame.display.update()
     
 pygame.quit()
-
-
-# not boucing at the same distance every time so it gets stuck to being still in contact with the path border
