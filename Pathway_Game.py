@@ -104,50 +104,46 @@ while not exit:
         if not poi:
             y -= velo
             y_path += velo_path
-
-            historyadd(hist,"w")
+            hist[0] ="w"
 
         if poi and hist[0] == "s":
             y += velo
-            hist[0] = "s"
-
-            print("w",hist[0])
+            hist[0] ="s"
     
     if  s and  y<1080-height:
         if not poi:
             y += velo
             y_path -= velo_path
-            historyadd(hist,"s")
+
+            hist[0] ="s"
 
         if poi and hist[0] == "w":
             y -= velo
             hist[0] ="w" 
 
-            print("s",hist[0])
-
 
     if a and  x>0:
-        x -= velo*2
-    
-
-        if  (not d) and x_path<-200:
+        if not poi:
+            x -= velo
             x_path += velo_path
-    
+            hist[0] ="a"
+
+
         if poi and hist[0] == "d":
             x += velo
-            x_path -= velo_path
-            hist[0] ="a"
+            hist[0] ="d"
+            
         
     if d and x<1920-width:
-        x += velo
-
-        if (not a) and ( x<1920-width and x_path>-680):
-            x_path -= velo_path
-
-        if poi and hist[0] == "a" and d:
+        if not poi:
             x += velo
-            x_path += velo_path
+            x_path -= velo_path
             hist[0] ="d"
+
+        if poi and hist[0] == "a":
+            x -= velo
+            hist[0] ="a"
+
     
     print(hist[0])
     canvas.blit(background, dest=position) # render image onto surface, background
