@@ -102,20 +102,21 @@ while not exit:
 
     if w and y>0: # key = k_(the key) events 
         if not poi:
-            y -= velo
-            y_path += velo_path
+            y -= velo*2
             hist[0] ="w"
-
+            if not s and (y>0 and y_path<310):
+                y_path += velo_path
+            
         if poi and hist[0] == "s":
             y += velo
             hist[0] ="s"
     
     if  s and  y<1080-height:
         if not poi:
-            y += velo
-            y_path -= velo_path
-
+            y += velo*2
             hist[0] ="s"
+            if (not w) and (y<1080-height and y_path>-2525):
+                y_path -= velo_path
 
         if poi and hist[0] == "w":
             y -= velo
@@ -124,10 +125,10 @@ while not exit:
 
     if a and  x>0:
         if not poi:
-            x -= velo
-            x_path += velo_path
+            x -= velo*2
             hist[0] ="a"
-
+            if (not d) and x_path<-200:
+                x_path += velo_path
 
         if poi and hist[0] == "d":
             x += velo
@@ -136,9 +137,10 @@ while not exit:
         
     if d and x<1920-width:
         if not poi:
-            x += velo
-            x_path -= velo_path
+            x += velo*2
             hist[0] ="d"
+            if (not a) and (x<1920-width and x_path>-680):
+                x_path -= velo_path
 
         if poi and hist[0] == "a":
             x -= velo
