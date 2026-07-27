@@ -107,13 +107,9 @@ while not exit:
 
             historyadd(hist,"w")
 
-        if poi and hist[0] == "w":
-            y -= velo
-            hist[0] = "s"
-
         if poi and hist[0] == "s":
             y += velo
-            hist[0] = "w"
+            hist[0] = "s"
 
             print("w",hist[0])
     
@@ -122,10 +118,7 @@ while not exit:
             y += velo
             y_path -= velo_path
             historyadd(hist,"s")
-        
-        if poi and hist[0] == "s":
-            y += velo
-            hist[0] ="s" 
+
         if poi and hist[0] == "w":
             y -= velo
             hist[0] ="w" 
@@ -135,12 +128,11 @@ while not exit:
 
     if a and  x>0:
         x -= velo*2
-        #historyadd(hist,"d")
+    
 
         if  (not d) and x_path<-200:
             x_path += velo_path
-            #historyadd(hist,"d")
-
+    
         if poi and hist[0] == "d":
             x += velo
             x_path -= velo_path
@@ -149,11 +141,8 @@ while not exit:
     if d and x<1920-width:
         x += velo
 
-        #historyadd(hist,"a")
-
         if (not a) and ( x<1920-width and x_path>-680):
             x_path -= velo_path
-            #historyadd(hist,"a")
 
         if poi and hist[0] == "a" and d:
             x += velo
