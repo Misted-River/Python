@@ -66,7 +66,7 @@ canvas.blit(player, player_rect) # render image onto surface, original position
 canvas.blit(path, path_rect) # render image onto surface, path
 canvas.blit(rocks, path_rect) # render image onto surface, rocks
 
-hist = ["none"] # history of last key pressed
+hist = ["none","none"] # history of last key pressed
 
 def historyadd(lista,key):
     lista.clear()
@@ -96,11 +96,13 @@ while not exit:
             exit = True
 
     if w and y>0: # key = k_(the key) events 
-        if not poi:
+        if not poi and not a and not d:
             y -= velo*2
             hist[0] ="w"
             if not s and (y>0 and y_path<310):
                 y_path += velo_path
+        
+
             
         if poi and hist[0] == "s":
             y += velo
@@ -111,13 +113,38 @@ while not exit:
         if poi and hist[0] == "a":
             x -= velo
             hist[0] ="a"
+
+        if poi and hist[0] == "a" and hist[1] == "w":
+            x -= velo
+            y -= velo
+            hist[0] ="a"
+            hist[1] ="s"
+        if poi and hist[0] == "d" and hist[1] == "w":
+            x += velo
+            y -= velo
+            hist[0] ="d"
+            hist[1] ="s"
+
     
     if  s and  y<1080-height:
-        if not poi:
+        if not poi and not a and not d:
             y += velo*2
             hist[0] ="s"
             if (not w) and (y<1080-height and y_path>-2525):
                 y_path -= velo_path
+        if not poi and a and (x>0 and x_path<-200):
+            x += velo*2
+            hist[0] ="a"
+            hist[1] = "w"
+            if not d and (x>0 and x_path<-200):
+                x_path += velo_path
+        if not poi and d and (x<1920-width and x_path>-680):
+            x += velo*2
+            hist[0] ="d"
+            hist[1] = "w"
+            if not a and (x<1920-width and x_path>-680):
+                x_path -= velo_path
+
 
         if poi and hist[0] == "w":
             y -= velo
