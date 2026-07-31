@@ -22,11 +22,11 @@ width_path = path_rect.width
 height_path = path_rect.height
 
 # resizing to fit
-path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
-rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
+path = pygame.transform.smoothscale(path,(width_path*1.65, height_path*1.7)) 
+rocks = pygame.transform.smoothscale(rocks,(width_path*1.65, height_path*1.7))
 background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 
-player.set_colorkey((255,255,255))
+player.set_colorkey((254,255,255))
 
 path_mask = pygame.mask.from_surface(path)
 path_rect = path.get_rect()
@@ -80,6 +80,8 @@ while not exit:
     s = keys[pygame.K_s]
     d = keys[pygame.K_d]
 
+    shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
+
     offset = (x - x_path), (y - y_path)
     poi = path_mask.overlap(player_mask,(offset)) 
     
@@ -94,6 +96,11 @@ while not exit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit = True
+
+    if shift:
+        velo = 6 # up down direction
+        velo_path = 60 # up down direction
+
 
     if w and y>0: # key = k_(the key) events 
         if not poi and not a and not d:
