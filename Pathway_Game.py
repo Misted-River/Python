@@ -105,6 +105,12 @@ while not exit:
         if poi and hist[0] == "s":
             y += velo
             hist[0] ="s"
+        if poi and hist[0] == "d":
+            x += velo
+            hist[0] ="d"
+        if poi and hist[0] == "a":
+            x -= velo
+            hist[0] ="a"
     
     if  s and  y<1080-height:
         if not poi:
@@ -116,6 +122,12 @@ while not exit:
         if poi and hist[0] == "w":
             y -= velo
             hist[0] ="w" 
+        if poi and hist[0] == "d":
+            x += velo
+            hist[0] ="d"
+        if poi and hist[0] == "a":
+            x -= velo
+            hist[0] ="a"
 
     if a and  x>0:
         if not poi:
@@ -127,6 +139,12 @@ while not exit:
         if poi and hist[0] == "d":
             x += velo
             hist[0] ="d"
+        if poi and hist[0] == "w":
+            y -= velo
+            hist[0] ="w"
+        if poi and hist[0] == "s":
+            y += velo
+            hist[0] ="s"
             
     if d and x<1920-width:
         if not poi:
@@ -137,9 +155,14 @@ while not exit:
 
         if poi and hist[0] == "a":
             x -= velo
-            hist[0] ="a"
+            hist[0] ="a" 
+        if poi and hist[0] == "w":
+            y -= velo
+            hist[0] ="w"
+        if poi and hist[0] == "s":
+            y += velo
+            hist[0] ="s"
     
-    print(hist[0])
     canvas.blit(background, dest=position) # render image onto surface, background
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
