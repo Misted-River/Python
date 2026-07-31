@@ -13,8 +13,8 @@ position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
 
 # set up objects
-path = pygame.image.load('unnamed.png').convert_alpha() # patyhway moves -> surface2
-player = pygame.image.load('player_placeholder.jpg').convert_alpha() # player image -> surface2
+path = pygame.image.load('pa_place.png').convert_alpha() # patyhway moves -> surface2
+player = pygame.image.load('play_place.png').convert_alpha() # player image -> surface2
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 path_rect = path.get_rect()
 
@@ -26,7 +26,7 @@ path = pygame.transform.smoothscale(path,(width_path*1.65, height_path*1.7))
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.65, height_path*1.7))
 background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 
-player.set_colorkey((254,255,255))
+player.set_colorkey((255,255,255))
 
 path_mask = pygame.mask.from_surface(path)
 path_rect = path.get_rect()
@@ -58,7 +58,7 @@ x_path = -365
 y_path = 240
 
 width = player.get_width()
-height = player.get_height() 
+height = player.get_height()
 
 #----------------------------------------------------------------------------------
 canvas.blit(background, dest=position) # render image onto surface, background
@@ -184,7 +184,7 @@ while not exit:
         if not poi:
             x += velo*2
             hist[0] ="d"
-            if (not a) and (x<1920-width and x_path>-680):
+            if (not a) and (x<1920-width and x_path>-570):
                 x_path -= velo_path
 
         if poi and hist[0] == "a":
