@@ -7,7 +7,7 @@ h = 1080
 pygame.init()
 
 canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
-background = pygame.image.load('placeholder_bg.png').convert() # initialise image -> surface2
+background = pygame.image.load('place_holder.png').convert() # initialise image -> surface2
 # constants
 position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
@@ -22,8 +22,8 @@ width_path = path_rect.width
 height_path = path_rect.height
 
 # resizing to fit
-path = pygame.transform.smoothscale(path,(width_path*1.65, height_path*1.7)) 
-rocks = pygame.transform.smoothscale(rocks,(width_path*1.65, height_path*1.7))
+path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
+rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 
 player.set_colorkey((255,255,255))
@@ -101,16 +101,13 @@ while not exit:
         velo = 6 # up down direction
         velo_path = 60 # up down direction
 
-
     if w and y>0: # key = k_(the key) events 
         if not poi and not a and not d:
             y -= velo*2
             hist[0] ="w"
-            if not s and (y>0 and y_path<310):
+            if not s and (y>0 and y_path<310)and x_path<-10:
                 y_path += velo_path
-        
 
-            
         if poi and hist[0] == "s":
             y += velo
             hist[0] ="s"
@@ -137,20 +134,9 @@ while not exit:
         if not poi and not a and not d:
             y += velo*2
             hist[0] ="s"
+
             if (not w) and (y<1080-height and y_path>-2525):
                 y_path -= velo_path
-        if not poi and a and (x>0 and x_path<-200):
-            x += velo*2
-            hist[0] ="a"
-            hist[1] = "w"
-            if not d and (x>0 and x_path<-200):
-                x_path += velo_path
-        if not poi and d and (x<1920-width and x_path>-680):
-            x += velo*2
-            hist[0] ="d"
-            hist[1] = "w"
-            if not a and (x<1920-width and x_path>-680):
-                x_path -= velo_path
 
 
         if poi and hist[0] == "w":
@@ -167,7 +153,7 @@ while not exit:
         if not poi:
             x -= velo*2
             hist[0] ="a"
-            if (not d) and x_path<-200:
+            if (not d) and x_path<-50:
                 x_path += velo_path
 
         if poi and hist[0] == "d":
