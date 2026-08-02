@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-
 w = 1920
 h = 1080
 
@@ -72,7 +71,6 @@ canvas.blit(path, path_rect) # render image onto surface, path
 canvas.blit(rocks, path_rect) # render image onto surface, rocks
 canvas.blit(dust, path_rect) # render image onto surface, dust
 
-
 hist = ["none","none"] # history of last key pressed
 
 while not exit:
@@ -109,8 +107,6 @@ while not exit:
 
     if clicks:
         print("click")
-    else:
-        print("no click")
 
     if shift:
         velo = 6 # up down direction
