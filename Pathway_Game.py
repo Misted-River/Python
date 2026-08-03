@@ -8,6 +8,7 @@ pygame.init()
 
 canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
 background = pygame.image.load('place_holder.png').convert() # initialise image -> surface2
+
 # constants
 position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
@@ -17,6 +18,7 @@ path = pygame.image.load('pa_place.png').convert_alpha() # patyhway moves -> sur
 player = pygame.image.load('play_place.png').convert_alpha() # player image -> surface2
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pathways, move same as path
+
 path_rect = path.get_rect()
 
 width_path = path_rect.width
@@ -33,14 +35,14 @@ dust.set_colorkey((255,255,255))
 
 path_mask = pygame.mask.from_surface(path)
 dust_mask = pygame.mask.from_surface(dust)
-path_rect = path.get_rect()
-
 player_mask = pygame.mask.from_surface(player)
+
+path_rect = path.get_rect()
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
 
-# rectangle -> rock
 rocks_rect = path_rect # rocks is same rect as path's recxtangle
 dust_rect = path_rect # dust is same rect as path's recxtangle
+
 # extra for path
 width_path = path_rect.width
 height_path = path_rect.height
@@ -48,8 +50,6 @@ height_path = path_rect.height
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
-# mouse
-mx,my = pygame.mouse.get_pos()
 
 pygame.event.get()
 pygame.display.set_icon(background)
@@ -64,6 +64,9 @@ y_path = 240
 width = player.get_width()
 height = player.get_height()
 
+circl_surface = pygame.Surface((10, 10), pygame.SRCALPHA) # create a surface for the circle
+circl_mask = pygame.mask.from_surface(circl_surface) # create mask for circle
+
 #----------------------------------------------------------------------------------
 canvas.blit(background, dest=position) # render image onto surface, background
 canvas.blit(player, player_rect) # render image onto surface, original position
@@ -74,6 +77,7 @@ canvas.blit(dust, path_rect) # render image onto surface, dust
 hist = ["none","none"] # history of last key pressed
 
 while not exit:
+    mx,my = pygame.mouse.get_pos()
 
     keys = pygame.key.get_pressed()
     w = keys[pygame.K_w]
@@ -83,10 +87,14 @@ while not exit:
     shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
 
     offset = (x - x_path), (y - y_path)
+    offset_circl = (mx - x_path), (my - y_path)
+
+
     poi = path_mask.overlap(player_mask,(offset)) 
+    #poi_circl = circl_mask.overlap(dust_mask,(offset_circl))
 
     # variables for movement speed
-    if poi: 
+    if poi:
         velo = -3
         velo_path = -34 
     else:
@@ -100,13 +108,13 @@ while not exit:
             exit = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1: # left click
-                click_position = event.pos
+                click_position = event.pos # location mouse -> middle
                 clicks = True
             else:
                 clicks = False
 
     if clicks:
-        print("click")
+        print(offset_circl[0] - mx, offset_circl[1] - my)
 
     if shift:
         velo = 6 # up down direction
@@ -196,8 +204,8 @@ while not exit:
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
     canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
     canvas.blit(player, (x,y)) # render image onto surface, original position
+    pygame.draw.circle(canvas, (255, 0, 0), (mx, my), 5) # draw circle on mouse position
+
     pygame.display.update()
     
 pygame.quit()
-
-# more collision detection yayyyyy, but seriously I need to detect if a mouse clicks on some image masks /sarc
