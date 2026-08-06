@@ -19,6 +19,8 @@ player = pygame.image.load('play_place.png').convert_alpha() # player image -> s
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pathways, move same as path
 dot = pygame.image.load('dot.png').convert_alpha() # cosmic dust on pathways, move same as path
+scraps = pygame.image.load('city_scrap.png').convert_alpha() # cosmic dust on pathways, move same as path
+cracks = pygame.image.load('cracks.png').convert_alpha() # cosmic dust on pathways, move same as path
 
 path_rect = path.get_rect()
 
@@ -30,21 +32,28 @@ height_path = path_rect.height
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 dust = pygame.transform.smoothscale(dust,(width_path*1.7, height_path*1.7))
+scraps = pygame.transform.smoothscale(scraps,(width_path*1.7, height_path*1.7))
+cracks = pygame.transform.smoothscale(cracks,(width_path*1.7, height_path*1.7))
 background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
-dot = pygame.transform.smoothscale(dot,(10,10)) # resizing image
+dot = pygame.transform.smoothscale(dot,(15,10)) # resizing image
 
 player.set_colorkey((255,255,255))
+dot.set_colorkey((255,255,255))
 
 path_mask = pygame.mask.from_surface(path)
 dust_mask = pygame.mask.from_surface(dust)
 player_mask = pygame.mask.from_surface(player)
 dot_mask = pygame.mask.from_surface(dot) # create mask for circle
+cracks_mask = pygame.mask.from_surface(cracks)
+scraps_mask = pygame.mask.from_surface(scraps)
 
 path_rect = path.get_rect()
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
 dot_rect = dot.get_rect() # original circle position (rect(0,0,10,10))
 rocks_rect = path_rect # rocks is same rect as path's recxtangle
 dust_rect = path_rect # dust is same rect as path's recxtangle
+scraps_rect = path_rect # scraps is same rect as path's recxtangle
+cracks_rect = path_rect # cracks is same rect as path's recxtangle
 
 # extra for path
 width_path = path_rect.width
@@ -77,6 +86,8 @@ canvas.blit(path, path_rect) # render image onto surface, path
 canvas.blit(rocks, path_rect) # render image onto surface, rocks
 canvas.blit(dust, path_rect) # render image onto surface, dust
 canvas.blit(dot, (mx,my)) # render image onto surface, original position
+canvas.blit(scraps, path_rect) # render image onto surface, scraps
+canvas.blit(cracks, path_rect) # render image onto surface, cracks
 
 hist = ["none","none"] # history of last key pressed
 
@@ -95,7 +106,10 @@ while not exit:
 
 
     poi = path_mask.overlap(player_mask,(offset)) 
-    poi_circl = dot_mask.overlap(dust_mask,(over_off))
+
+    poi_scraps = dot_mask.overlap(scraps_mask,(over_off))
+    poi_cracks = dot_mask.overlap(cracks_mask,(over_off))
+    poi_dot = dot_mask.overlap(dust_mask,(over_off))
 
     # variables for movement speed
     if poi:
@@ -119,9 +133,15 @@ while not exit:
 
     if clicks:
         print("click")
-        if poi_circl:
+        if poi_dot:
             print("Mouse clicked on dust")
-            print(poi_circl)
+            print(poi_dot)
+        elif poi_scraps:
+            print("Mouse clicked on scraps")
+            print(poi_scraps)
+        elif poi_cracks:
+            print("Mouse clicked on cracks")
+            print(poi_cracks)
 
     if shift:
         velo = 12 # up down direction
@@ -212,6 +232,8 @@ while not exit:
     canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
     canvas.blit(player, (x,y)) # render image onto surface, original position
     canvas.blit(dot, (mx,my)) # render image onto surface, original position
+    canvas.blit(scraps, (x_path,y_path)) # render image onto surface, scraps
+    canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
 
     pygame.display.update()
     
