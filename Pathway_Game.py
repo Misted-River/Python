@@ -4,6 +4,8 @@ from pygame.locals import *
 w = 1920
 h = 1080
 
+timer = pygame.time.Clock()
+
 pygame.init()
 
 canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
@@ -21,6 +23,10 @@ dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pat
 dot = pygame.image.load('dot.png').convert_alpha() # cosmic dust on pathways, move same as path
 scraps = pygame.image.load('city_scrap.png').convert_alpha() # cosmic dust on pathways, move same as path
 cracks = pygame.image.load('cracks.png').convert_alpha() # cosmic dust on pathways, move same as path
+
+dust_label = pygame.image.load('dust_label.png').convert_alpha() # cosmic dust on pathways, move same as path
+ring_label = pygame.image.load('ring_label.png').convert_alpha() # cosmic dust on pathways, move same as path
+scraps_label = pygame.image.load('scrap_label.png').convert_alpha() # cosmic dust on pathways, move same as path
 
 path_rect = path.get_rect()
 
@@ -66,6 +72,34 @@ exit = False
 pygame.event.get()
 pygame.display.set_icon(background)
 
+def canvas_blit_end():
+    canvas.blit(background, dest=position) # render image onto surface, background
+    canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
+    canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
+    canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
+    canvas.blit(player, (x,y)) # render image onto surface, original position
+    canvas.blit(scraps, (x_path,y_path)) # render image onto surface, scraps
+    canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
+    canvas.blit(dot, (mx,my)) # render image onto surface, original position
+    
+def canvas_blit_start():
+    canvas.blit(background, dest=position) # render image onto surface, background
+    canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
+    canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
+    canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
+    canvas.blit(player, (x,y)) # render image onto surface, original position
+    canvas.blit(scraps, (x_path,y_path)) # render image onto surface, scraps
+    canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
+    canvas.blit(dot, (mx,my)) # render image onto surface, original position
+
+def canvas_blit_labels(label):
+    if label == "dust":
+        canvas.blit(dust_label, (mx,my)) # render image onto surface, original position
+    elif label == "ring":
+        canvas.blit(ring_label, (mx,my)) # render image onto surface, original position
+    elif label == "scraps":
+        canvas.blit(scraps_label, (mx,my)) # render image onto surface, original position
+
 
 # player 
 x = 800 # position x
@@ -80,14 +114,7 @@ width = player.get_width()
 height = player.get_height()
 
 #----------------------------------------------------------------------------------
-canvas.blit(background, dest=position) # render image onto surface, background
-canvas.blit(player, player_rect) # render image onto surface, original position
-canvas.blit(path, path_rect) # render image onto surface, path
-canvas.blit(rocks, path_rect) # render image onto surface, rocks
-canvas.blit(dust, path_rect) # render image onto surface, dust
-canvas.blit(dot, (mx,my)) # render image onto surface, original position
-canvas.blit(scraps, path_rect) # render image onto surface, scraps
-canvas.blit(cracks, path_rect) # render image onto surface, cracks
+canvas_blit_start()
 
 hist = ["none","none"] # history of last key pressed
 
@@ -103,7 +130,6 @@ while not exit:
 
     offset = (x - x_path), (y - y_path)
     over_off = (x_path - mx ), (y_path - my)
-
 
     poi = path_mask.overlap(player_mask,(offset)) 
 
@@ -128,20 +154,27 @@ while not exit:
             if event.button == 1: # left click
                 click_position = event.pos # location mouse -> middle
                 clicks = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                clicks = True
+                pygame.time.delay(10000)
+                clicks = False
             else:
                 clicks = False
 
     if clicks:
-        print("click")
         if poi_dot:
-            print("Mouse clicked on dust")
-            print(poi_dot)
+            canvas_blit_end()
+            canvas_blit_labels("dust")
         elif poi_scraps:
-            print("Mouse clicked on scraps")
-            print(poi_scraps)
+            canvas_blit_end()
+            canvas_blit_labels("scraps")
         elif poi_cracks:
-            print("Mouse clicked on cracks")
-            print(poi_cracks)
+            canvas_blit_end()
+            canvas_blit_labels("ring")
+        else:
+            canvas_blit_end()
+    else:
+        canvas_blit_end()
 
     if shift:
         velo = 12 # up down direction
@@ -225,15 +258,6 @@ while not exit:
         if poi and hist[0] == "s":
             y += velo
             hist[0] ="s"
-    
-    canvas.blit(background, dest=position) # render image onto surface, background
-    canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
-    canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
-    canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
-    canvas.blit(player, (x,y)) # render image onto surface, original position
-    canvas.blit(dot, (mx,my)) # render image onto surface, original position
-    canvas.blit(scraps, (x_path,y_path)) # render image onto surface, scraps
-    canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
 
     pygame.display.update()
     
