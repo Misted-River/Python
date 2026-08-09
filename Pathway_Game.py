@@ -83,7 +83,7 @@ scene = 1
 pygame.event.get()
 pygame.display.set_icon(background)
 
-def canvas_blit_end():
+def canvas_blit_scene1():
     canvas.blit(background, dest=position) # render image onto surface, background
     canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
@@ -178,18 +178,18 @@ while not exit:
             
 
         if clicks == True:
-            canvas_blit_end()
+            canvas_blit_scene1()
             if poi_dot:
-                canvas_blit_end()
+                canvas_blit_scene1()
                 canvas_blit_labels("dust")
             elif poi_scraps:
-                canvas_blit_end()
+                canvas_blit_scene1()
                 canvas_blit_labels("scrap")
             elif poi_cracks:
-                canvas_blit_end()
+                canvas_blit_scene1()
                 canvas_blit_labels("ring")
         else:
-            canvas_blit_end()
+            canvas_blit_scene1()
 
 
         if shift:
@@ -275,10 +275,11 @@ while not exit:
                 y += velo
                 hist[0] ="s"
         if poi_next:
-            canvas.blit(background, dest=position) # render image onto surface, background
             scene = 2
+            print(scene)
     if scene == 2:
         canvas.blit(background, dest=position) # render image onto surface, background
+        pygame.mixer.music.stop
 
     pygame.display.update()
 
