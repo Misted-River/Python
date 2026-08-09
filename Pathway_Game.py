@@ -21,12 +21,12 @@ player = pygame.image.load('play_place.png').convert_alpha() # player image -> s
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pathways, move same as path
 dot = pygame.image.load('dot.png').convert_alpha() # cosmic dust on pathways, move same as path
-scraps = pygame.image.load('city_scrap.png').convert_alpha() # cosmic dust on pathways, move same as path
+scrap = pygame.image.load('city_scrap.png').convert_alpha() # cosmic dust on pathways, move same as path
 cracks = pygame.image.load('cracks.png').convert_alpha() # cosmic dust on pathways, move same as path
 
 dust_label = pygame.image.load('dust_label.png').convert_alpha() # cosmic dust on pathways, move same as path
 ring_label = pygame.image.load('ring_label.png').convert_alpha() # cosmic dust on pathways, move same as path
-scraps_label = pygame.image.load('scrap_label.png').convert_alpha() # cosmic dust on pathways, move same as path
+scrap_label = pygame.image.load('scrap_label.png').convert_alpha() # cosmic dust on pathways, move same as path
 
 path_rect = path.get_rect()
 
@@ -38,7 +38,7 @@ height_path = path_rect.height
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 dust = pygame.transform.smoothscale(dust,(width_path*1.7, height_path*1.7))
-scraps = pygame.transform.smoothscale(scraps,(width_path*1.7, height_path*1.7))
+scrap = pygame.transform.smoothscale(scrap,(width_path*1.7, height_path*1.7))
 cracks = pygame.transform.smoothscale(cracks,(width_path*1.7, height_path*1.7))
 background = pygame.transform.smoothscale(background,(1920,1080)) # resizing image
 dot = pygame.transform.smoothscale(dot,(15,10)) # resizing image
@@ -51,14 +51,14 @@ dust_mask = pygame.mask.from_surface(dust)
 player_mask = pygame.mask.from_surface(player)
 dot_mask = pygame.mask.from_surface(dot) # create mask for circle
 cracks_mask = pygame.mask.from_surface(cracks)
-scraps_mask = pygame.mask.from_surface(scraps)
+scrap_mask = pygame.mask.from_surface(scrap)
 
 path_rect = path.get_rect()
 player_rect = player.get_rect() #  original player position (rect(0,0,300,180))
 dot_rect = dot.get_rect() # original circle position (rect(0,0,10,10))
 rocks_rect = path_rect # rocks is same rect as path's recxtangle
 dust_rect = path_rect # dust is same rect as path's recxtangle
-scraps_rect = path_rect # scraps is same rect as path's recxtangle
+scrap_rect = path_rect # scraps is same rect as path's recxtangle
 cracks_rect = path_rect # cracks is same rect as path's recxtangle
 
 # extra for path
@@ -78,7 +78,7 @@ def canvas_blit_end():
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
     canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
     canvas.blit(player, (x,y)) # render image onto surface, original position
-    canvas.blit(scraps, (x_path,y_path)) # render image onto surface, scraps
+    canvas.blit(scrap, (x_path,y_path)) # render image onto surface, scraps
     canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
     canvas.blit(dot, (mx,my)) # render image onto surface, original position
     
@@ -88,7 +88,7 @@ def canvas_blit_start():
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
     canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
     canvas.blit(player, (x,y)) # render image onto surface, original position
-    canvas.blit(scraps, (x_path,y_path)) # render image onto surface, scraps
+    canvas.blit(scrap, (x_path,y_path)) # render image onto surface, scraps
     canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
     canvas.blit(dot, (mx,my)) # render image onto surface, original position
 
@@ -97,8 +97,8 @@ def canvas_blit_labels(label):
         canvas.blit(dust_label, (mx,my)) # render image onto surface, original position
     elif label == "ring":
         canvas.blit(ring_label, (mx,my)) # render image onto surface, original position
-    elif label == "scraps":
-        canvas.blit(scraps_label, (mx,my)) # render image onto surface, original position
+    elif label == "scrap":
+        canvas.blit(scrap_label, (mx,my)) # render image onto surface, original position
 
 
 # player 
@@ -118,7 +118,10 @@ canvas_blit_start()
 
 hist = ["none","none"] # history of last key pressed
 
+clicks = "none"
+
 while not exit:
+    
     mx,my = pygame.mouse.get_pos()
 
     keys = pygame.key.get_pressed()
@@ -133,7 +136,7 @@ while not exit:
 
     poi = path_mask.overlap(player_mask,(offset)) 
 
-    poi_scraps = dot_mask.overlap(scraps_mask,(over_off))
+    poi_scraps = dot_mask.overlap(scrap_mask,(over_off))
     poi_cracks = dot_mask.overlap(cracks_mask,(over_off))
     poi_dot = dot_mask.overlap(dust_mask,(over_off))
 
@@ -145,36 +148,33 @@ while not exit:
         velo = 6 # up down direction
         velo_path = 68 # up down direction
 
-    clicks = False
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit = True
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1: # left click
-                click_position = event.pos # location mouse -> middle
-                clicks = True
-            elif event.type == pygame.MOUSEBUTTONUP:
-                clicks = True
-                pygame.time.delay(10000)
-                clicks = False
-            else:
-                clicks = False
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # left click
+            click_position = event.pos # location mouse -> middle
+            clicks = True
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1: # left click
+            click_position = event.pos # location mouse -> middle
+            clicks = False
+        
 
-    if clicks:
+    if clicks == True:
+        canvas_blit_end()
         if poi_dot:
             canvas_blit_end()
             canvas_blit_labels("dust")
         elif poi_scraps:
             canvas_blit_end()
-            canvas_blit_labels("scraps")
+            canvas_blit_labels("scrap")
         elif poi_cracks:
             canvas_blit_end()
             canvas_blit_labels("ring")
-        else:
-            canvas_blit_end()
     else:
         canvas_blit_end()
+
+
+        
 
     if shift:
         velo = 12 # up down direction
