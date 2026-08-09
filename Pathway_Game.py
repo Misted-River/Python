@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 w = 1920
 h = 1080
 
@@ -14,6 +15,11 @@ background = pygame.image.load('place_holder.png').convert() # initialise image 
 # constants
 position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
+
+
+pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
+
+
 
 # set up objects
 path = pygame.image.load('pa_place.png').convert_alpha() # patyhway moves -> surface2
@@ -120,8 +126,11 @@ hist = ["none","none"] # history of last key pressed
 
 clicks = "none"
 
+pygame.mixer.music.play(4)
+
 while not exit:
     
+
     mx,my = pygame.mouse.get_pos()
 
     keys = pygame.key.get_pressed()
@@ -173,8 +182,6 @@ while not exit:
     else:
         canvas_blit_end()
 
-
-        
 
     if shift:
         velo = 12 # up down direction
@@ -260,6 +267,8 @@ while not exit:
             hist[0] ="s"
 
     pygame.display.update()
-    
+
+
 pygame.quit()
+pygame.mixer.music.stop
 
