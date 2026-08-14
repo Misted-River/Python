@@ -1,0 +1,13 @@
+Ok so quite a lot of changes made to the game so yay lets go :D
+
+Firstly...
+Added when shift pressed that the player moves faster and modified player speed for a better experience when playing.
+
+I achieved another goal of mine by making some items clickable in the game which then lead to a popup label coming onto the screen at the moise pointer position! 
+This indeed took a while yea but I figured out the logic at some point by myself and with the help of some videos on collisions with masks 
+(again lol because I had to make a workaround for the mouse pointer to be able to interact with these objects so yea image masks made an appearance yet again lmao)
+and I did initially have some trouble with how I could have the label appear whenever left click of a moiuse is pressed so that when player is pressing and holding that the label will be shown.
+
+Also im nearly completed scene 1! Im done with its code but I have yet to draw the art for it <3 and I did come across a small bug in the movement along the path so that the player can go back and forth with ease so I will have to fix that but for now I have other more important issues on my mind
+
+One of these is that I still need to fiigure out how scene 2 will go wheter there will be a cutscene or not and all that, but so far scene change works in the code so I am really happy about that and the progress :DD

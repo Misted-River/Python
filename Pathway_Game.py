@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-
 w = 1920
 h = 1080
 
@@ -17,13 +16,13 @@ position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
 
 
-pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
+#pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
 
 
 
 # set up objects
-path = pygame.image.load('pa_place.png').convert_alpha() # patyhway moves -> surface2
-player = pygame.image.load('play_place.png').convert_alpha() # player image -> surface2
+path = pygame.image.load('path_ou.png').convert_alpha() # patyhway moves -> surface2
+player = pygame.image.load('comet_stationary.png').convert_alpha() # player image -> surface2
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pathways, move same as path
 dot = pygame.image.load('dot.png').convert_alpha() # cosmic dust on pathways, move same as path
@@ -31,18 +30,27 @@ scrap = pygame.image.load('city_scrap.png').convert_alpha() # cosmic dust on pat
 cracks = pygame.image.load('cracks.png').convert_alpha() # cosmic dust on pathways, move same as path
 line = pygame.image.load("line.png").convert_alpha() # line to go to next scene
 
+# labels in scene 1
 dust_label = pygame.image.load('dust_label.png').convert_alpha() # cosmic dust on pathways, move same as path
 ring_label = pygame.image.load('ring_label.png').convert_alpha() # cosmic dust on pathways, move same as path
 scrap_label = pygame.image.load('scrap_label.png').convert_alpha() # cosmic dust on pathways, move same as path
+
+# comet costumes (anim frames for scene 1)
+
+# right / left -> will be flipped
+# top/ down will be flipped
+
+
+# #----------------------------------------------------------------------------------
 
 path_rect = path.get_rect()
 
 width_path = path_rect.width
 height_path = path_rect.height
 
-
 # resizing to fit
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
+player = pygame.transform.smoothscale(player,(500/1.5,343/1.5))
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 dust = pygame.transform.smoothscale(dust,(width_path*1.7, height_path*1.7))
 scrap = pygame.transform.smoothscale(scrap,(width_path*1.7, height_path*1.7))
@@ -113,6 +121,45 @@ def canvas_blit_labels(label):
     elif label == "scrap":
         canvas.blit(scrap_label, (mx,my)) # render image onto surface, original position
 
+def anim_walk_lr():
+    print("images go here")
+
+def anim_walk_td():
+    print("images go here")
+
+def direction_walk(direction):
+    if direction == "left":
+        print("insert walk anim here-> have picture and blit over each other as player moves")
+    elif direction == "right":
+        print("insert walk anim here-> have picture and blit over each other as player moves")
+    elif direction == "top":
+        print("insert walk anim here-> have picture and blit over each other as player moves")
+    elif direction == "down":
+        print("insert walk anim here-> have picture and blit over each other as player moves")
+
+global animation_frames
+animation_frames = {}
+
+
+"""def load_animation(path,frame_duration):
+    global animation_frames
+    animation_name = path.split("/")[-1]
+    animation_frame_data = []
+    n = 0
+    for frame in frame_duration:
+        animation_frame_id = animation_name + "_" + str(n)
+        img_loc = path + "/" + animation_frame_id + ".png"
+        animation_image = pygame.image.load(img_loc).convert()
+        animation_image.set_colorkey((255,255,255))
+        animation_frames[animation_frame_id] = animation_image.copy()
+        for i in range(frame):
+            animation_frame_data.append(animation_frame_id)
+        n +=1
+    return animation_frame_data
+
+animation_database = {}
+animation_database["run"] = load_animation["player_animations/run",[7,7]]
+"""
 
 # player 
 x = 800 # position x
@@ -130,12 +177,12 @@ height = player.get_height()
 canvas_blit_start()
 
 hist = ["none","none"] # history of last key pressed
-
 clicks = "none"
 
-pygame.mixer.music.play(4)
+#pygame.mixer.music.play(4) # start music -> for 4 loops it plays and then it stops
 
 while not exit:
+    
 
     if scene == 1:
     
@@ -259,6 +306,7 @@ while not exit:
                 hist[0] ="s"
                 
         if d and x<1920-width:
+            pygame.transform.rotate(player,180)
             if not poi:
                 x += velo*2
                 hist[0] ="d"
@@ -279,11 +327,10 @@ while not exit:
             print(scene)
     if scene == 2:
         canvas.blit(background, dest=position) # render image onto surface, background
-        pygame.mixer.music.stop
+        #pygame.mixer.music.stop
 
     pygame.display.update()
 
-
 pygame.quit()
-pygame.mixer.music.stop
+#pygame.mixer.music.stop
 
