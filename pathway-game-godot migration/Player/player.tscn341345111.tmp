@@ -43,7 +43,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk left_right",
-"speed": 8.0
+"speed": 5.0
 }, {
 "frames": [],
 "loop": 1,
@@ -52,7 +52,6 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=736718251]
-position = Vector2(4, -154)
 script = ExtResource("1_fhl08")
 metadata/_edit_group_ = true
 
@@ -60,14 +59,10 @@ metadata/_edit_group_ = true
 sprite_frames = SubResource("SpriteFrames_hnts1")
 animation = &"walk left_right"
 frame = 2
-frame_progress = 0.7745828
+frame_progress = 0.4473732
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=530290951]
-position = Vector2(-96, 69.5)
-scale = Vector2(10.6, 7.95)
-polygon = PackedVector2Array(20.094337, -17.54717, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9.461018, -8.261738)
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2057230398]
-light_mask = 2
-visibility_layer = 0
 position_smoothing_enabled = true

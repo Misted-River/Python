@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=1920
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [input]
@@ -51,5 +51,7 @@ move_down={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+gl_compatibility/driver.windows="opengl3_angle"
+gl_compatibility/driver.macos="opengl3_angle"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

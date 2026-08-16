@@ -36,6 +36,13 @@ ring_label = pygame.image.load('ring_label.png').convert_alpha() # cosmic dust o
 scrap_label = pygame.image.load('scrap_label.png').convert_alpha() # cosmic dust on pathways, move same as path
 
 # comet costumes (anim frames for scene 1)
+comet_1 = pygame.image.load('1.png').convert_alpha() # cosmic dust on pathways, move same as path
+comet_2 = pygame.image.load('2.png').convert_alpha() # cosmic dust on pathways, move same as path
+comet_3 = pygame.image.load('3.png').convert_alpha() # cosmic dust on pathways, move same as path
+comet_4 = pygame.image.load('4.png').convert_alpha() # cosmic dust on pathways, move same as path
+comet_5 = pygame.image.load('5.png').convert_alpha() # cosmic dust on pathways, move same as path
+
+
 
 # right / left -> will be flipped
 # top/ down will be flipped
@@ -141,26 +148,6 @@ global animation_frames
 animation_frames = {}
 
 
-"""def load_animation(path,frame_duration):
-    global animation_frames
-    animation_name = path.split("/")[-1]
-    animation_frame_data = []
-    n = 0
-    for frame in frame_duration:
-        animation_frame_id = animation_name + "_" + str(n)
-        img_loc = path + "/" + animation_frame_id + ".png"
-        animation_image = pygame.image.load(img_loc).convert()
-        animation_image.set_colorkey((255,255,255))
-        animation_frames[animation_frame_id] = animation_image.copy()
-        for i in range(frame):
-            animation_frame_data.append(animation_frame_id)
-        n +=1
-    return animation_frame_data
-
-animation_database = {}
-animation_database["run"] = load_animation["player_animations/run",[7,7]]
-"""
-
 # player 
 x = 800 # position x
 y = 345 # position y
@@ -185,6 +172,7 @@ while not exit:
     
 
     if scene == 1:
+        move = False
     
         mx,my = pygame.mouse.get_pos()
 
@@ -244,6 +232,7 @@ while not exit:
             velo_path = 136 # up down direction
 
         if w and y>0: # key = k_(the key) events 
+            move = True
             if not poi and not a and not d:
                 y -= velo*2
                 hist[0] ="w"
@@ -272,6 +261,7 @@ while not exit:
                 hist[1] ="s"
         
         if  s and  y<1080-height:
+            move = True
             if not poi and not a and not d:
                 y += velo*2
                 hist[0] ="s"
@@ -289,6 +279,7 @@ while not exit:
                 hist[0] ="a"
 
         if a and  x>0:
+            move = True
             if not poi:
                 x -= velo*2
                 hist[0] ="a"
@@ -306,6 +297,7 @@ while not exit:
                 hist[0] ="s"
                 
         if d and x<1920-width:
+            move = True
             pygame.transform.rotate(player,180)
             if not poi:
                 x += velo*2
@@ -325,6 +317,9 @@ while not exit:
         if poi_next:
             scene = 2
             print(scene)
+
+        if move == True:
+            canvas.blit()            
     if scene == 2:
         canvas.blit(background, dest=position) # render image onto surface, background
         #pygame.mixer.music.stop

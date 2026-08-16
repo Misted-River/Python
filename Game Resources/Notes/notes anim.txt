@@ -1,0 +1,1 @@
+one default image -> changes based on whether input is detected, if no input -> idle
