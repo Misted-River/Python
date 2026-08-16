@@ -16,7 +16,7 @@ position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
 time = pygame.Clock()
 
-#pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
+pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
 
 # set up objects
 path = pygame.image.load('pa_place.png').convert_alpha() # patyhway moves -> surface2
@@ -175,9 +175,15 @@ def canvas_blit_scene1(move):
             canv_blit_rest()
     else:
         player = comet_3
-        canvas.blit(player, (x,y)) # render image onto surface, original position
-        canv_blit_rest()
-        
+        if hist_right[0] == "yes":
+            player = pygame.transform.flip(player, True, False)
+            canvas.blit(player, (x,y)) # render image onto surface, original position
+            timer.tick(10)
+            canv_blit_rest()
+        else:
+            canvas.blit(player, (x,y)) # render image onto surface, original position
+            canv_blit_rest()
+            
     
 def canvas_blit_start():
     canvas.blit(background, dest=position) # render image onto surface, background
@@ -235,7 +241,10 @@ hist = ["none","none"] # history of last key pressed
 clicks = "none"
 move = "none"
 
-#pygame.mixer.music.play(4) # start music -> for 4 loops it plays and then it stops
+hist_right = [""]
+
+pygame.mixer.music.play(4) # start music -> for 4 loops it plays and then it stops
+pygame.mixer.music.set_volume(0.2)
 
 while not exit:
     frame +=1
@@ -334,6 +343,7 @@ while not exit:
         if w and y>0: # key = k_(the key) events 
             move = True
             right = "none"
+            hist_right[0] = "no"
             if not poi and not a and not d:
                 y -= velo*2
                 hist[0] ="w"
@@ -364,6 +374,7 @@ while not exit:
         if  s and  y<1080-height:
             move = True
             right = "none"
+            hist_right[0] = "no"
             if not poi and not a and not d:
                 y += velo*2
                 hist[0] ="s"
@@ -383,6 +394,7 @@ while not exit:
         if a and  x>0:
             move = True
             right = "none"
+            hist_right[0] = "no"
             if not poi:
                 x -= velo*2
                 hist[0] ="a"
@@ -402,6 +414,7 @@ while not exit:
         if d and x<1920-width:
             move = True
             right = "yes"
+            hist_right[0] = "yes"
             if not poi:
                 x += velo*2
                 hist[0] ="d"
@@ -423,10 +436,10 @@ while not exit:
          
     if scene == 2:
         canvas.blit(background, dest=position) # render image onto surface, background
-        #pygame.mixer.music.stop
+        pygame.mixer.music.stop
 
     pygame.display.update()
 
 pygame.quit()
-#pygame.mixer.music.stop
+
 
