@@ -393,4 +393,188 @@ while not exit:
 pygame.quit()
 
 """
+"""
+import pygame
+from pygame.locals import *
+w = 600
+h = 600
+pygame.init()
+canvas = pygame.display.set_mode((600,600)) # canvas size -> creates screen -> background 
+# constants
+position = (0,0)
+bottom_line_height = 100 # move based on this height, which is centered
+background = pygame.image.load('place_holder.png').convert() # initialise image -> surface2
+
+
+
+
+#----------------------------------------------------------------------------------
+pygame.event.get()
+
+# player 
+x_path = -365
+y_path = 240
+
+mx,my = pygame.mouse.get_pos()
+
+
+#----------------------------------------------------------------------------------
+canvas.blit(background, dest=position) # render image onto surface, background
+
+
+hist = ["none","none"] # history of last key pressed
+
+while not exit:
+    mx,my = pygame.mouse.get_pos()
+
+    keys = pygame.key.get_pressed()
+    w = keys[pygame.K_w]
+    a = keys[pygame.K_a]
+    s = keys[pygame.K_s]
+    d = keys[pygame.K_d]
+    shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
+
+    over_off = (mx - dust_rect.x), (my - dust_rect.y)
+    poi_dust = dust_mask.overlap(dot_mask,(over_off))
+
+    clicks = False
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            exit = True
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1: # left click
+                click_position = event.pos # location mouse -> middle
+                clicks = True
+            else:
+                clicks = False
+
+    if clicks:
+        print("click")
+        if poi_dust:
+            print("Mouse clicked on dust")
+            print(poi_dust)
+
+    if shift:
+        velo = 12 # up down direction
+        velo_path = 136 # up down direction
+
+    canvas.blit(background, dest=position) # render image onto surface, background
+    canvas.blit(dust, dust_rect) # render image onto surface, dust
+
+    pygame.display.update()
+    
+pygame.quit()
+
+
+
+import pygame
+from pygame.locals import *
+
+w = 500
+h = 500
+
+pygame.init()
+
+canvas = pygame.display.set_mode((500,500)) # canvas size -> creates screen -> background 
+background = pygame.image.load('place_holder.png').convert() # initialise image -> surface2
+
+# constants
+position = (0,0)
+bottom_line_height = 100 # move based on this height, which is centered
+
+# set up objects
+rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
+dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pathways, move same as path
+dot = pygame.image.load('dot.png').convert_alpha() # cosmic dust on pathways, move same as path
+
+
+
+# resizing to fit
+rocks = pygame.transform.smoothscale(rocks,(500, 500))
+dust = pygame.transform.smoothscale(dust,(500, 500))
+background = pygame.transform.smoothscale(background,(500,500)) # resizing image
+dot = pygame.transform.smoothscale(dot,(10,10)) # resizing image
+
+
+dust_mask = pygame.mask.from_surface(dust)
+dot_mask = pygame.mask.from_surface(dot) # create mask for circle
+
+
+
+dot_rect = dot.get_rect() # original circle position (rect(0,0,10,10))
+rocks_rect = rocks.get_rect() # rocks is same rect as path's recxtangle
+dust_rect = dust.get_rect() # dust is same rect as path's recxtangle
+
+# extra for path
+#----------------------------------------------------------------------------------
+pygame.display.set_caption("Welcome to The Pathways") # name of game for window
+
+exit = False
+
+pygame.event.get()
+pygame.display.set_icon(background)
+
+
+# player 
+x = 800 # position x
+y = 345 # position y
+
+x_path = -365
+y_path = 240
+
+mx,my = pygame.mouse.get_pos()
+
+
+#----------------------------------------------------------------------------------
+canvas.blit(background, dest=position) # render image onto surface, background
+canvas.blit(rocks, rocks_rect) # render image onto surface, rocks
+canvas.blit(dust, dust_rect) # render image onto surface, dust
+canvas.blit(dot, dot_rect) # render image onto surface, original position
+
+hist = ["none","none"] # history of last key pressed
+
+while not exit:
+    mx,my = pygame.mouse.get_pos()
+
+    keys = pygame.key.get_pressed()
+    w = keys[pygame.K_w]
+    a = keys[pygame.K_a]
+    s = keys[pygame.K_s]
+    d = keys[pygame.K_d]
+    shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
+
+    offset = (x - x_path), (y - y_path)
+    over_off = (x_path - mx ), (y_path - my)
+
+    poi_circl = dot_mask.overlap(dust_mask,(over_off))
+
+    clicks = False
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            exit = True
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1: # left click
+                click_position = event.pos # location mouse -> middle
+                clicks = True
+            else:
+                clicks = False
+
+    if clicks:
+        print("click")
+        if poi_circl:
+            print("Mouse clicked on dust")
+            print(poi_circl)
+
+
+    canvas.blit(background, dest=position) # render image onto surface, background
+    canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
+    canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
+    canvas.blit(dot, (mx,my)) # render image onto surface, original position
+
+    pygame.display.update()
+    
+pygame.quit()
+"""
 
