@@ -246,12 +246,22 @@ pygame.mixer.music.play(4) # start music -> for 4 loops it plays and then it sto
 pygame.mixer.music.set_volume(0.2)
 
 while not exit:
-    frame +=1
 
-    if frame == 6:
-        frame = 1
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            exit = True
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # left click
+            click_position = event.pos # location mouse -> middle
+            clicks = True
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1: # left click
+            click_position = event.pos # location mouse -> middle
+            clicks = False
 
     if scene == 1:
+        frame +=1
+        if frame == 6:
+            frame = 1
+
         mx,my = pygame.mouse.get_pos()
 
         keys = pygame.key.get_pressed()
@@ -279,16 +289,6 @@ while not exit:
             velo = 6 # up down direction
             velo_path = 68 # up down direction
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                exit = True
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # left click
-                click_position = event.pos # location mouse -> middle
-                clicks = True
-            if event.type == pygame.MOUSEBUTTONUP and event.button == 1: # left click
-                click_position = event.pos # location mouse -> middle
-                clicks = False
-
         if move == True:
             print("anim walk")
         else:
@@ -301,38 +301,15 @@ while not exit:
             right = "none"
 
 
-
-        if clicks == True:
-            if move ==True:
-                canvas_blit_scene1(True)
-            else:
-                canvas_blit_scene1(False)
+        canvas_blit_scene1(move)
+        if clicks == True:  
             if poi_dot:
-                if move == True:
-                    canvas_blit_scene1(True)
-                    canvas_blit_labels("dust")
-                else:
-                    canvas_blit_scene1(False)
-                    canvas_blit_labels("dust")
+                canvas_blit_labels("dust")
             elif poi_scraps:
                 if move == True:
-                    canvas_blit_scene1(True)
-                    canvas_blit_labels("scrap")
-                else:
-                    canvas_blit_scene1(False)
-                    canvas_blit_labels("scrap")
+                    canvas_blit_labels("scrap")   
             elif poi_cracks:
-                if move == True:
-                    canvas_blit_scene1(True)
                     canvas_blit_labels("ring")
-                else:
-                    canvas_blit_scene1(False)
-                    canvas_blit_labels("ring")
-        else:
-            if move == True:
-                canvas_blit_scene1(True)
-            else:
-                canvas_blit_scene1(False)
 
 
         if shift:
