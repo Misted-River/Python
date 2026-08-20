@@ -1,3 +1,5 @@
+Repost -> Video is missing from last devlog so Im uploading here again oof ->
+
 Figured I should post a devlog before I work on the code on my new device so here we go...
 
 So, I a couple of changes have happened to the game and I did attempt to try migrate to Godot however I have made too much progress on pygame so far and decided not to go ahead with it. 
