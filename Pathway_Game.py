@@ -73,6 +73,7 @@ dot = pygame.transform.smoothscale(dot,(15,10)) # resizing image
 player.set_colorkey((255,255,255))
 dot.set_colorkey((255,255,255))
 
+
 path_mask = pygame.mask.from_surface(path)
 dust_mask = pygame.mask.from_surface(dust)
 player_mask = pygame.mask.from_surface(player)
@@ -328,7 +329,7 @@ while not exit:
                 y -= velo*2
                 hist[0] ="w"
 
-                if not s: # and (y>0 and y_path<310)and x_path<-10:
+                if not s and (y>0 and y_path<310)and x_path<-10:
                     y_path += velo_path
 
             if poi and hist[0] == "s":
@@ -364,7 +365,7 @@ while not exit:
                 y += velo*2
                 hist[0] ="s"
 
-                if (not w): #(y<1080-height and y_path>-2525):
+                if (not w) and (y<1080-height and y_path>-2525):
                     y_path -= velo_path
 
             if poi and hist[0] == "w":
@@ -377,7 +378,7 @@ while not exit:
                 x -= velo
                 hist[0] ="a"
 
-        if a: #x>0:
+        if a and x>0:
             move = True
             right = "none"
             hist_right[0] = "no"
@@ -385,7 +386,7 @@ while not exit:
             if not poi:
                 x -= velo*2
                 hist[0] ="a"
-                if (not d): # and x_path<-50:
+                if (not d) and x_path<-50:
                     x_path += velo_path
 
             if poi and hist[0] == "d":
@@ -398,7 +399,7 @@ while not exit:
                 y += velo
                 hist[0] ="s"
 
-        if d: #x<1920-width:
+        if d and x<1920-width:
             move = True
             right = "yes"
             hist_right[0] = "yes"
@@ -406,7 +407,7 @@ while not exit:
             if not poi:
                 x += velo*2
                 hist[0] ="d"
-                if (not a): #and (x<1920-width and x_path>-570):
+                if (not a) and (x<1920-width and x_path>-570):
                     x_path -= velo_path
 
             if poi and hist[0] == "a":
@@ -420,23 +421,118 @@ while not exit:
                 hist[0] ="s"
 
         if poi_next:
-            scene = 2
+            path = path_scene2
+            x_path = 0
+            y_path = 0
 
-    if scene == 2:
-        canvas.blit(background,dest=position)
-        canvas.blit(path_scene2, (x_path,y_path))
+            x = 800 # position x
+            y = 345 # position y
 
-        if w:
-            y_path += 3
-        if  s:
-            y_path -= 3       
-        if a: 
-            x_path += 3
-        if d:
-            x_path -= 3
+            path_mask = pygame.mask.from_surface(path_scene2)
+
+            velo = 0
+            velo_path = -5
+
+            if w:
+                move = True
+                right = "none"
+                hist_right[0] = "no"
             
-        
-       
+                if not poi and not a and not d:
+                    y -= velo*2
+                    hist[0] ="w"
+            
+                if not s and (y>0 and y_path<310)and x_path<-10:
+                    y_path += velo_path
+            
+                    if poi and hist[0] == "s":
+                        y += velo
+                        hist[0] ="s"
+            
+                    if poi and hist[0] == "d":
+                        x += velo
+                        hist[0] ="d"
+            
+                    if poi and hist[0] == "a":
+                        x -= velo
+                        hist[0] ="a"
+            
+                    if poi and hist[0] == "a" and hist[1] == "w":
+                        x -= velo
+                        y -= velo
+                        hist[0] ="a"
+                        hist[1] ="s"
+            
+                    if poi and hist[0] == "d" and hist[1] == "w":
+                        x += velo
+                        y -= velo
+                        hist[0] ="d"
+                        hist[1] ="s"
+            
+                    if  s:
+                        move = True
+                        right = "none"
+                        hist_right[0] = "no"
+            
+                        if not poi and not a and not d:
+                            y += velo*2
+                            hist[0] ="s"
+            
+                            if (not w) and (y<1080-height and y_path>-2525):
+                                y_path -= velo_path
+            
+                        if poi and hist[0] == "w":
+                            y -= velo
+                            hist[0] ="w"
+                        if poi and hist[0] == "d":
+                            x += velo
+                            hist[0] ="d"
+                        if poi and hist[0] == "a":
+                            x -= velo
+                            hist[0] ="a"
+            
+                    if a:
+                        move = True
+                        right = "none"
+                        hist_right[0] = "no"
+            
+                        if not poi:
+                            x -= velo*2
+                            hist[0] ="a"
+                            if (not d) and x_path<-50:
+                                x_path += velo_path
+            
+                        if poi and hist[0] == "d":
+                            x += velo
+                            hist[0] ="d"
+                        if poi and hist[0] == "w":
+                            y -= velo
+                            hist[0] ="w"
+                        if poi and hist[0] == "s":
+                            y += velo
+                            hist[0] ="s"
+            
+                    if d:
+                        move = True
+                        right = "yes"
+                        hist_right[0] = "yes"
+            
+                        if not poi:
+                            x += velo*2
+                            hist[0] ="d"
+                            if (not a) and (x<1920-width and x_path>-570):
+                                x_path -= velo_path
+            
+                        if poi and hist[0] == "a":
+                            x -= velo
+                            hist[0] ="a"
+                        if poi and hist[0] == "w":
+                            y -= velo
+                            hist[0] ="w"
+                        if poi and hist[0] == "s":
+                            y += velo
+                            hist[0] ="s"
+            
 
         pygame.mixer.music.stop
 
