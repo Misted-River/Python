@@ -14,7 +14,6 @@ background = pygame.image.load('place_holder.png').convert() # initialise image 
 # constants
 position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
-time = pygame.Clock()
 
 pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
 

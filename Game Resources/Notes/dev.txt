@@ -1,0 +1,12 @@
+Repost -> Video is missing from last devlog so Im uploading here again oof ->
+
+Figured I should post a devlog before I work on the code on my new device so here we go...
+
+So, I a couple of changes have happened to the game and I did attempt to try migrate to Godot however I have made too much progress on pygame so far and decided not to go ahead with it. 
+
+Also player graphics are added now! The back legs in the animation ive been told, look a little stiff so I do aim to fix that later on once I make more progress on the actual gameplay of the game, but for now it should be ok hopefully lol.
+
+I also have been planning the actual gameplay style now by making little notes and have multiple routes planned for the player to take so that they will have a sense of agency in the game, that their choices matter so hopefully I can pull that off as I keep on  working on the game yay.
+
+Not sure if I said anything in the last devlog but I added music too! Its a custom beepbox tune which I made before stardance so I will change bits to fit the vibe better later on as it isnt perfect right now yea.
+Once I finish the start (scene1) I will probably ship, but I doubt I'll finish this project before september, anyways thanks for reading :D
