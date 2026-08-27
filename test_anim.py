@@ -432,7 +432,6 @@ while not exit:
                 hist[0] ="s"
         if poi_next:
             scene = 2
-            print(scene)
          
     if scene == 2:
         canvas.blit(background, dest=position) # render image onto surface, background

@@ -8,7 +8,7 @@ timer = pygame.time.Clock()
 
 pygame.init()
 
-canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background 
+canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background
 background = pygame.image.load('place_holder.png').convert() # initialise image -> surface2
 
 # constants
@@ -20,6 +20,8 @@ pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
 
 # set up objects
 path = pygame.image.load('pa_place.png').convert_alpha() # patyhway moves -> surface2
+path_scene2 = pygame.image.load('p.png').convert_alpha() # patyhway moves -> surface2
+
 player = pygame.image.load('comet_stationary.png').convert_alpha() # player image -> surface2
 rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
 dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pathways, move same as path
@@ -40,19 +42,17 @@ comet_3 = pygame.image.load('3.png').convert_alpha() # cosmic dust on pathways, 
 comet_4 = pygame.image.load('4.png').convert_alpha() # cosmic dust on pathways, move same as path
 comet_5 = pygame.image.load('5.png').convert_alpha() # cosmic dust on pathways, move same as path
 
-
 # right / left -> will be flipped
 # top/ down will be flipped
 
-
 # #----------------------------------------------------------------------------------
-
 path_rect = path.get_rect()
+
 width_path = path_rect.width
 height_path = path_rect.height
 
 # resizing to fit
-path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7)) 
+path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7))
 
 comet_1 = pygame.transform.smoothscale(comet_1,(500/1.5,343/1.5))
 comet_2 = pygame.transform.smoothscale(comet_2,(500/1.5,343/1.5))
@@ -61,6 +61,7 @@ comet_4 = pygame.transform.smoothscale(comet_4,(500/1.5,343/1.5))
 comet_5 = pygame.transform.smoothscale(comet_5,(500/1.5,343/1.5))
 
 player = pygame.transform.smoothscale(player,(500/1.5,343/1.5))
+
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 dust = pygame.transform.smoothscale(dust,(width_path*1.7, height_path*1.7))
 scrap = pygame.transform.smoothscale(scrap,(width_path*1.7, height_path*1.7))
@@ -108,7 +109,7 @@ def canv_blit_rest():
     canvas.blit(scrap, (x_path,y_path)) # render image onto surface, scraps
     canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
     canvas.blit(dot, (mx,my)) # render image onto surface, original position
-                
+
 
 def canvas_blit_scene1(move):
     canvas.blit(background, dest=position) # render image onto surface, background
@@ -258,25 +259,25 @@ while not exit:
             click_position = event.pos # location mouse -> middle
             clicks = False
 
+    mx,my = pygame.mouse.get_pos()
+        
+    keys = pygame.key.get_pressed()
+    w = keys[pygame.K_w]
+    a = keys[pygame.K_a]
+    s = keys[pygame.K_s]
+    d = keys[pygame.K_d]
+    shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
+
     if scene == 1:
         frame +=1
         if frame == 6:
             frame = 1
 
-        mx,my = pygame.mouse.get_pos()
-
-        keys = pygame.key.get_pressed()
-        w = keys[pygame.K_w]
-        a = keys[pygame.K_a]
-        s = keys[pygame.K_s]
-        d = keys[pygame.K_d]
-        shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
-
         offset = (x - x_path), (y - y_path)
         over_off = (x_path - mx ), (y_path - my)
 
-        poi = path_mask.overlap(player_mask,(offset)) 
-        poi_next = line_mask.overlap(player_mask,(offset)) 
+        poi = path_mask.overlap(player_mask,(offset))
+        poi_next = line_mask.overlap(player_mask,(offset))
 
         poi_scraps = dot_mask.overlap(scrap_mask,(over_off))
         poi_cracks = dot_mask.overlap(cracks_mask,(over_off))
@@ -303,12 +304,13 @@ while not exit:
 
 
         canvas_blit_scene1(move)
-        if clicks == True:  
+
+        if clicks == True:
             if poi_dot:
                 canvas_blit_labels("dust")
             elif poi_scraps:
                 if move == True:
-                    canvas_blit_labels("scrap")   
+                    canvas_blit_labels("scrap")
             elif poi_cracks:
                     canvas_blit_labels("ring")
 
@@ -317,22 +319,26 @@ while not exit:
             velo = 12 # up down direction
             velo_path = 136 # up down direction
 
-        if w and y>0: # key = k_(the key) events 
+        if w: #and y>0: # key = k_(the key) events
             move = True
             right = "none"
             hist_right[0] = "no"
+
             if not poi and not a and not d:
                 y -= velo*2
                 hist[0] ="w"
-                if not s and (y>0 and y_path<310)and x_path<-10:
+
+                if not s: # and (y>0 and y_path<310)and x_path<-10:
                     y_path += velo_path
 
             if poi and hist[0] == "s":
                 y += velo
                 hist[0] ="s"
+
             if poi and hist[0] == "d":
                 x += velo
                 hist[0] ="d"
+
             if poi and hist[0] == "a":
                 x -= velo
                 hist[0] ="a"
@@ -342,25 +348,28 @@ while not exit:
                 y -= velo
                 hist[0] ="a"
                 hist[1] ="s"
+
             if poi and hist[0] == "d" and hist[1] == "w":
                 x += velo
                 y -= velo
                 hist[0] ="d"
                 hist[1] ="s"
-        
-        if  s and  y<1080-height:
+
+        if  s: #y<1080-height:
             move = True
             right = "none"
             hist_right[0] = "no"
+
             if not poi and not a and not d:
                 y += velo*2
                 hist[0] ="s"
-                if (not w) and (y<1080-height and y_path>-2525):
+
+                if (not w): #(y<1080-height and y_path>-2525):
                     y_path -= velo_path
 
             if poi and hist[0] == "w":
                 y -= velo
-                hist[0] ="w" 
+                hist[0] ="w"
             if poi and hist[0] == "d":
                 x += velo
                 hist[0] ="d"
@@ -368,14 +377,15 @@ while not exit:
                 x -= velo
                 hist[0] ="a"
 
-        if a and  x>0:
+        if a: #x>0:
             move = True
             right = "none"
             hist_right[0] = "no"
+
             if not poi:
                 x -= velo*2
                 hist[0] ="a"
-                if (not d) and x_path<-50:
+                if (not d): # and x_path<-50:
                     x_path += velo_path
 
             if poi and hist[0] == "d":
@@ -387,32 +397,47 @@ while not exit:
             if poi and hist[0] == "s":
                 y += velo
                 hist[0] ="s"
-                
-        if d and x<1920-width:
+
+        if d: #x<1920-width:
             move = True
             right = "yes"
             hist_right[0] = "yes"
+
             if not poi:
                 x += velo*2
                 hist[0] ="d"
-                if (not a) and (x<1920-width and x_path>-570):
+                if (not a): #and (x<1920-width and x_path>-570):
                     x_path -= velo_path
 
             if poi and hist[0] == "a":
                 x -= velo
-                hist[0] ="a" 
+                hist[0] ="a"
             if poi and hist[0] == "w":
                 y -= velo
                 hist[0] ="w"
             if poi and hist[0] == "s":
                 y += velo
                 hist[0] ="s"
+
         if poi_next:
             scene = 2
-            print(scene)
-         
+
     if scene == 2:
-        canvas.blit(background, dest=position) # render image onto surface, background
+        canvas.blit(background,dest=position)
+        canvas.blit(path_scene2, (x_path,y_path))
+
+        if w:
+            y_path += 3
+        if  s:
+            y_path -= 3       
+        if a: 
+            x_path += 3
+        if d:
+            x_path -= 3
+            
+        
+       
+
         pygame.mixer.music.stop
 
     pygame.display.update()
