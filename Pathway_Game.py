@@ -274,7 +274,7 @@ while not exit:
         start = False
         scene = 1
 
-    if scene == 1:
+    if scene == 1: # set of main area and secondary areas
         frame +=1
         if frame == 6:
             frame = 1
@@ -425,7 +425,7 @@ while not exit:
                 y += velo
                 hist[0] ="s"
 
-        if poi_next:
+        """if poi_next:
             path = path_scene2
             x_path = 0
             y_path = 0
@@ -537,8 +537,7 @@ while not exit:
                         if poi and hist[0] == "s":
                             y += velo
                             hist[0] ="s"
-            pygame.mixer.music.stop
-
+                            """
     pygame.display.update()
 
 pygame.quit()
