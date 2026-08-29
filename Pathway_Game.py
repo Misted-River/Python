@@ -98,7 +98,7 @@ height_path = path_rect.height
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
-scene = 1
+scene = "none"
 frame = 0
 right = "none"
 
@@ -241,6 +241,7 @@ canvas_blit_start()
 hist = ["none","none"] # history of last key pressed
 clicks = "none"
 move = "none"
+start = True
 
 hist_right = [""]
 
@@ -267,6 +268,11 @@ while not exit:
     s = keys[pygame.K_s]
     d = keys[pygame.K_d]
     shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
+
+    if start:
+        print("start intro cutscenes")
+        start = False
+        scene = 1
 
     if scene == 1:
         frame +=1
@@ -517,7 +523,7 @@ while not exit:
                         hist_right[0] = "yes"
             
                         if not poi:
-                            x += velo*2
+                            x += velo*21
                             hist[0] ="d"
                             if (not a) and (x<1920-width and x_path>-570):
                                 x_path -= velo_path
@@ -531,9 +537,7 @@ while not exit:
                         if poi and hist[0] == "s":
                             y += velo
                             hist[0] ="s"
-            
-
-        pygame.mixer.music.stop
+            pygame.mixer.music.stop
 
     pygame.display.update()
 
