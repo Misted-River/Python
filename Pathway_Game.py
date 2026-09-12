@@ -111,79 +111,150 @@ def canv_blit_rest():
     canvas.blit(dot, (mx,my)) # render image onto surface, original position
 
 
-def canvas_blit_scene1(move):
-    canvas.blit(background, dest=position) # render image onto surface, background
-    canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
-    canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
-    canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
-    canvas.blit(line,(x_path,y_path))
+def canvas_blit_scene1(move,scene):
+    if scene == 1:
+        canvas.blit(background, dest=position) # render image onto surface, background
+        canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
+        canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
+        canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
+        canvas.blit(line,(x_path,y_path))
 
-    if move == True and frame == 1:
-        player = comet_1
-        if right == "yes":
-            player = pygame.transform.flip(player, True, False)
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
+        if move == True and frame == 1:
+            player = comet_1
+            if right == "yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+            
+        elif move == True and frame == 2:
+            player = comet_2
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+        elif move == True and frame == 3:
+            player = comet_3
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+        elif move == True and frame == 4:
+            player = comet_4
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+        elif move == True and frame == 5:
+            player = comet_5
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
         else:
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-        
-    elif move == True and frame == 2:
-        player = comet_2
-        if right=="yes":
-            player = pygame.transform.flip(player, True, False)
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
+            player = comet_3
+            if hist_right[0] == "yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                canv_blit_rest()
+    elif scene == 2:
+        canvas.blit(background, dest=position) # render image onto surface, background
+        canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
+        if move == True and frame == 1:
+            player = comet_1
+            if right == "yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                canv_blit_rest()
+                    
+        elif move == True and frame == 2:
+            player = comet_2
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+        elif move == True and frame == 3:
+            player = comet_3
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+        elif move == True and frame == 4:
+            player = comet_4
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+        elif move == True and frame == 5:
+            player = comet_5
+            if right=="yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
         else:
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-    elif move == True and frame == 3:
-        player = comet_3
-        if right=="yes":
-            player = pygame.transform.flip(player, True, False)
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-        else:
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-    elif move == True and frame == 4:
-        player = comet_4
-        if right=="yes":
-            player = pygame.transform.flip(player, True, False)
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-        else:
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-    elif move == True and frame == 5:
-        player = comet_5
-        if right=="yes":
-            player = pygame.transform.flip(player, True, False)
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-        else:
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-    else:
-        player = comet_3
-        if hist_right[0] == "yes":
-            player = pygame.transform.flip(player, True, False)
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            timer.tick(10)
-            canv_blit_rest()
-        else:
-            canvas.blit(player, (x,y)) # render image onto surface, original position
-            canv_blit_rest()
+            player = comet_3
+            if hist_right[0] == "yes":
+                player = pygame.transform.flip(player, True, False)
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                timer.tick(10)
+                
+            else:
+                canvas.blit(player, (x,y)) # render image onto surface, original position
+                
+
             
     
 def canvas_blit_start():
@@ -249,8 +320,8 @@ hist_right = [""]
 
 restraints = False
 
-pygame.mixer.music.play(-1) # start music -> plays indefinitely
-pygame.mixer.music.set_volume(0.2)
+#pygame.mixer.music.play(-1) # start music -> plays indefinitely
+#pygame.mixer.music.set_volume(0.2)
 
 while not exit:
     for event in pygame.event.get():
@@ -290,16 +361,19 @@ while not exit:
         move = False
         right = "none"
 
-    canvas_blit_scene1(move)
-
-    if w and y>0 : # key = k_(the key) events
-        move,right,hist_right[0] = True,"none","no"
+    if w : # key = k_(the key) events
+        if y>0 and scene == 1:
+            move,right,hist_right[0] = True,"none","no"
+        elif scene == 2:
+            move,right,hist_right[0] = True,"none","no"
     
         if not poi and not a and not d and not poi_next:
             y -= velo*2
             hist[0] ="w"
     
-            if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next:
+            if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next and scene == 1:
+                y_path += velo_path
+            elif not s and scene == 2:
                 y_path += velo_path
     
         if poi and hist[0] == "s":
@@ -325,18 +399,20 @@ while not exit:
             y -= velo
             hist[0] ="d"
             hist[1] ="s"
-
-    elif w and y>0 :
-        print("restraints true")
     
-    if s and y<1080-height and restraints == False:
-        move,right,hist_right[0] = True,"none","no"
+    if s:
+        if y<1080-height and scene == 1:
+            move,right,hist_right[0] = True,"none","no"
+        elif scene == 2:
+            move,right,hist_right[0] = True,"none","no"
     
         if not poi and not a and not d and not poi_next:
             y += velo*2
             hist[0] ="s"
     
-            if (not w) and (y<1080-height and y_path>-2525) and not poi_next:
+            if (not w) and (y<1080-height and y_path>-2525) and not poi_next and scene == 1:
+                y_path -= velo_path
+            elif (not w) and scene == 2:
                 y_path -= velo_path
     
         if poi and hist[0] == "w":
@@ -350,12 +426,18 @@ while not exit:
             hist[0] ="a"
     
     if a and x>0 :
-        move,right,hist_right[0] = True,"none","no"
+        if x>0 and scene == 1:
+            move,right,hist_right[0] = True,"none","no"
+        elif scene == 2:
+            move,right,hist_right[0] = True,"none","no"
+
     
         if not poi:
             x -= velo*2
             hist[0] ="a"
-            if (not d) and x_path<-50 and not poi_next:
+            if (not d) and x_path<-50 and not poi_next and scene == 1:
+                x_path += velo_path
+            elif (not d) and scene == 2:
                 x_path += velo_path
     
         if poi and hist[0] == "d":
@@ -368,13 +450,18 @@ while not exit:
             y += velo
             hist[0] ="s"
     
-    if d and x<1920-width :
-        move,right,hist_right[0] = True,"yes","yes"
+    if d :
+        if x<1920-width and scene == 1:
+            move,right,hist_right[0] = True,"yes","yes"
+        elif scene == 2:
+            move,right,hist_right[0] = True,"yes","yes"
     
         if not poi and restraints == False:
             x += velo*2
             hist[0] ="d"
-            if (not a) and (x<1920-width and x_path>-570) and not poi_next:
+            if (not a) and (x<1920-width and x_path>-570) and not poi_next and scene == 1:
+                x_path -= velo_path
+            elif (not a) and scene == 2:
                 x_path -= velo_path
     
         if poi and hist[0] == "a":
@@ -387,32 +474,40 @@ while not exit:
             y += velo
             hist[0] ="s"
 
+    if scene == 1:
+        canvas_blit_scene1(move,1)
+    elif scene == 2:
+        canvas_blit_scene1(move,2)
+
+
+    offset = (x - x_path), (y - y_path)
+    over_off = (x_path - mx ), (y_path - my)
+    
+    poi = path_mask.overlap(player_mask,(offset))
+    poi_scraps = dot_mask.overlap(scrap_mask,(over_off))
+    poi_cracks = dot_mask.overlap(cracks_mask,(over_off))
+    poi_dot = dot_mask.overlap(dust_mask,(over_off))
+    
+    poi_next = line_mask.overlap(player_mask,(offset))
+
+    # variables for movement speed
+    if poi:
+        velo = -6
+        velo_path = -68
+    else:
+        velo = 6 # up down direction
+        velo_path = 68 # up down direction
+    
+    
+    
+
     if start:
         print("start intro cutscenes")
         start = False
         scene = 1
 
     if scene == 1: # set of main area and secondary areas
-
-        offset = (x - x_path), (y - y_path)
-        over_off = (x_path - mx ), (y_path - my)
-
-        poi = path_mask.overlap(player_mask,(offset))
-        poi_next = line_mask.overlap(player_mask,(offset))
-
-        poi_scraps = dot_mask.overlap(scrap_mask,(over_off))
-        poi_cracks = dot_mask.overlap(cracks_mask,(over_off))
-        poi_dot = dot_mask.overlap(dust_mask,(over_off))
-
-
-        # variables for movement speed
-        if poi:
-            velo = -6
-            velo_path = -68
-        else:
-            velo = 6 # up down direction
-            velo_path = 68 # up down direction
-
+        
         if clicks == True:
             if poi_dot:
                 if items_found < 3:
@@ -422,7 +517,7 @@ while not exit:
             elif poi_scraps:
                 if items_found < 3:
                     items_found = 2
-                    canvas_blit_labels("scrap")
+                canvas_blit_labels("scrap")
             elif poi_cracks:
                 if items_found < 3:
                     items_found = 3
@@ -430,7 +525,18 @@ while not exit:
 
 
         if poi_next and items_found == 3:
+            poi_next = False
+
+            #offset = (x - x_path), (y - y_path)
+            #over_off = (x_path - mx ), (y_path - my)
+            
+            #poi = path_mask.overlap(player_mask,(offset))
+            #poi_next = line_mask.overlap(player_mask,(offset))
+
+            scene = 2
+
             path = path_scene2
+
             x_path = 0
             y_path = 0
 
@@ -439,10 +545,7 @@ while not exit:
 
             path_mask = pygame.mask.from_surface(path_scene2)
 
-            velo = 1
-            velo_path = -5
-
-            restraints = True
+            print(x_path,y_path)
 
         elif poi_next and items_found < 3:
             print("you need to find all 3 items before you can go to the next scene")
