@@ -37,5 +37,5 @@ _Currently only supports windows_
 
 ## Credits:
 
-I used various tutorials in YouTube to form an undertanding of pixel perfect collision along with the basics of pygame
+I used various tutorials in YouTube to form an undertanding of pixel perfect collision along with the basics of pygame.
  
