@@ -36,6 +36,7 @@ _Currently only supports windows_
 ***Scene 2 Coding: (not complete yet):***
  - Different path is shown
  - Player movement is the same as scene 1, path scrolls as player moves
+ - In scene 1, edge of path is not shown for aesthetic purposes, here in this scene I have yet to implement this
  
 ***Art :*** 
  - The art for the path, background, objects and some bits of the characters animation are work in progress for now
