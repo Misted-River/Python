@@ -3,7 +3,8 @@ An adventure game based on my story world of The Pathways, a civilization for cr
 
  Currently a work in progress as this is going to be a long project which will continue even after the end of the Stardance Challenge.
 
-![enter image description here](https://f2.toyhou.se/file/f2-toyhou-se/images/127601557_93TfkPaarwIGySj.gif)
+<img width="623" height="360" alt="Elli Kourousi_s Video - Sep 12, 2026" src="https://github.com/user-attachments/assets/2dc2bba3-b457-4a18-8712-fe5b494b372f" />
+
 ## Authors
 
  - Elli Kourousi ([@Misted-River on GitHub](https://github.com/Misted-River/Python/tree/main))
