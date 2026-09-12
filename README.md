@@ -16,6 +16,12 @@ Try it:
 _Currently only supports windows_
 -> Unzip the folder and download the .exe file to run locally on your windows device
 
+## How to play
+ - Player controls Comet, a canine-like character using w,a,s,d keys
+ - Shift to speed Comet up
+ - Observe all objects in scene 1 (click and hold on them) to pass into scene 2 and the end of the path!
+ - (Scene 2 gameplay is under construction, but you can move around on the path to just look around so far)
+
 ## Features
 
 **Scene 1 Coding**
@@ -29,7 +35,7 @@ _Currently only supports windows_
 
 ***Scene 2 Coding: (not complete yet):***
  - Different path is shown
- - Player movement is the same as scene 1 (work in progress, bug is present here)
+ - Player movement is the same as scene 1, path scrolls as player moves
  
 ***Art :*** 
  - The art for the path, background, objects and some bits of the characters animation are work in progress for now
