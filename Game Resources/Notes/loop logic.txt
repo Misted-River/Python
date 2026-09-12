@@ -1,2 +1,14 @@
 Work on scene 2 and Readme written in github!
+
+I had issues when I split the code into scene 1 and scene 2 as I still needed the same movement mech for scene 2 as well, but I managed to manage this split into working as I needed it to.
+
+I also am preparing for my first ship! This is because I am aware that Stardance is ending soon and so want to share what I have so far instead of waiting for a better time, this is the best I can get for now as this project will be long and will definitely be continued after Stardance is over as I begin college and have more time to myself to make this hopefully become a reality!
+
+Another feature is that the player must find all objects along the path in scene 1 in order to proceed to scene 2.
+
+Thanks so much for reading, this might be the last devlog before shipping but who knows, I could make changes anytime before the end of the challenge if I want to! This is just a precautionary ship just in case
+
+In the future I hope to include more gameplay (this right now is legit the intro to the game, along with some cutscenes ill draw for the very start) I have written notes in GitHub in Python-> Game Resources -> Notes -> Gameplay.txt if interested!
+
+Thanks so much for anyone following along with this project <3
 			

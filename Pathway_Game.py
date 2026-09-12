@@ -1,5 +1,19 @@
 import pygame
 from pygame.locals import *
+from sys import exit
+import random
+
+import os 
+import sys
+
+def resource_path(path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, path)
+
 
 w = 1920
 h = 1080
@@ -9,37 +23,37 @@ timer = pygame.time.Clock()
 pygame.init()
 
 canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background
-background = pygame.image.load('place_holder.png').convert() # initialise image -> surface2
+background = pygame.image.load(resource_path('place_holder.png')).convert() # initialise image -> surface2
 
 # constants
 position = (0,0)
 bottom_line_height = 100 # move based on this height, which is centered
 
-pygame.mixer.music.load('Walking The Pathways - Version 6.wav') # load music
+pygame.mixer.music.load(resource_path('Walking The Pathways - Version 6.wav')) # load music
 
 # set up objects
-path = pygame.image.load('pa_place.png').convert_alpha() # patyhway moves -> surface2
-path_scene2 = pygame.image.load('p.png').convert_alpha() # patyhway moves -> surface2
+path = pygame.image.load(resource_path('pa_place.png')).convert_alpha() # patyhway moves -> surface2
+path_scene2 = pygame.image.load(resource_path('p.png')).convert_alpha() # patyhway moves -> surface2
 
-player = pygame.image.load('comet_stationary.png').convert_alpha() # player image -> surface2
-rocks = pygame.image.load('rocks.png').convert_alpha() # rocks on pathways, move same as path
-dust = pygame.image.load('cosmic_dust.png').convert_alpha() # cosmic dust on pathways, move same as path
-dot = pygame.image.load('dot.png').convert_alpha() # cosmic dust on pathways, move same as path
-scrap = pygame.image.load('city_scrap.png').convert_alpha() # cosmic dust on pathways, move same as path
-cracks = pygame.image.load('cracks.png').convert_alpha() # cosmic dust on pathways, move same as path
-line = pygame.image.load("line.png").convert_alpha() # line to go to next scene
+player = pygame.image.load(resource_path('comet_stationary.png')).convert_alpha() # player image -> surface2
+rocks = pygame.image.load(resource_path('rocks.png')).convert_alpha() # rocks on pathways, move same as path
+dust = pygame.image.load(resource_path('cosmic_dust.png')).convert_alpha() # cosmic dust on pathways, move same as path
+dot = pygame.image.load(resource_path('dot.png')).convert_alpha() # cosmic dust on pathways, move same as path
+scrap = pygame.image.load(resource_path('city_scrap.png')).convert_alpha() # cosmic dust on pathways, move same as path
+cracks = pygame.image.load(resource_path('cracks.png')).convert_alpha() # cosmic dust on pathways, move same as path
+line = pygame.image.load(resource_path("line.png")).convert_alpha() # line to go to next scene
 
 # labels in scene 1
-dust_label = pygame.image.load('dust_label.png').convert_alpha() # cosmic dust on pathways, move same as path
-ring_label = pygame.image.load('ring_label.png').convert_alpha() # cosmic dust on pathways, move same as path
-scrap_label = pygame.image.load('scrap_label.png').convert_alpha() # cosmic dust on pathways, move same as path
+dust_label = pygame.image.load(resource_path('dust_label.png')).convert_alpha() # cosmic dust on pathways, move same as path
+ring_label = pygame.image.load(resource_path('ring_label.png')).convert_alpha() # cosmic dust on pathways, move same as path
+scrap_label = pygame.image.load(resource_path('scrap_label.png')).convert_alpha() # cosmic dust on pathways, move same as path
 
 # comet costumes (anim frames for scene 1)
-comet_1 = pygame.image.load('1.png').convert_alpha() # cosmic dust on pathways, move same as path
-comet_2 = pygame.image.load('2.png').convert_alpha() # cosmic dust on pathways, move same as path
-comet_3 = pygame.image.load('3.png').convert_alpha() # cosmic dust on pathways, move same as path
-comet_4 = pygame.image.load('4.png').convert_alpha() # cosmic dust on pathways, move same as path
-comet_5 = pygame.image.load('5.png').convert_alpha() # cosmic dust on pathways, move same as path
+comet_1 = pygame.image.load(resource_path('1.png')).convert_alpha() # cosmic dust on pathways, move same as path
+comet_2 = pygame.image.load(resource_path('2.png')).convert_alpha() # cosmic dust on pathways, move same as path
+comet_3 = pygame.image.load(resource_path('3.png')).convert_alpha() # cosmic dust on pathways, move same as path
+comet_4 = pygame.image.load(resource_path('4.png')).convert_alpha() # cosmic dust on pathways, move same as path
+comet_5 = pygame.image.load(resource_path('5.png')).convert_alpha() # cosmic dust on pathways, move same as path
 
 # right / left -> will be flipped
 # top/ down will be flipped
