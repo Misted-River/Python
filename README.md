@@ -5,7 +5,7 @@ An adventure game based on my story world of The Pathways, a civilisation for cr
 
 ## Authors
 
- - Elli Kourousi (@Misted-River on GitHub)
+ - Elli Kourousi ([@Misted-River on GitHub](https://github.com/Misted-River/Python/tree/main))
 
 ## Features
 
