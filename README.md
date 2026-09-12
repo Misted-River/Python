@@ -3,7 +3,7 @@ An adventure game based on my story world of The Pathways, a civilization for cr
 
  Currently a work in progress as this is going to be a long project which will continue even after the end of the Stardance Challenge.
 
-<img width="623" height="360" alt="Elli Kourousi_s Video - Sep 12, 2026" src="https://github.com/user-attachments/assets/2dc2bba3-b457-4a18-8712-fe5b494b372f" />
+<img width="623" height="360" alt="Elli Kourousi_s Video - Sep 12, 2026" src="https://github.com/user-attachments/assets/78895c30-b1f0-4057-a12d-7ed958077979" />
 
 ## Authors
 
@@ -21,6 +21,7 @@ _Currently only supports windows_
  - Shift to speed Comet up
  - Observe all objects in scene 1 (click and hold on them) to pass into scene 2 and the end of the path!
  - (Scene 2 gameplay is under construction, but you can move around on the path to just look around so far)
+
 
 ## Features
 
