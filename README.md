@@ -9,7 +9,7 @@ An adventure game based on my story world of The Pathways, a civilisation for cr
 
 ## Features
 
- *Scene 1 Coding*:
+**Scene 1 Coding**
  - Main character is moved by pressing w,a,s,d keys on a keyboard in the respective directions
  - Main charcter movement can be accelerated by pressing shift while w,a,s,d keys are pressed
  - If player hits on the edge of the path on-screen, a collision occurs which blocks character movement in direction of the obstacle -> Pixel perfect collision 
@@ -18,15 +18,15 @@ An adventure game based on my story world of The Pathways, a civilisation for cr
  - End of scene is reached at the end of the path where a visible item, when touched by character, brings the player into scene 2.
  - Animated player character goes through a loop of 5 individual drawn frames to make the character appear to move visually
 
-*Scene 2 Coding: (not complete yet):*
+***Scene 2 Coding: (not complete yet):***
  - Different path is shown
  - Player movement is the same as scene 1 (work in progress, bug is present here)
  
-*Art :* 
+***Art :*** 
  - The art for the path, background, objects and some bits of the characters animation are work in progress for now
  - All art is drawn by me using Ibis Paint X drawing software on Ipad
  
- *Music:*
+ ***Music:***
  - Custom music created by me using Beepbox, which plays indefinately
 
 
