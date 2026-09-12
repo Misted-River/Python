@@ -19,7 +19,7 @@ _Currently only supports windows_
 ## How to play
  - Player controls Comet, a canine-like character using w,a,s,d keys
  - Shift to speed Comet up
- - Observe all objects in scene 1 (click and hold on them) to pass into scene 2 and the end of the path!
+ - Press and hold on all objects in scene 1 (click and hold on them) to pass into scene 2 and the end of the path!
  - (Scene 2 gameplay is under construction, but you can move around on the path to just look around so far)
 
 
