@@ -10,6 +10,9 @@ An adventure game based on my story world of The Pathways, a civilization for cr
  - Elli Kourousi ([@Misted-River on GitHub](https://github.com/Misted-River/Python/tree/main))
 
 ## Installation
+
+Try it:
+
 _Currently only supports windows_
 -> Unzip the folder and download the .exe file to run locally on your windows device
 
