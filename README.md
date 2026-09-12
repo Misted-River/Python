@@ -11,7 +11,7 @@ An adventure game based on my story world of The Pathways, a civilization for cr
 
 ## Installation
 
-Try it:
+Try it: https://ek-7.itch.io/welcome-to-the-pathways-the-game
 
 _Currently only supports windows_
 -> Unzip the folder and download the .exe file to run locally on your windows device
