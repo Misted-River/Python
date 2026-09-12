@@ -272,15 +272,127 @@ while not exit:
     d = keys[pygame.K_d]
     shift = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
 
+    frame +=1
+    if frame == 6:
+        frame = 1
+
+    if shift:
+        velo = 12 # up down direction
+        velo_path = 136 # up down direction
+
+    if move == True:
+        print("anim walk")
+    else:
+        print("anim idle")
+        move = False
+
+    if not s and not d and not a and not w:
+        move = False
+        right = "none"
+
+    canvas_blit_scene1(move)
+
+    if w and y>0 : # key = k_(the key) events
+        move,right,hist_right[0] = True,"none","no"
+    
+        if not poi and not a and not d and not poi_next:
+            y -= velo*2
+            hist[0] ="w"
+    
+            if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next:
+                y_path += velo_path
+    
+        if poi and hist[0] == "s":
+            y += velo
+            hist[0] ="s"
+    
+        if poi and hist[0] == "d":
+            x += velo
+            hist[0] ="d"
+    
+        if poi and hist[0] == "a":
+            x -= velo
+            hist[0] ="a"
+    
+        if poi and hist[0] == "a" and hist[1] == "w":
+            x -= velo
+            y -= velo
+            hist[0] ="a"
+            hist[1] ="s"
+    
+        if poi and hist[0] == "d" and hist[1] == "w":
+            x += velo
+            y -= velo
+            hist[0] ="d"
+            hist[1] ="s"
+
+    elif w and y>0 :
+        print("restraints true")
+    
+    if s and y<1080-height and restraints == False:
+        move,right,hist_right[0] = True,"none","no"
+    
+        if not poi and not a and not d and not poi_next:
+            y += velo*2
+            hist[0] ="s"
+    
+            if (not w) and (y<1080-height and y_path>-2525) and not poi_next:
+                y_path -= velo_path
+    
+        if poi and hist[0] == "w":
+            y -= velo
+            hist[0] ="w"
+        if poi and hist[0] == "d":
+            x += velo
+            hist[0] ="d"
+        if poi and hist[0] == "a":
+            x -= velo
+            hist[0] ="a"
+    
+    if a and x>0 :
+        move,right,hist_right[0] = True,"none","no"
+    
+        if not poi:
+            x -= velo*2
+            hist[0] ="a"
+            if (not d) and x_path<-50 and not poi_next:
+                x_path += velo_path
+    
+        if poi and hist[0] == "d":
+            x += velo
+            hist[0] ="d"
+        if poi and hist[0] == "w":
+            y -= velo
+            hist[0] ="w"
+        if poi and hist[0] == "s":
+            y += velo
+            hist[0] ="s"
+    
+    if d and x<1920-width :
+        move,right,hist_right[0] = True,"yes","yes"
+    
+        if not poi and restraints == False:
+            x += velo*2
+            hist[0] ="d"
+            if (not a) and (x<1920-width and x_path>-570) and not poi_next:
+                x_path -= velo_path
+    
+        if poi and hist[0] == "a":
+            x -= velo
+            hist[0] ="a"
+        if poi and hist[0] == "w":
+            y -= velo
+            hist[0] ="w"
+        if poi and hist[0] == "s":
+            y += velo
+            hist[0] ="s"
+
     if start:
         print("start intro cutscenes")
         start = False
         scene = 1
 
     if scene == 1: # set of main area and secondary areas
-        frame +=1
-        if frame == 6:
-            frame = 1
 
         offset = (x - x_path), (y - y_path)
         over_off = (x_path - mx ), (y_path - my)
@@ -292,6 +404,7 @@ while not exit:
         poi_cracks = dot_mask.overlap(cracks_mask,(over_off))
         poi_dot = dot_mask.overlap(dust_mask,(over_off))
 
+
         # variables for movement speed
         if poi:
             velo = -6
@@ -299,19 +412,6 @@ while not exit:
         else:
             velo = 6 # up down direction
             velo_path = 68 # up down direction
-
-        if move == True:
-            print("anim walk")
-        else:
-            print("anim idle")
-            move = False
-
-
-        if not s and not d and not a and not w:
-            move = False
-            right = "none"
-
-        canvas_blit_scene1(move)
 
         if clicks == True:
             if poi_dot:
@@ -322,118 +422,12 @@ while not exit:
             elif poi_scraps:
                 if items_found < 3:
                     items_found = 2
-                if move == True:
                     canvas_blit_labels("scrap")
             elif poi_cracks:
                 if items_found < 3:
                     items_found = 3
                 canvas_blit_labels("ring")
 
-        if shift:
-            velo = 12 # up down direction
-            velo_path = 136 # up down direction
-
-        if w and y>0 and restraints == False: # key = k_(the key) events
-            move = True
-            right = "none"
-            hist_right[0] = "no"
-
-            if not poi and not a and not d and not poi_next:
-                y -= velo*2
-                hist[0] ="w"
-
-                if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next:
-                    y_path += velo_path
-
-            if poi and hist[0] == "s":
-                y += velo
-                hist[0] ="s"
-
-            if poi and hist[0] == "d":
-                x += velo
-                hist[0] ="d"
-
-            if poi and hist[0] == "a":
-                x -= velo
-                hist[0] ="a"
-
-            if poi and hist[0] == "a" and hist[1] == "w":
-                x -= velo
-                y -= velo
-                hist[0] ="a"
-                hist[1] ="s"
-
-            if poi and hist[0] == "d" and hist[1] == "w":
-                x += velo
-                y -= velo
-                hist[0] ="d"
-                hist[1] ="s"
-        elif w and y>0 and restraints == True:
-            print("restraints true")
-
-        if s and y<1080-height and restraints == False:
-            move = True
-            right = "none"
-            hist_right[0] = "no"
-
-            if not poi and not a and not d and not poi_next:
-                y += velo*2
-                hist[0] ="s"
-
-                if (not w) and (y<1080-height and y_path>-2525) and not poi_next:
-                    y_path -= velo_path
-
-            if poi and hist[0] == "w":
-                y -= velo
-                hist[0] ="w"
-            if poi and hist[0] == "d":
-                x += velo
-                hist[0] ="d"
-            if poi and hist[0] == "a":
-                x -= velo
-                hist[0] ="a"
-
-        if a and x>0 and restraints == False:
-            move = True
-            right = "none"
-            hist_right[0] = "no"
-
-            if not poi:
-                x -= velo*2
-                hist[0] ="a"
-                if (not d) and x_path<-50 and not poi_next:
-                    x_path += velo_path
-
-            if poi and hist[0] == "d":
-                x += velo
-                hist[0] ="d"
-            if poi and hist[0] == "w":
-                y -= velo
-                hist[0] ="w"
-            if poi and hist[0] == "s":
-                y += velo
-                hist[0] ="s"
-
-        if d and x<1920-width and restraints == False:
-            move = True
-            right = "yes"
-            hist_right[0] = "yes"
-
-            if not poi and restraints == False:
-                x += velo*2
-                hist[0] ="d"
-                if (not a) and (x<1920-width and x_path>-570) and not poi_next:
-                    x_path -= velo_path
-
-            if poi and hist[0] == "a":
-                x -= velo
-                hist[0] ="a"
-            if poi and hist[0] == "w":
-                y -= velo
-                hist[0] ="w"
-            if poi and hist[0] == "s":
-                y += velo
-                hist[0] ="s"
 
         if poi_next and items_found == 3:
             path = path_scene2
@@ -445,115 +439,14 @@ while not exit:
 
             path_mask = pygame.mask.from_surface(path_scene2)
 
-            velo = 0
+            velo = 1
             velo_path = -5
 
             restraints = True
 
         elif poi_next and items_found < 3:
             print("you need to find all 3 items before you can go to the next scene")
-            
-            """
-            if w:
-                move = True
-                right = "none"
-                hist_right[0] = "no"
-            
-                if not poi and not a and not d:
-                    y -= velo*2
-                    hist[0] ="w"
-            
-                if not s and (y>0 and y_path<310)and x_path<-10:
-                    y_path += velo_path
-            
-                    if poi and hist[0] == "s":
-                        y += velo
-                        hist[0] ="s"
-            
-                    if poi and hist[0] == "d":
-                        x += velo
-                        hist[0] ="d"
-            
-                    if poi and hist[0] == "a":
-                        x -= velo
-                        hist[0] ="a"
-            
-                    if poi and hist[0] == "a" and hist[1] == "w":
-                        x -= velo
-                        y -= velo
-                        hist[0] ="a"
-                        hist[1] ="s"
-            
-                    if poi and hist[0] == "d" and hist[1] == "w":
-                        x += velo
-                        y -= velo
-                        hist[0] ="d"
-                        hist[1] ="s"
-            
-                    if  s:
-                        move = True
-                        right = "none"
-                        hist_right[0] = "no"
-            
-                        if not poi and not a and not d:
-                            y += velo*2
-                            hist[0] ="s"
-            
-                            if (not w) and (y<1080-height and y_path>-2525):
-                                y_path -= velo_path
-            
-                        if poi and hist[0] == "w":
-                            y -= velo
-                            hist[0] ="w"
-                        if poi and hist[0] == "d":
-                            x += velo
-                            hist[0] ="d"
-                        if poi and hist[0] == "a":
-                            x -= velo
-                            hist[0] ="a"
-            
-                    if a:
-                        move = True
-                        right = "none"
-                        hist_right[0] = "no"
-            
-                        if not poi:
-                            x -= velo*2
-                            hist[0] ="a"
-                            if (not d) and x_path<-50:
-                                x_path += velo_path
-            
-                        if poi and hist[0] == "d":
-                            x += velo
-                            hist[0] ="d"
-                        if poi and hist[0] == "w":
-                            y -= velo
-                            hist[0] ="w"
-                        if poi and hist[0] == "s":
-                            y += velo
-                            hist[0] ="s"
-            
-                    if d:
-                        move = True
-                        right = "yes"
-                        hist_right[0] = "yes"
-            
-                        if not poi:
-                            x += velo*21
-                            hist[0] ="d"
-                            if (not a) and (x<1920-width and x_path>-570):
-                                x_path -= velo_path
-            
-                        if poi and hist[0] == "a":
-                            x -= velo
-                            hist[0] ="a"
-                        if poi and hist[0] == "w":
-                            y -= velo
-                            hist[0] ="w"
-                        if poi and hist[0] == "s":
-                            y += velo
-                            hist[0] ="s"
-                            """
+                            
     pygame.display.update()
 
 pygame.quit()
