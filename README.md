@@ -34,4 +34,8 @@ _Currently only supports windows_
  
  ***Music:***
  - Custom music created by me using Beepbox, which plays indefinitely
+
+## Credits:
+
+I used various tutorials in YouTube to form an undertanding of pixel perfect collision along with the basics of pygame
  
