@@ -320,8 +320,8 @@ hist_right = [""]
 
 restraints = False
 
-#pygame.mixer.music.play(-1) # start music -> plays indefinitely
-#pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1) # start music -> plays indefinitely
+pygame.mixer.music.set_volume(0.2)
 
 while not exit:
     for event in pygame.event.get():

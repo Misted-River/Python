@@ -1,2 +1,2 @@
-loop logic
-
+Work on scene 2 and Readme written in github!
+			
