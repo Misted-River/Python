@@ -235,6 +235,8 @@ mx,my = pygame.mouse.get_pos()
 width = player.get_width()
 height = player.get_height()
 
+items_found = 0
+
 #----------------------------------------------------------------------------------
 canvas_blit_start()
 
@@ -245,11 +247,12 @@ start = True
 
 hist_right = [""]
 
-pygame.mixer.music.play(4) # start music -> for 4 loops it plays and then it stops
+restraints = False
+
+pygame.mixer.music.play(-1) # start music -> plays indefinitely
 pygame.mixer.music.set_volume(0.2)
 
 while not exit:
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit = True
@@ -308,33 +311,38 @@ while not exit:
             move = False
             right = "none"
 
-
         canvas_blit_scene1(move)
 
         if clicks == True:
             if poi_dot:
+                if items_found < 3:
+                    items_found = 1
                 canvas_blit_labels("dust")
+                
             elif poi_scraps:
+                if items_found < 3:
+                    items_found = 2
                 if move == True:
                     canvas_blit_labels("scrap")
             elif poi_cracks:
-                    canvas_blit_labels("ring")
-
+                if items_found < 3:
+                    items_found = 3
+                canvas_blit_labels("ring")
 
         if shift:
             velo = 12 # up down direction
             velo_path = 136 # up down direction
 
-        if w: #and y>0: # key = k_(the key) events
+        if w and y>0 and restraints == False: # key = k_(the key) events
             move = True
             right = "none"
             hist_right[0] = "no"
 
-            if not poi and not a and not d:
+            if not poi and not a and not d and not poi_next:
                 y -= velo*2
                 hist[0] ="w"
 
-                if not s and (y>0 and y_path<310)and x_path<-10:
+                if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next:
                     y_path += velo_path
 
             if poi and hist[0] == "s":
@@ -360,17 +368,19 @@ while not exit:
                 y -= velo
                 hist[0] ="d"
                 hist[1] ="s"
+        elif w and y>0 and restraints == True:
+            print("restraints true")
 
-        if  s: #y<1080-height:
+        if s and y<1080-height and restraints == False:
             move = True
             right = "none"
             hist_right[0] = "no"
 
-            if not poi and not a and not d:
+            if not poi and not a and not d and not poi_next:
                 y += velo*2
                 hist[0] ="s"
 
-                if (not w) and (y<1080-height and y_path>-2525):
+                if (not w) and (y<1080-height and y_path>-2525) and not poi_next:
                     y_path -= velo_path
 
             if poi and hist[0] == "w":
@@ -383,7 +393,7 @@ while not exit:
                 x -= velo
                 hist[0] ="a"
 
-        if a and x>0:
+        if a and x>0 and restraints == False:
             move = True
             right = "none"
             hist_right[0] = "no"
@@ -391,7 +401,7 @@ while not exit:
             if not poi:
                 x -= velo*2
                 hist[0] ="a"
-                if (not d) and x_path<-50:
+                if (not d) and x_path<-50 and not poi_next:
                     x_path += velo_path
 
             if poi and hist[0] == "d":
@@ -404,15 +414,15 @@ while not exit:
                 y += velo
                 hist[0] ="s"
 
-        if d and x<1920-width:
+        if d and x<1920-width and restraints == False:
             move = True
             right = "yes"
             hist_right[0] = "yes"
 
-            if not poi:
+            if not poi and restraints == False:
                 x += velo*2
                 hist[0] ="d"
-                if (not a) and (x<1920-width and x_path>-570):
+                if (not a) and (x<1920-width and x_path>-570) and not poi_next:
                     x_path -= velo_path
 
             if poi and hist[0] == "a":
@@ -425,7 +435,7 @@ while not exit:
                 y += velo
                 hist[0] ="s"
 
-        """if poi_next:
+        if poi_next and items_found == 3:
             path = path_scene2
             x_path = 0
             y_path = 0
@@ -438,6 +448,12 @@ while not exit:
             velo = 0
             velo_path = -5
 
+            restraints = True
+
+        elif poi_next and items_found < 3:
+            print("you need to find all 3 items before you can go to the next scene")
+            
+            """
             if w:
                 move = True
                 right = "none"
