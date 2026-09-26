@@ -16,21 +16,16 @@ def resource_path(path):
 
 
 for m in get_monitors():
-    print(str(m.width) + "x" + str(m.height))
+    print(m.width, m.height)
 
-
-
-for m in get_monitors():
-    print(str(m))
-
-w = 1920
-h = 1080
+w = m.width
+h = m.height
 
 timer = pygame.time.Clock()
 
 pygame.init()
 
-canvas = pygame.display.set_mode((1920,1080)) # canvas size -> creates screen -> background
+canvas = pygame.display.set_mode((w, h)) # canvas size -> creates screen -> background
 background = pygame.image.load(resource_path('place_holder.png')).convert() # initialise image -> surface2
 
 # constants
