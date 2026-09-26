@@ -19,7 +19,7 @@ for m in get_monitors():
     print(str(m.width) + "x" + str(m.height))
 
 
-from screeninfo import get_monitors
+
 for m in get_monitors():
     print(str(m))
 
