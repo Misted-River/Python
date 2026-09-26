@@ -1,6 +1,10 @@
 import pygame
 from pygame.locals import *
 
+from screeninfo import get_monitors
+for m in get_monitors():
+    print(str(m))
+
 w = 1920
 h = 1080
 
@@ -335,6 +339,7 @@ while not exit:
             clicks = False
 
     mx,my = pygame.mouse.get_pos()
+
         
     keys = pygame.key.get_pressed()
     w = keys[pygame.K_w]

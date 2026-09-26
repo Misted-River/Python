@@ -27,7 +27,7 @@ PATH 1 : MAIN STORY-> TRUTH OF A MATTER                                         
                                                                                                                                                                                                                                    - 8: She accepts (you investigated TRUE ENDING) or denies (you told her outright) -> kicks you out of house back to where you started (sense of loop, some closure you knwo more but you didnt get true ending)
 
 
-
+-- refine resolution of collison -> more accurate than the blocky collision is has now
 
 
 
