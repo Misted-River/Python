@@ -53,11 +53,11 @@ height_path = path_rect.height
 # resizing to fit
 path = pygame.transform.smoothscale(path,(width_path*1.7, height_path*1.7))
 
-comet_1 = pygame.transform.smoothscale(comet_1,(500/1.5,343/1.5))
-comet_2 = pygame.transform.smoothscale(comet_2,(500/1.5,343/1.5))
-comet_3 = pygame.transform.smoothscale(comet_3,(500/1.5,343/1.5))
-comet_4 = pygame.transform.smoothscale(comet_4,(500/1.5,343/1.5))
-comet_5 = pygame.transform.smoothscale(comet_5,(500/1.5,343/1.5))
+comet_1 = pygame.transform.smoothscale(comet_1,(500/2,343/2))
+comet_2 = pygame.transform.smoothscale(comet_2,(500/2,343/2))
+comet_3 = pygame.transform.smoothscale(comet_3,(500/2,343/2))
+comet_4 = pygame.transform.smoothscale(comet_4,(500/2,343/2))
+comet_5 = pygame.transform.smoothscale(comet_5,(500/2,343/2))
 
 player = pygame.transform.smoothscale(player,(500/1.5,343/1.5))
 
