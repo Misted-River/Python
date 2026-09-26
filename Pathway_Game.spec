@@ -5,7 +5,7 @@ a = Analysis(
     ['Pathway_Game.py'],
     pathex=[],
     binaries=[],
-    datas=[('pa_place.png', '.'), ('p.png', '.'), ('comet_stationary.png', '.'), ('rocks.png', '.'), ('cosmic_dust.png', '.'), ('dot.png', '.'), ('city_scrap.png', '.'), ('cracks.png', '.'), ('line.png', '.'), ('dust_label.png', '.'), ('ring_label.png', '.'), ('scrap_label.png', '.')],
+    datas=[('pa_place.png', '.'), ('p.png', '.'), ('comet_stationary.png', '.'), ('rocks.png', '.'), ('cosmic_dust.png', '.'), ('dot.png', '.'), ('city_scrap.png', '.'), ('cracks.png', '.'), ('line.png', '.'), ('dust_label.png', '.'), ('ring_label.png', '.'), ('scrap_label.png', '.'), ('place_holder.png', '.'), ('Walking The Pathways - Version 6.wav', '.'), ('1.png', '.'), ('2.png', '.'), ('3.png', '.'), ('4.png', '.'), ('5.png', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

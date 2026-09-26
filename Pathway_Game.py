@@ -212,7 +212,6 @@ def canvas_blit_scene1(move,scene):
             else:
                 canvas.blit(player, (x,y)) # render image onto surface, original position
                 timer.tick(10)
-                canv_blit_rest()
                     
         elif move == True and frame == 2:
             player = comet_2
