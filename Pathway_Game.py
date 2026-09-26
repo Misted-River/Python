@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 from sys import exit
-import random
+from screeninfo import get_monitors
 
 import os 
 import sys
@@ -13,6 +13,10 @@ def resource_path(path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, path)
+
+
+for m in get_monitors():
+    print(str(m.width) + "x" + str(m.height))
 
 
 w = 1920
@@ -511,9 +515,6 @@ while not exit:
         velo = 6 # up down direction
         velo_path = 68 # up down direction
     
-    
-    
-
     if start:
         print("start intro cutscenes")
         start = False
