@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from screeninfo import get_monitors
-
 import os 
 import sys
 
@@ -13,7 +12,6 @@ def resource_path(path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, path)
-
 
 for m in get_monitors():
     print(m.width, m.height)
@@ -115,9 +113,12 @@ height_path = path_rect.height
 pygame.display.set_caption("Welcome to The Pathways") # name of game for window
 
 exit = False
+
 scene = "none"
-frame = 0
 right = "none"
+frame = 0
+velo = 6 # up down direction
+velo_path = 68 # up down direction
 
 pygame.event.get()
 pygame.display.set_icon(background)
@@ -328,12 +329,12 @@ items_found = 0
 canvas_blit_start()
 
 hist = ["none","none"] # history of last key pressed
-clicks = "none"
-move = "none"
-start = True
-
 hist_right = [""]
 
+clicks = "none"
+move = "none"
+
+start = True
 restraints = False
 
 pygame.mixer.music.play(-1) # start music -> plays indefinitely
@@ -364,15 +365,11 @@ while not exit:
     if frame == 6:
         frame = 1
 
-    if shift:
-        velo = 12 # up down direction
-        velo_path = 136 # up down direction
 
     if move == True:
-        print("anim walk")
+        move = True
     else:
-        print("anim idle")
-        move = False
+        move = False # idle
 
     if not s and not d and not a and not w:
         move = False
@@ -383,10 +380,15 @@ while not exit:
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
+
     
         if not poi and not a and not d and not poi_next:
             y -= velo*2
             hist[0] ="w"
+
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
     
             if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next and scene == 1:
                 y_path += velo_path
@@ -394,40 +396,62 @@ while not exit:
                 y_path += velo_path
     
         if poi and hist[0] == "s":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
             y += velo
             hist[0] ="s"
     
         if poi and hist[0] == "d":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
             x += velo
             hist[0] ="d"
     
         if poi and hist[0] == "a":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
             x -= velo
             hist[0] ="a"
     
         if poi and hist[0] == "a" and hist[1] == "w":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
+
             x -= velo
             y -= velo
             hist[0] ="a"
             hist[1] ="s"
     
         if poi and hist[0] == "d" and hist[1] == "w":
+
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
+
             x += velo
             y -= velo
             hist[0] ="d"
             hist[1] ="s"
     
     if s:
-        if y<1080-height and scene == 1:
+        if  scene == 1: # y<1080-height
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
+
+        if shift:
+            velo = 12 # up down direction
+            velo_path = 136 # up down direction
     
         if not poi and not a and not d and not poi_next:
             y += velo*2
             hist[0] ="s"
     
-            if (not w) and (y<1080-height and y_path>-2525) and not poi_next and scene == 1:
+            if (not w)  and not poi_next and scene == 1: #and (y<1080-height and y_path>-2525)
                 y_path -= velo_path
             elif (not w) and scene == 2:
                 y_path -= velo_path
@@ -448,14 +472,19 @@ while not exit:
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
 
+        if shift:
+            velo = 12 # up down direction
+            velo_path = 136 # up down direction
+
     
         if not poi:
             x -= velo*2
             hist[0] ="a"
-            if (not d) and x_path<-50 and not poi_next and scene == 1:
+            if (not d) and not poi_next and scene == 1: #x_path<-50
                 x_path += velo_path
             elif (not d) and scene == 2:
                 x_path += velo_path
+
     
         if poi and hist[0] == "d":
             x += velo
@@ -467,16 +496,19 @@ while not exit:
             y += velo
             hist[0] ="s"
     
-    if d :
-        if x<1920-width and scene == 1:
+    if d and x>0:
+        if  x>0 and scene == 1: #x<1920-width
             move,right,hist_right[0] = True,"yes","yes"
         elif scene == 2:
             move,right,hist_right[0] = True,"yes","yes"
+        if shift:
+            velo = 12 # up down direction
+            velo_path = 136 # up down direction
     
         if not poi and restraints == False:
             x += velo*2
             hist[0] ="d"
-            if (not a) and (x<1920-width and x_path>-570) and not poi_next and scene == 1:
+            if (not a) and not poi_next and scene == 1: #(x<1920-width and x_path>-570)
                 x_path -= velo_path
             elif (not a) and scene == 2:
                 x_path -= velo_path
@@ -490,6 +522,7 @@ while not exit:
         if poi and hist[0] == "s":
             y += velo
             hist[0] ="s"
+   
 
     if scene == 1:
         canvas_blit_scene1(move,1)
@@ -567,5 +600,3 @@ while not exit:
     pygame.display.update()
 
 pygame.quit()
-
-
