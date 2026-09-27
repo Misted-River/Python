@@ -59,8 +59,7 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=356894092]
 sprite_frames = SubResource("SpriteFrames_hnts1")
 animation = &"walk left_right"
-frame = 2
-frame_progress = 0.7745828
+frame_progress = 0.91963714
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=530290951]
 position = Vector2(-96, 69.5)

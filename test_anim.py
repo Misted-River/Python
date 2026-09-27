@@ -337,8 +337,8 @@ move = "none"
 start = True
 restraints = False
 
-#pygame.mixer.music.play(-1) # start music -> plays indefinitely
-#pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.play(-1) # start music -> plays indefinitely
+pygame.mixer.music.set_volume(0.2)
 
 while not exit:
     for event in pygame.event.get():
@@ -365,14 +365,11 @@ while not exit:
     if frame == 6:
         frame = 1
 
-    
 
     if move == True:
-        move = False
-        #print("anim walk")
+        move = True
     else:
-        move = False
-        #print("anim idle")
+        move = False # idle
 
     if not s and not d and not a and not w:
         move = False
@@ -387,6 +384,10 @@ while not exit:
         if not poi and not a and not d and not poi_next:
             y -= velo*2
             hist[0] ="w"
+
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
     
             if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next and scene == 1:
                 y_path += velo_path
@@ -394,66 +395,73 @@ while not exit:
                 y_path += velo_path
     
         if poi and hist[0] == "s":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
             y += velo
             hist[0] ="s"
     
         if poi and hist[0] == "d":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
             x += velo
             hist[0] ="d"
     
         if poi and hist[0] == "a":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
             x -= velo
             hist[0] ="a"
     
         if poi and hist[0] == "a" and hist[1] == "w":
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
+
             x -= velo
             y -= velo
             hist[0] ="a"
             hist[1] ="s"
     
         if poi and hist[0] == "d" and hist[1] == "w":
+
+            if shift:
+                velo = 12 # up down direction
+                velo_path = 136 # up down direction
+
             x += velo
             y -= velo
             hist[0] ="d"
             hist[1] ="s"
     
     if s:
-        if  scene == 1: # y<1080-height
+        if scene == 1: # y<1080-height
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
 
-        
+        if shift:
+            velo = 12 # up down direction
+            velo_path = 136 # up down direction
     
-        if not poi and not a and not d and not w and not poi_next:
-
-            if shift:
-                velo = 12 # up down direction
-                velo_path = 136 # up down direction
-
+        if not poi and not a and not d and not poi_next:
             y += velo*2
             hist[0] ="s"
     
-            if (not w)  and not poi_next and scene == 1: #and (y<1080-height and y_path>-2525)
+            if (not w)  and (y<1080-height and y_path>-2525) and not poi_next and scene == 1: 
                 y_path -= velo_path
             elif (not w) and scene == 2:
                 y_path -= velo_path
-
-            
     
         if poi and hist[0] == "w":
-            if shift:
-                velo = 12 # up down direction
             y -= velo
             hist[0] ="w"
         if poi and hist[0] == "d":
-            if shift:
-                velo = 12 # up down direction
             x += velo
             hist[0] ="d"
         if poi and hist[0] == "a":
-            if shift:
-                velo = 12 # up down direction
             x -= velo
             hist[0] ="a"
     
@@ -463,46 +471,35 @@ while not exit:
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
 
-        
+        if shift:
+            velo = 12 # up down direction
+            velo_path = 136 # up down direction
 
     
         if not poi:
-
-            if shift:
-                    velo = 12 # up down direction
-                    velo_path = 136 # up down direction
-
             x -= velo*2
             hist[0] ="a"
-            if (not d) and not poi_next and scene == 1: #x_path<-50
+            if (not d) and (x_path<-50) and not poi_next and scene == 1: 
                 x_path += velo_path
             elif (not d) and scene == 2:
                 x_path += velo_path
-            
 
     
         if poi and hist[0] == "d":
-            if shift:
-                velo = 12 # up down direction
             x += velo
             hist[0] ="d"
         if poi and hist[0] == "w":
-            if shift:
-                velo = 12 # up down direction
             y -= velo
             hist[0] ="w"
         if poi and hist[0] == "s":
-            if shift:
-                velo = 12 # up down direction
             y += velo
             hist[0] ="s"
     
-    if d and x<1920-width:
-        if  x_path<1920-width and scene == 1:
+    if d and x>0:
+        if  x<1920-width and x>0 and scene == 1: 
             move,right,hist_right[0] = True,"yes","yes"
         elif scene == 2:
             move,right,hist_right[0] = True,"yes","yes"
-
         if shift:
             velo = 12 # up down direction
             velo_path = 136 # up down direction
@@ -510,9 +507,7 @@ while not exit:
         if not poi and restraints == False:
             x += velo*2
             hist[0] ="d"
-            if (not a) and(x<1920-width and x_path>-570) and  not poi_next and scene == 1:
-                print("x_path",x_path)
-                print(("x",x))
+            if (not a) and (x<1920-width and x_path>-570) and not poi_next and scene == 1: 
                 x_path -= velo_path
             elif (not a) and scene == 2:
                 x_path -= velo_path
@@ -526,7 +521,7 @@ while not exit:
         if poi and hist[0] == "s":
             y += velo
             hist[0] ="s"
-    
+   
 
     if scene == 1:
         canvas_blit_scene1(move,1)
@@ -557,50 +552,6 @@ while not exit:
         start = False
         scene = 1
 
-    if scene == 1: # set of main area and secondary areas
-        
-        if clicks == True:
-            if poi_dot:
-                if items_found < 3:
-                    items_found = 1
-                canvas_blit_labels("dust")
-                
-            elif poi_scraps:
-                if items_found < 3:
-                    items_found = 2
-                canvas_blit_labels("scrap")
-            elif poi_cracks:
-                if items_found < 3:
-                    items_found = 3
-                canvas_blit_labels("ring")
-
-
-        if poi_next and items_found == 3:
-            poi_next = False
-
-            #offset = (x - x_path), (y - y_path)
-            #over_off = (x_path - mx ), (y_path - my)
-            
-            #poi = path_mask.overlap(player_mask,(offset))
-            #poi_next = line_mask.overlap(player_mask,(offset))
-
-            scene = 2
-
-            path = path_scene2
-
-            x_path = 0
-            y_path = 0
-
-            x = 800 # position x
-            y = 345 # position y
-
-            path_mask = pygame.mask.from_surface(path_scene2)
-
-            print(x_path,y_path)
-
-        elif poi_next and items_found < 3:
-            print("you need to find all 3 items before you can go to the next scene")
-                            
     pygame.display.update()
 
 pygame.quit()
