@@ -367,6 +367,13 @@ while not exit:
 
     print("velo",velo)
     print("velo_path",velo_path)
+    print("x_path",x_path)
+    print("y_path",y_path)
+    print("x",x)
+    print("y",y)
+    print("hist",hist)
+
+
 
 
     if move == True:
@@ -391,6 +398,19 @@ while not exit:
         #if d and not poi:
            #velo = 12 # up down direction
            #velo_path = 24 # up down direction
+
+
+    if x < 0: 
+        x = 0
+   
+    elif x > 1920 - width/1.5: 
+        x = 1920 - width/1.5
+    
+    if y < 0: 
+        y = 0
+    
+    elif y > 1080 - height/1.5: 
+        y = 1080 - height/1.5
 
     if w : # key = k_(the key) events
         if y>0 and scene == 1:
@@ -420,24 +440,10 @@ while not exit:
             x_path += velo_path
             x -= velo
             hist[0] ="a"
-        
-        if poi and hist[0] == "a" and hist[1] == "w":
+        if poi and hist[0] == "w":
             y_path += velo_path
-            x_path += velo_path
-    
-            x -= velo
             y -= velo
-            hist[0] ="a"
-            hist[1] ="s"
-        
-        if poi and hist[0] == "d" and hist[1] == "w":
-            y_path -= velo_path
-            x_path -= velo_path
-    
-            x += velo
-            y -= velo
-            hist[0] ="d"
-            hist[1] ="s"
+            hist[0] ="w"
         
     if s:
         if scene == 1: # y<1080-height
@@ -503,8 +509,8 @@ while not exit:
             x_path += velo_path
             hist[0] ="a"
         
-    if d and x>0:
-        if  x<1920-width and x>0 and scene == 1: 
+    if d and x<1920-width/1.4:
+        if x>0 and scene == 1: 
             move,right,hist_right[0] = True,"yes","yes"
         elif scene == 2:
             move,right,hist_right[0] = True,"yes","yes"
