@@ -118,7 +118,7 @@ scene = "none"
 right = "none"
 frame = 0
 velo = 6 # up down direction
-velo_path = 68 # up down direction
+velo_path = 12 # up down direction
 
 pygame.event.get()
 pygame.display.set_icon(background)
@@ -374,6 +374,7 @@ while not exit:
     if not s and not d and not a and not w:
         move = False
         right = "none"
+        
 
     if w : # key = k_(the key) events
         if y>0 and scene == 1:
@@ -387,7 +388,7 @@ while not exit:
 
             if shift:
                 velo = 12 # up down direction
-                velo_path = 136 # up down direction
+                velo_path = 24 # up down direction
     
             if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next and scene == 1:
                 y_path += velo_path
@@ -397,28 +398,33 @@ while not exit:
         if poi and hist[0] == "s":
             if shift:
                 velo = 12 # up down direction
-                velo_path = 136 # up down direction
+                velo_path = 24 # up down direction
+            y_path -= velo_path/2
             y += velo
             hist[0] ="s"
     
         if poi and hist[0] == "d":
             if shift:
                 velo = 12 # up down direction
-                velo_path = 136 # up down direction
+                velo_path = 24 # up down direction
+            x_path -= velo_path/2
             x += velo
             hist[0] ="d"
     
         if poi and hist[0] == "a":
             if shift:
                 velo = 12 # up down direction
-                velo_path = 136 # up down direction
+                velo_path = 24 # up down direction
+            x_path += velo_path/2
             x -= velo
             hist[0] ="a"
     
         if poi and hist[0] == "a" and hist[1] == "w":
             if shift:
                 velo = 12 # up down direction
-                velo_path = 136 # up down direction
+                velo_path = 24 # up down direction
+            y_path += velo_path/2
+            x_path += velo_path/2
 
             x -= velo
             y -= velo
@@ -429,7 +435,9 @@ while not exit:
 
             if shift:
                 velo = 12 # up down direction
-                velo_path = 136 # up down direction
+                velo_path = 24 # up down direction
+            y_path -= velo_path/2
+            x_path -= velo_path/2
 
             x += velo
             y -= velo
@@ -444,7 +452,7 @@ while not exit:
 
         if shift:
             velo = 12 # up down direction
-            velo_path = 136 # up down direction
+            velo_path = 24 # up down direction
     
         if not poi and not a and not d and not poi_next:
             y += velo*2
@@ -458,12 +466,19 @@ while not exit:
         if poi and hist[0] == "w":
             y -= velo
             hist[0] ="w"
+            y_path += velo_path/2
         if poi and hist[0] == "d":
             x += velo
             hist[0] ="d"
+            x_path -= velo_path/2
         if poi and hist[0] == "a":
             x -= velo
+            x_path += velo_path/2
             hist[0] ="a"
+        if poi and hist[0] == "s":
+            y += velo           
+            y_path -= velo_path/2
+
     
     if a and x>0 :
         if x>0 and scene == 1:
@@ -473,7 +488,7 @@ while not exit:
 
         if shift:
             velo = 12 # up down direction
-            velo_path = 136 # up down direction
+            velo_path = 24 # up down direction
 
     
         if not poi:
@@ -487,12 +502,15 @@ while not exit:
     
         if poi and hist[0] == "d":
             x += velo
+            x_path -= velo_path/2
             hist[0] ="d"
         if poi and hist[0] == "w":
             y -= velo
+            y_path += velo_path/2
             hist[0] ="w"
         if poi and hist[0] == "s":
             y += velo
+            y_path -= velo_path/2
             hist[0] ="s"
     
     if d and x>0:
@@ -502,7 +520,7 @@ while not exit:
             move,right,hist_right[0] = True,"yes","yes"
         if shift:
             velo = 12 # up down direction
-            velo_path = 136 # up down direction
+            velo_path = 24 # up down direction
     
         if not poi and restraints == False:
             x += velo*2
@@ -514,12 +532,15 @@ while not exit:
     
         if poi and hist[0] == "a":
             x -= velo
+            x_path += velo_path/2
             hist[0] ="a"
         if poi and hist[0] == "w":
             y -= velo
+            y_path += velo_path/2
             hist[0] ="w"
         if poi and hist[0] == "s":
             y += velo
+            y_path -= velo_path/2
             hist[0] ="s"
    
 
