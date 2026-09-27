@@ -365,13 +365,7 @@ while not exit:
     if frame == 6:
         frame = 1
 
-    print("velo",velo)
-    print("velo_path",velo_path)
-    print("x_path",x_path)
-    print("y_path",y_path)
-    print("x",x)
-    print("y",y)
-    print("hist",hist)
+    
 
 
 
@@ -385,19 +379,19 @@ while not exit:
         move = False
         right = "none"
 
-    #if shift:
-        #if w and not poi:
-            #velo = 12 # up down direction
-            #velo_path = 24 # up down direction
-        ##if a and not poi:
-            #velo = 12 # up down direction
-            #velo_path = 24 # up down direction
-        #if s and not poi:
-            #velo = 12 # up down direction
-            #velo_path = 24 # up down direction
-        #if d and not poi:
-           #velo = 12 # up down direction
-           #velo_path = 24 # up down direction
+    if shift:
+        if w and not poi:
+            velo = 20 # up down direction
+            velo_path = 40 # up down direction
+        if a and not poi:
+            velo = 20 # up down direction
+            velo_path = 40 # up down direction
+        if s and not poi:
+            velo = 20 # up down direction
+            velo_path = 40 # up down direction
+        if d and not poi:
+           velo = 20 # up down direction
+           velo_path = 40 # up down direction
 
 
     if x < 0: 
@@ -455,7 +449,7 @@ while not exit:
             y += velo
             hist[0] ="s"
         
-            if (not w)  and (y<1080-height and y_path>-2525) and not poi_next and scene == 1: 
+            if (not w)  and (y_path>-2525) and not poi_next and scene == 1: 
                 y_path -= velo_path
             elif (not w) and scene == 2:
                 y_path -= velo_path
@@ -555,11 +549,11 @@ while not exit:
 
     # variables for movement speed
     if poi:
-        velo = -6
-        velo_path = -12
+        velo = -5
+        velo_path = -25
     else:
-        velo = 6 # up down direction
-        velo_path = 12 # up down direction
+        velo = 5 # up down direction
+        velo_path = 25 # up down direction
     
     if start:
         print("start intro cutscenes")
