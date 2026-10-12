@@ -1,11 +1,9 @@
 import pygame
 from pygame.locals import *
-from sys import exit
+from sys import exit    
 from screeninfo import get_monitors
 import os
 import sys
-
-
 
 def resource_path(path):
     try:
@@ -41,7 +39,7 @@ bottom_line_height = 100 # move based on this height, which is centered
 pygame.mixer.music.load(resource_path('Walking The Pathways - Version 6.wav')) # load music
 
 # set up objects
-path = pygame.image.load(resource_path('pa_pa.png')).convert_alpha() # patyhway moves -> surface2
+path = pygame.image.load(resource_path('pa_plave.png')).convert_alpha() # patyhway moves -> surface2
 path_scene2 = pygame.image.load(resource_path('p.png')).convert_alpha() # patyhway moves -> surface2
 
 player = pygame.image.load(resource_path('comet_stationary.png')).convert_alpha() # player image -> surface2
@@ -383,32 +381,32 @@ while not exit:
 
     if shift:
         if w and not poi:
-            velo = 10 # up down direction
-            velo_path = 25 # up down direction
+            velo = 2 # up down direction
+            velo_path = 18 # up down direction
         elif a and not poi:
-            velo = 10 # up down direction
-            velo_path = 25 # up down direction
+            velo = 2 # up down direction
+            velo_path = 18 # up down direction
         elif s and not poi:
-            velo = 10 # up down direction
-            velo_path = 25 # up down direction
+            velo = 2 # up down direction
+            velo_path = 18 # up down direction
         elif d and not poi:
-           velo = 10 # up down direction
-           velo_path = 25 # up down direction
+           velo = 2 # up down direction
+           velo_path = 18 # up down direction
 
 
-    if x < 0: 
-        x = 0
+    #if x < 0: 
+        #x = 0
    
-    elif x > 1920 - width/1.5: 
+    if x > 1920 - width/1.5: 
         x = 1920 - width/1.5
     
-    if y < 0: 
+    #if y < 0: 
         y = 0
     
     elif y > 1080 - height/1.5: 
         y = 1080 - height/1.5
 
-    if w : # key = k_(the key) events
+    if w and y>-2: # key = k_(the key) events
         if y>0 and scene == 1:
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
@@ -417,31 +415,31 @@ while not exit:
         if not poi and not a and not d and not poi_next:
             y -= velo/2
             hist[0] ="w"
-            if not s and (y>0 and y_path<310)and x_path<-10 and not poi_next and scene == 1:
+            if blok !="yes" and not s and not poi_next and scene == 1: # (y>0 and y_path<310)and x_path<-10 and 
                 y_path += velo_path
             elif not s and scene == 2:
                 y_path += velo_path
         
         if poi and hist[0] == "s":
             y_path -= velo_path
-            y += velo/2
+            y += velo
             hist[0] ="s"
         
         if poi and hist[0] == "d":
             x_path -= velo_path
-            x += velo/2
+            x += velo
             hist[0] ="d"
         
         if poi and hist[0] == "a":
             x_path += velo_path
-            x -= velo/2
+            x -= velo
             hist[0] ="a"
         if poi and hist[0] == "w":
             y_path += velo_path
-            y -= velo/2
+            y -= velo
             hist[0] ="w"
         
-    if s and y>-600:
+    if s and y<603:
         if scene == 1: # y<1080-height
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
@@ -451,29 +449,29 @@ while not exit:
             y += velo/2
             hist[0] ="s"
         
-            if (not w)  and (y_path>-2525) and not poi_next and scene == 1: 
+            if blok !="yes" and (not w) and scene == 1:  #and (y_path>-2525)ssssss
                 y_path -= velo_path
             elif (not w) and scene == 2:
                 y_path -= velo_path
         
         if poi and hist[0] == "w":
-            y -= velo/2
+            y -= velo
             hist[0] ="w"
             y_path += velo_path
         if poi and hist[0] == "d":
-            x += velo/2
+            x += velo
             hist[0] ="d"
             x_path -= velo_path
         if poi and hist[0] == "a":
-            x -= velo/2
+            x -= velo
             y_path += velo_path
             hist[0] ="a"
         if poi and hist[0] == "s":
-            y += velo/2          
+            y += velo         
             y_path -= velo_path
     
         
-    if a and x>0 : # stops at edge of screen and when path outline is touched yes, wokrks on smaller screen
+    if a and x>-15: # stops at edge of screen and when path outline is touched yes, wokrks on smaller screen
         if scene == 1:
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
@@ -481,8 +479,8 @@ while not exit:
         if not poi:
             x -= velo
             hist[0] ="a"
-            if (not d) and (x_path<-50) and not poi_next and scene == 1: 
-                x_path += velo_path
+            if blok !="yes" and (not d) and not poi_next and scene == 1: # (x_path<-20)
+                x_path += velo_path 
 
             elif (not d) and scene == 2:
                 x_path += velo_path
@@ -505,7 +503,7 @@ while not exit:
             x_path += velo_path
             hist[0] ="a"
 
-    if d and x<1100: 
+    if d : #and x<1200 
         if x>0 and scene == 1: 
             move,right,hist_right[0] = True,"yes","yes"
         elif scene == 2:
@@ -514,7 +512,7 @@ while not exit:
         if not poi and restraints == False:
             x += velo
             hist[0] ="d"
-            if (not a) and (x<1920-width and x_path>-1200) and not poi_next and scene == 1: 
+            if blok !="yes" and (not a)  and not poi_next and scene == 1:  #(x<1920-width and x_path>-1200)
                 x_path -= velo_path
             elif (not a) and scene == 2:
                 x_path -= velo_path
@@ -549,12 +547,17 @@ while not exit:
     
     poi_next = line_mask.overlap(player_mask,(offset))
 
+    
+
     # variables for movement speed
+    blok = "no"
+
     if poi:
-        velo = -2
+        blok = "yes"
+        velo = -1
         velo_path = -10
     else:
-        velo = 2 # up down direction
+        velo = 1 # up down direction
         velo_path = 10 # up down direction
     
     if start:
