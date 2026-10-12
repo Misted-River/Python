@@ -125,7 +125,7 @@ exit = False
 scene = "none"
 right = "none"
 frame = 0
-velo = 6 # up down direction
+velo = 2 # up down direction
 velo_path = 1 # up down direction
 
 pygame.event.get()
@@ -383,17 +383,17 @@ while not exit:
 
     if shift:
         if w and not poi:
-            velo = 20 # up down direction
-            velo_path = 20 # up down direction
+            velo = 10 # up down direction
+            velo_path = 25 # up down direction
         elif a and not poi:
-            velo = 20 # up down direction
-            velo_path = 20 # up down direction
+            velo = 10 # up down direction
+            velo_path = 25 # up down direction
         elif s and not poi:
-            velo = 20 # up down direction
-            velo_path = 20 # up down direction
+            velo = 10 # up down direction
+            velo_path = 25 # up down direction
         elif d and not poi:
-           velo = 20 # up down direction
-           velo_path = 20 # up down direction
+           velo = 10 # up down direction
+           velo_path = 25 # up down direction
 
 
     if x < 0: 
@@ -441,7 +441,7 @@ while not exit:
             y -= velo/2
             hist[0] ="w"
         
-    if s:
+    if s and y>-600:
         if scene == 1: # y<1080-height
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
@@ -474,7 +474,7 @@ while not exit:
     
         
     if a and x>0 : # stops at edge of screen and when path outline is touched yes, wokrks on smaller screen
-        if x>0 and scene == 1:
+        if scene == 1:
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
@@ -551,11 +551,11 @@ while not exit:
 
     # variables for movement speed
     if poi:
-        velo = -5
-        velo_path = -25
+        velo = -2
+        velo_path = -10
     else:
-        velo = 5 # up down direction
-        velo_path = 25 # up down direction
+        velo = 2 # up down direction
+        velo_path = 10 # up down direction
     
     if start:
         print("start intro cutscenes")
@@ -580,6 +580,7 @@ while not exit:
                 canvas_blit_labels("ring")
         print(x_path,y_path)
         print(x,y)
+        print(height)
 
 
         if poi_next and items_found == 3:
