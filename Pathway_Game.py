@@ -379,7 +379,7 @@ while not exit:
         move = False
         right = "none"
 
-    if shift:
+    """if shift:
         if w and not poi:
             velo = 2 # up down direction
             velo_path = 18 # up down direction
@@ -392,7 +392,7 @@ while not exit:
         elif d and not poi:
            velo = 2 # up down direction
            velo_path = 18 # up down direction
-
+"""
 
     #if x < 0: 
         #x = 0
@@ -554,11 +554,11 @@ while not exit:
 
     if poi:
         blok = "yes"
-        velo = -1
-        velo_path = -10
+        velo = -2
+        velo_path = -15
     else:
-        velo = 1 # up down direction
-        velo_path = 10 # up down direction
+        velo = 2 # up down direction
+        velo_path = 15 # up down direction
     
     if start:
         print("start intro cutscenes")
