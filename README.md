@@ -3,11 +3,7 @@ An adventure game based on my story world of The Pathways, a civilization for cr
 
  Currently a work in progress as this is going to be a long project which will continue even after the end of the Stardance Challenge.
 
-<img width="623" height="360" alt="Game Video Clip" src="
-
 https://github.com/user-attachments/assets/1f09ea2a-8bbe-432d-aba1-5a5671f70825
-
-" />
 
 ## Authors
 
