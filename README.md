@@ -3,7 +3,11 @@ An adventure game based on my story world of The Pathways, a civilization for cr
 
  Currently a work in progress as this is going to be a long project which will continue even after the end of the Stardance Challenge.
 
-<img width="623" height="360" alt="Elli Kourousi_s Video - Sep 12, 2026" src="https://github.com/user-attachments/assets/78895c30-b1f0-4057-a12d-7ed958077979" />
+<img width="623" height="360" alt="Game Video Clip" src="
+
+https://github.com/user-attachments/assets/1f09ea2a-8bbe-432d-aba1-5a5671f70825
+
+" />
 
 ## Authors
 
@@ -11,7 +15,7 @@ An adventure game based on my story world of The Pathways, a civilization for cr
 
 ## Installation
 
-Try it: https://ek-7.itch.io/welcome-to-the-pathways-the-game
+Try it: https://ek-7.itch.io/welcome-to-the-pathways-the-game [ Fixing in progress do not play this version yet! ]
 
 _Currently only supports windows_
 -> Unzip the folder and download the .exe file to run locally on your windows device
