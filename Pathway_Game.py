@@ -28,9 +28,9 @@ background = pygame.image.load(resource_path('place_holder.png')).convert() # in
 
 pygame.draw.rect(canvas, (255, 0, 0), (10, 10, 100, 100))
 
-fontTitle = pygame.font.SysFont("arial", 10)
-textTitle = fontTitle.render("Observe (click) on objects to examine them", True, (0, 0, 255))
-rectTitle = textTitle.get_rect(center=canvas.get_rect().center)
+#fontTitle = pygame.font.SysFont("arial", 10)
+#textTitle = fontTitle.render("Observe (click) on objects to examine them", True, (0, 0, 255))
+#rectTitle = textTitle.get_rect(center=canvas.get_rect().center)
 
 # constants
 position = (0,0)
@@ -142,7 +142,7 @@ def canvas_blit_scene1(move,scene):
         canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
         canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
         canvas.blit(line,(x_path,y_path))
-        canvas.blit(textTitle, rectTitle)
+        #canvas.blit(textTitle, rectTitle)
 
         if move == True and frame == 1:
             player = comet_1
