@@ -287,9 +287,9 @@ def canvas_blit_start():
     canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
     canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
     canvas.blit(line,(x_path,y_path))
-    canvas.blit(player, (x,y)) # render image onto surface, original position
     canvas.blit(scrap, (x_path,y_path)) # render image onto surface, scraps
     canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
+    canvas.blit(player, (x,y)) # render image onto surface, original position
     canvas.blit(dot, (mx,my)) # render image onto surface, original position
 
 
