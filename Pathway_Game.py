@@ -130,8 +130,6 @@ pygame.event.get()
 pygame.display.set_icon(background)
 
 def canv_blit_rest():
-    canvas.blit(scrap, (x_path,y_path)) # render image onto surface, scraps
-    canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
     canvas.blit(dot, (mx,my)) # render image onto surface, original position
 
 
@@ -141,6 +139,8 @@ def canvas_blit_scene1(move,scene):
         canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
         canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
         canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
+        canvas.blit(scrap, (x_path,y_path)) # render image onto surface, scraps
+        canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
         #canvas.blit(line,(x_path,y_path))
         #canvas.blit(textTitle, rectTitle)
 
