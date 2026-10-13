@@ -141,7 +141,7 @@ def canvas_blit_scene1(move,scene):
         canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
         canvas.blit(rocks, (x_path,y_path)) # render image onto surface, rocks
         canvas.blit(dust, (x_path,y_path)) # render image onto surface, dust
-        canvas.blit(line,(x_path,y_path))
+        #canvas.blit(line,(x_path,y_path))
         #canvas.blit(textTitle, rectTitle)
 
         if move == True and frame == 1:
