@@ -143,7 +143,7 @@ def canvas_blit_scene1(move,scene):
         canvas.blit(cracks, (x_path,y_path)) # render image onto surface, cracks
         #canvas.blit(line,(x_path,y_path))
         #canvas.blit(textTitle, rectTitle)
-
+        
         if move == True and frame == 1:
             player = comet_1
             if right == "yes":
@@ -210,6 +210,9 @@ def canvas_blit_scene1(move,scene):
             else:
                 canvas.blit(player, (x,y)) # render image onto surface, original position
                 canv_blit_rest()
+
+        
+    
     elif scene == 2:
         canvas.blit(background, dest=position) # render image onto surface, background
         canvas.blit(path, (x_path,y_path)) # render image onto surface, original position
@@ -358,6 +361,8 @@ while not exit:
             click_position = event.pos # location mouse -> middle
             clicks = False
 
+    player_mask = pygame.mask.from_surface(player)
+
     mx,my = pygame.mouse.get_pos()
 
     keys = pygame.key.get_pressed()
@@ -378,6 +383,9 @@ while not exit:
     if not s and not d and not a and not w:
         move = False
         right = "none"
+
+    
+        
 
     """if shift:
         if w and not poi:
@@ -405,6 +413,9 @@ while not exit:
     
     elif y > 1080 - height/1.5: 
         y = 1080 - height/1.5
+
+
+    
 
     if w and y>-2: # key = k_(the key) events
         if y>0 and scene == 1:
@@ -529,6 +540,10 @@ while not exit:
             y += velo
             y_path -= velo_path
             hist[0] ="s"
+        if poi and hist[0] == "d":
+            x += velo
+            x_path -= velo_path
+            hist[0] ="d"
    
 
     if scene == 1:
