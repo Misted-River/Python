@@ -80,7 +80,7 @@ comet_3 = pygame.transform.smoothscale(comet_3,(500/2,343/2))
 comet_4 = pygame.transform.smoothscale(comet_4,(500/2,343/2))
 comet_5 = pygame.transform.smoothscale(comet_5,(500/2,343/2))
 
-player = pygame.transform.smoothscale(player,(500/1.5,343/1.5))
+player = pygame.transform.smoothscale(player,(500/2,343/2))
 
 rocks = pygame.transform.smoothscale(rocks,(width_path*1.7, height_path*1.7))
 dust = pygame.transform.smoothscale(dust,(width_path*1.7, height_path*1.7))
@@ -528,19 +528,19 @@ while not exit:
             elif (not a) and scene == 2:
                 x_path -= velo_path
         
-        if poi and hist[0] == "a":
+        elif poi and hist[0] == "a":
             x -= velo
             x_path += velo_path
             hist[0] ="a"
-        if poi and hist[0] == "w":
+        elif poi and hist[0] == "w":
             y -= velo
             y_path += velo_path
             hist[0] ="w"
-        if poi and hist[0] == "s":
+        elif poi and hist[0] == "s":
             y += velo
             y_path -= velo_path
             hist[0] ="s"
-        if poi and hist[0] == "d":
+        elif poi and hist[0] == "d":
             x += velo
             x_path -= velo_path
             hist[0] ="d"
