@@ -5,25 +5,11 @@ An adventure game based on my story world of The Pathways, a civilization for cr
 
  Currently a work in progress as this is going to be a long project which will continue even after the end of the Stardance Challenge.
 
-https://github.com/user-attachments/assets/1f09ea2a-8bbe-432d-aba1-5a5671f70825
+[https://github.com/user-attachments/assets/1f09ea2a-8bbe-432d-aba1-5a5671f70825](https://github.com/user-attachments/assets/e4e5c9d0-1830-4262-a68f-74d77b3ee02d)
 
 ## Authors
 
  - Elli Kourousi 
-
-https://github.com/user-attachments/assets/e4e5c9d0-1830-4262-a68f-74d77b3ee02d
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Installation
