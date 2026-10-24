@@ -1,3 +1,5 @@
+
+
 ## Welcome to The Pathways : The Game
 An adventure game based on my story world of The Pathways, a civilization for criminals located on the interconnected rings of planets outside of Earths orbit. Created using the pygame library  in Visual Studio Code.
 
@@ -7,7 +9,13 @@ https://github.com/user-attachments/assets/1f09ea2a-8bbe-432d-aba1-5a5671f70825
 
 ## Authors
 
- - Elli Kourousi ([@Misted-River on GitHub](https://github.com/Misted-River/Python/tree/main))
+ - Elli Kourousi https://github.com/user-attachments/assets/a0dce3f0-a546-40b0-8aed-0cb6815e06e7
+
+
+
+
+
+
 
 ## Installation
 
