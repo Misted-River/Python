@@ -1,17 +1,20 @@
+
+
 ## Welcome to The Pathways : The Game
 An adventure game based on my story world of The Pathways, a civilization for criminals located on the interconnected rings of planets outside of Earths orbit. Created using the pygame library  in Visual Studio Code.
 
  Currently a work in progress as this is going to be a long project which will continue even after the end of the Stardance Challenge.
 
-https://github.com/user-attachments/assets/1f09ea2a-8bbe-432d-aba1-5a5671f70825
+[https://github.com/user-attachments/assets/1f09ea2a-8bbe-432d-aba1-5a5671f70825](https://github.com/user-attachments/assets/e4e5c9d0-1830-4262-a68f-74d77b3ee02d)
 
 ## Authors
 
- - Elli Kourousi ([@Misted-River on GitHub](https://github.com/Misted-River/Python/tree/main))
+ - Elli Kourousi 
+
 
 ## Installation
 
-Try it: https://ek-7.itch.io/welcome-to-the-pathways-the-game [ Fixing in progress do not play this version yet! ]
+Try it: https://ek-7.itch.io/welcome-to-the-pathways-the-game
 
 _Currently only supports windows_
 -> Unzip the folder and download the .exe file to run locally on your windows device
