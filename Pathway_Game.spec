@@ -5,7 +5,7 @@ a = Analysis(
     ['Pathway_Game.py'],
     pathex=[],
     binaries=[],
-    datas=[('pa_place.png', '.'), ('p.png', '.'), ('comet_stationary.png', '.'), ('rocks.png', '.'), ('cosmic_dust.png', '.'), ('dot.png', '.'), ('city_scrap.png', '.'), ('cracks.png', '.'), ('line.png', '.'), ('dust_label.png', '.'), ('ring_label.png', '.'), ('scrap_label.png', '.'), ('place_holder.png', '.'), ('Walking The Pathways - Version 6.wav', '.'), ('1.png', '.'), ('2.png', '.'), ('3.png', '.'), ('4.png', '.'), ('5.png', '.')],
+    datas=[('1.png', '.'), ('2.png', '.'), ('3.png', '.'), ('4.png', '.'), ('5.png', '.'), ('city_scrap.png', '.'), ('comet_stationary.png', '.'), ('cosmic_dust.png', '.'), ('cracks.png', '.'), ('dot.png', '.'), ('line.png', '.'), ('1.png', '.'), ('p.png', '.'), ('PA.png', '.'), ('pa_pa.png', '.'), ('pa_place.png', '.'), ('pa_plave.png', '.'), ('pat_new.png', '.'), ('PATH.png', '.'), ('1.png', '.'), ('path_ou.png', '.'), ('1.png', '.'), ('pathways_place.png', '.'), ('place_holder.png', '.'), ('placeholder_bg.png', '.'), ('play_place.png', '.'), ('ring_label.png', '.'), ('rocks.png', '.'), ('scrap_label.png', '.'), ('unnamed.png', '.'), ('Walking The Pathways - Version 6.wav', '.'), ('dust_label.png', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

@@ -123,8 +123,8 @@ exit = False
 scene = "none"
 right = "none"
 frame = 0
-velo = 2 # up down direction
-velo_path = 1 # up down direction
+#velo = 2 # up down direction
+#velo_path = 1 # up down direction
 
 pygame.event.get()
 pygame.display.set_icon(background)
@@ -417,14 +417,14 @@ while not exit:
 
     
 
-    if w and y>-2: # key = k_(the key) events
+    if w and not a and not d and not s and y>-2: # key = k_(the key) events
         if y>0 and scene == 1:
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
         
         if not poi and not a and not d and not poi_next:
-            y -= velo/2
+            y -= velo
             hist[0] ="w"
             if blok !="yes" and not s and not poi_next and scene == 1: # (y>0 and y_path<310)and x_path<-10 and 
                 y_path += velo_path
@@ -449,15 +449,20 @@ while not exit:
             y_path += velo_path
             y -= velo
             hist[0] ="w"
+    elif  w and ( a or d or s):
+        move = False
+        right = "none"
+        hist_right[0] = "no"
+        hist[0] ="none"
         
-    if s and y<603:
+    if s and not a and not d and not w and y<603:
         if scene == 1: # y<1080-height
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
         
         if not poi and not a and not d and not poi_next:
-            y += velo/2
+            y += velo
             hist[0] ="s"
         
             if blok !="yes" and (not w) and scene == 1:  #and (y_path>-2525)ssssss
@@ -480,9 +485,37 @@ while not exit:
         if poi and hist[0] == "s":
             y += velo         
             y_path -= velo_path
+    elif s and (w or a or d or w):
+        #move = False
+        hist_right[0] = "no"
+        hist[0] ="none"
+        if s and a and not d and not w:
+            y += velo
+            x -= velo
+            y_path -= velo_path
+            right = "no"
+        elif s and d and not a and not w:
+            y += velo
+            x += velo
+            y_path -= velo_path
+            right = "yes"
+        elif s and w and not a and not d:
+            y += velo
+            y_path -= velo_path
+            right = "none"
+
+
+
+
+
+
+        
+        
+        
+        
     
         
-    if a and x>-15: # stops at edge of screen and when path outline is touched yes, wokrks on smaller screen
+    if a and not w and not s and not d and x>-15: # stops at edge of screen and when path outline is touched yes, wokrks on smaller screen
         if scene == 1:
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
@@ -513,8 +546,13 @@ while not exit:
             x -= velo
             x_path += velo_path
             hist[0] ="a"
+    elif a and ( w or s or d):
+        #move = False
+        right = "none"
+        hist_right[0] = "none"
+        hist[0] ="none"
 
-    if d : #and x<1200 
+    if d and not w and not s and not a : #and x<1200 
         if x>0 and scene == 1: 
             move,right,hist_right[0] = True,"yes","yes"
         elif scene == 2:
@@ -544,6 +582,13 @@ while not exit:
             x += velo
             x_path -= velo_path
             hist[0] ="d"
+    elif d and (w or s or a):
+        #move = False
+        right = "none"
+        hist_right[0] = "yes"
+        hist[0] ="none"
+
+    
    
 
     if scene == 1:
@@ -569,11 +614,13 @@ while not exit:
 
     if poi:
         blok = "yes"
-        velo = -2
+        velo = -10
         velo_path = -15
     else:
         velo = 2 # up down direction
         velo_path = 15 # up down direction
+
+    print("velo",velo)
     
     if start:
         print("start intro cutscenes")
