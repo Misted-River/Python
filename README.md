@@ -20,7 +20,7 @@ _Currently only supports windows_
 -> Unzip the folder and download the .exe file to run locally on your windows device
 
 ## How to play
- - Player controls Comet, a canine-like character using w,a,s,d keys (avoid pressing two keys at a time as player is intended to go up,down,left,right and not combined keys like wa being pressed at the same time etc.)
+ - Player controls Comet, a canine-like character using w,a,s,d keys.
  - Press and hold on all objects observed in scene 1 (click and hold on them) to pass into scene 2 and the end of the introduction path!
  - (Scene 2 gameplay is under construction, but you can move around on the path to just look around so far)
 
@@ -46,6 +46,9 @@ _Currently only supports windows_
  ***Music:***
  - Custom music created by me using Beepbox, which plays indefinitely.
  - Other tunes, which will also be made by me on Beepbox are yet to be added.
+
+***Extra Notes***
+- Made entirely using Pygame in VSCode to gain a better understanding of what goes on behind the scenes of game engines. Python is a very versatile language and so Pygame seemed suiting as a challenge to try code this game in.
 
 ## Credits:
 
