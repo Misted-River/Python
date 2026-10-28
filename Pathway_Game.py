@@ -417,46 +417,66 @@ while not exit:
 
     
 
-    if w and not a and not d and not s and y>-2: # key = k_(the key) events
-        if y>0 and scene == 1:
+    #if w and poi and hist[0] == "none":
+        #if a or d:
+            #y_path += velo_path
+            #y -= velo
+    #if s and poi and hist[0] == "none":
+        #if a or d:
+            #y_path += velo_path
+            #y -= velo
+
+    if w and y>-2: # key = k_(the key) events
+        if y>0 and scene == 1 and (not d and not a) and (not poi_next) and not poi: # y<1080-height
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
         
-        if not poi and not a and not d and not poi_next:
+        if not poi and not poi_next:
             y -= velo
             hist[0] ="w"
-            if blok !="yes" and not s and not poi_next and scene == 1: # (y>0 and y_path<310)and x_path<-10 and 
+            if blok !="yes" and not poi_next and scene == 1: # (y>0 and y_path<310)and x_path<-10 and 
                 y_path += velo_path
             elif not s and scene == 2:
                 y_path += velo_path
         
-        if poi and hist[0] == "s":
+        if poi and hist[0] == "s": # fine
             y_path -= velo_path
             y += velo
             hist[0] ="s"
         
-        if poi and hist[0] == "d":
+        elif poi and hist[0] == "d":
             x_path -= velo_path
             x += velo
             hist[0] ="d"
         
-        if poi and hist[0] == "a":
+        elif poi and hist[0] == "a":
             x_path += velo_path
             x -= velo
             hist[0] ="a"
-        if poi and hist[0] == "w":
+        elif poi and hist[0] == "w":
             y_path += velo_path
             y -= velo
             hist[0] ="w"
-    elif  w and ( a or d or s):
-        move = False
-        right = "none"
-        hist_right[0] = "no"
-        hist[0] ="none"
+
+
+
+        #elif poi and a:
+            #x_path += velo_path
+            #x -= velo
+            #hist[0] ="a"
+        #elif poi and d:
+            #x_path += velo_path
+            #x -= velo
+            #hist[0] ="d"
+    #elif  w and ( a or d or s):
+        #move = False
+        #right = "none"
+        #hist_right[0] = "no"
+        #hist[0] ="none"
         
-    if s and not a and not d and not w and y<603:
-        if scene == 1: # y<1080-height
+    if s and not w and y<603:
+        if scene == 1 and not d and not a and not poi_next and not poi: # y<1080-height
             move,right,hist_right[0] = True,"none","no"
         elif scene == 2:
             move,right,hist_right[0] = True,"none","no"
@@ -490,9 +510,9 @@ while not exit:
         hist_right[0] = "no"
         hist[0] ="none"
         if s and a and not d and not w:
-            y += velo
-            x -= velo
-            y_path -= velo_path
+            y -= velo
+            x += velo
+            #y_path += velo_path
             right = "no"
         elif s and d and not a and not w:
             y += velo
@@ -504,17 +524,8 @@ while not exit:
             y_path -= velo_path
             right = "none"
 
-
-
-
-
-
-        
-        
-        
-        
     
-        
+
     if a and not w and not s and not d and x>-15: # stops at edge of screen and when path outline is touched yes, wokrks on smaller screen
         if scene == 1:
             move,right,hist_right[0] = True,"none","no"
@@ -607,6 +618,23 @@ while not exit:
     
     poi_next = line_mask.overlap(player_mask,(offset))
 
+    if (hist[0] == "none") and poi :
+        if w and a:
+            hist[0] ="a"
+            timer.tick(10)
+            hist[0] ="w"
+        if w and d:
+            hist[0] ="d"
+            timer.tick(10)
+            hist[0] ="w"
+        if s and a:
+            hist[0] ="a"
+            timer.tick(10)
+            hist[0] ="s"
+        if s and d:
+            hist[0] ="d"
+            timer.tick(10)
+            hist[0] ="s"
     
 
     # variables for movement speed
@@ -614,14 +642,15 @@ while not exit:
 
     if poi:
         blok = "yes"
-        velo = -10
+        velo = -2
         velo_path = -15
     else:
         velo = 2 # up down direction
         velo_path = 15 # up down direction
 
-    print("velo",velo)
+    print("velo:",velo)
     
+
     if start:
         print("start intro cutscenes")
         start = False
@@ -643,19 +672,13 @@ while not exit:
                 if items_found < 3:
                     items_found = 3
                 canvas_blit_labels("ring")
-        print(x_path,y_path)
-        print(x,y)
-        print(height)
+
+        print("hist[0]",hist[0]) # one key
+        print("hist[1]",hist[1]) # second key
 
 
         if poi_next and items_found == 3:
             poi_next = False
-
-            #offset = (x - x_path), (y - y_path)
-            #over_off = (x_path - mx ), (y_path - my)
-            
-            #poi = path_mask.overlap(player_mask,(offset))
-            #poi_next = line_mask.overlap(player_mask,(offset))
 
             scene = 2
 
